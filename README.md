@@ -42,7 +42,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `docs/UEEC_DESIGN.md` | Design rationale, novelty, and how UEEC compares to ELF/PE/Mach-O and prior art |
 | `00_shell_code/` | Earliest prototype — minimal shell-code-style payload |
 | `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 11 architectures |
-| `02_ueec_load/` | First working Linux loader for a `_GM`-header UEEC file |
+| `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 11 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
 | `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format |
 | `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 11 architectures |
 | `05_align/` | Section-granularity/alignment tooling |
@@ -81,6 +81,13 @@ binaries — including an actual machine-code function call — under QEMU on
 11 CPU architectures (x86, x86-64, ARM32, ARM64, RISC-V32/64, PowerPC32/64,
 SPARC32/64, LoongArch64), with byte-identical round-trip checks
 (`encode(decode(x)) == x`).
+
+A single container holding all 11 architectures at once is also validated:
+`02_ueec_load/` builds one physical file with 11 architecture-specific CODE
+nodes sharing one HEADER, and a loader — cross-compiled once per target —
+that opens that same file and correctly selects and runs only the node
+matching its own host, in each of three loading layouts (`monolithic`,
+`scattered`, `hybrid`).
 
 ## Roadmap
 

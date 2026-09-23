@@ -77,17 +77,39 @@ converters), which is itself evidence that this class of bug is easy to
 introduce silently and needs to stay under continuous multi-architecture
 test coverage, not a one-time check.
 
+**A single container holding multiple target architectures at once is now
+validated, not just a stated design goal.** `02_ueec_load/ueec.asm` builds one
+physical `.ueec` file containing 11 architecture-specific CODE nodes (ARM32,
+ARM64, LoongArch64, PowerPC32/64, RISC-V32/64, SPARC32/64, x86, x86-64), all
+sharing one HEADER and one logical name. `02_ueec_load/ueec_load.c` is a
+single loader implementation, cross-compiled once per target, that opens
+that *same* file, selects the node matching its own host
+`(machine_type, machine, system_type, system)`, and loads only that node.
+Tested directly (native + QEMU user-mode) on 9 of the 11 architectures —
+x86, x86-64, ARM32, ARM64, LoongArch64, PowerPC32, PowerPC64, RISC-V64,
+SPARC64 — each correctly selects its own node from the shared file and runs
+it to a real `exit(0)` syscall. (RISC-V32 and SPARC32 were not exercised in
+every environment, for missing cross-toolchain components, not a code
+defect.)
+
+**The three loading strategies are now implemented and exercised, not just
+named.** `02_ueec_load/ueec_load.c` supports `--load-mode
+auto|monolithic|scattered|hybrid`: monolithic maps the HEADER and every
+selected section into one contiguous anonymous mapping; scattered maps each
+section into its own independent mapping at an address chosen by the kernel;
+hybrid maps the HEADER separately from one combined mapping of the
+remaining sections. All four modes (including `auto`, which tries
+monolithic and falls back to scattered) build a correct runtime image and
+locate a valid entry point from the same input file — `make test-modes`
+exercises all four end to end.
+
 ## Forward-compatibility, stated but not yet built
 
-UEEC's section and node model is designed with some additions in mind that
-are **not yet implemented or empirically validated** — they shape the
+UEEC's section and node model is designed with further additions in mind
+that are **not yet implemented or empirically validated** — they shape the
 design (see `machine_type` and the section-type enum in
 `FORMAT_SPECIFICATION.md`) without being claimed as working today:
 
-- a single UEEC container may hold code for more than one target
-  architecture (multiple architecture-specific CODE sections across
-  nodes in one file, closer to a fat/universal binary than a single-arch
-  ELF/PE image);
 - the section-type space is deliberately left open for future non-CPU
   execution targets (MPU, VM byte-code, GPU compute kernels, FPGA
   bitstreams) — see the reserved `machine_type` values;
@@ -107,14 +129,6 @@ design (see `machine_type` and the section-type enum in
   structs and returns one), a debug-information section, and an
   architecture-oriented metadata section. These are the next concrete
   tests of the mechanism.
-- **Choice of loading strategy: monolithic, scattered, or hybrid.** Loaded
-  sections can be laid out in a process's virtual address space
-  contiguously, one after another (monolithic), independently at
-  unrelated addresses (scattered), or as a mix of the two (hybrid). No
-  loader in this repository has deliberately chosen and documented one of
-  these strategies yet — it is currently an accident of whichever loader
-  was written first, and needs to be settled once optional section types
-  (debug info, in particular) make "load everything, always" wasteful.
 - **Round-trip correctness at scale.** Current validation uses hand-built
   demo binaries with a handful of entries. Hardening the reference
   library further means fuzzing decoders against malformed input and
