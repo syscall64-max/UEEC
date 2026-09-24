@@ -43,7 +43,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `00_shell_code/` | Earliest prototype — minimal shell-code-style payload |
 | `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 11 architectures |
 | `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 11 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
-| `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format |
+| `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format; also demonstrates 11 nodes sharing one physical DATA section, each with its own architecture-correct relocation into it |
 | `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 11 architectures |
 | `05_align/` | Section-granularity/alignment tooling |
 | `06_extract/` | Extracts a single node out of a multi-node UEEC file into a standalone one-node file |
@@ -88,6 +88,14 @@ nodes sharing one HEADER, and a loader — cross-compiled once per target —
 that opens that same file and correctly selects and runs only the node
 matching its own host, in each of three loading layouts (`monolithic`,
 `scattered`, `hybrid`).
+
+File-level section sharing is validated the same way: `03_reloc/` builds a
+container where all 11 architecture nodes reference one shared DATA
+section instead of each carrying its own copy, with a real, per-architecture
+relocation patching that shared section's address into each node's CODE.
+(This is a structural check of the generated file, not yet a full run of
+`03_reloc`'s own test suite; see `docs/UEEC_DESIGN.md` for the exact scope
+and current limits.)
 
 ## Roadmap
 

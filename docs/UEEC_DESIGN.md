@@ -103,6 +103,28 @@ monolithic and falls back to scattered) build a correct runtime image and
 locate a valid entry point from the same input file — `make test-modes`
 exercises all four end to end.
 
+**File-level section sharing across nodes is now structurally validated, not
+just a design claim.** `03_reloc/03_reloc.asm` builds one physical container
+where 11 architecture-specific CODE+RELOCATION section pairs all reference a
+single shared DATA section: every entry in the `ueec_node_info` mapping table
+(confirmed for all 11 nodes) points at the same global section index, and
+each node's own RELOCATION section (`SECTION_FLAT` design) patches that
+shared DATA section's runtime address into its own CODE with a real,
+architecture-correct relocation (`ABS32` for 32-bit targets, `ABS64` for
+64-bit). This is a structural, byte-level confirmation obtained by reading
+the generated container directly — it has not yet been exercised through a
+full build-and-run pass of `03_reloc`'s own `Makefile`, which remains for a
+later validation pass. Two related limits are worth stating plainly: (1) no
+RAM-level reference-counting or deduplication mechanism exists anywhere in
+the loader code (`loader.c`, `ueec.h`, `reloc.h` contain no such logic) — the
+sharing demonstrated so far is on-disk storage, not runtime memory
+management; (2) the current test payload is a plain byte string, which is
+endianness-agnostic, so it does not exercise the case where shared DATA
+holds multi-byte numeric content — sharing a single DATA section across
+architectures of both endiannesses would need either a second, byte-swapped
+copy of that data (halving, not eliminating, the duplication) or explicit
+loader-side byte-swapping, neither of which exists today.
+
 ## Forward-compatibility, stated but not yet built
 
 UEEC's section and node model is designed with further additions in mind
