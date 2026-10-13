@@ -166,7 +166,8 @@ jobs:
           printf 'int main(void){return 0;}\n' > /tmp/rv32-smoke.c
           /opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -static /tmp/rv32-smoke.c -o /tmp/rv32-smoke
           file /tmp/rv32-smoke
-          readelf -h /tmp/rv32-smoke | grep -E 'Class:.*ELF32|Machine:.*RISC-V'
+          readelf -h /tmp/rv32-smoke | grep -E 'Class:.*ELF32'
+          readelf -h /tmp/rv32-smoke | grep -E 'Machine:.*RISC-V'
           qemu-riscv32 /tmp/rv32-smoke
       - name: Run all existing RV32 tests
         run: |
