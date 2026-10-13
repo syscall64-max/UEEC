@@ -37,54 +37,63 @@ jobs:
       matrix:
         include:
           - arch: arm32
+            libc_package: libc6-dev-armhf-cross
             compiler_package: gcc-arm-linux-gnueabihf
             compiler: arm-linux-gnueabihf-gcc
             qemu: qemu-arm
             make_arch: arm32
             core_arch: arm32
           - arch: arm64
+            libc_package: libc6-dev-arm64-cross
             compiler_package: gcc-aarch64-linux-gnu
             compiler: aarch64-linux-gnu-gcc
             qemu: qemu-aarch64
             make_arch: arm64
             core_arch: arm64
           - arch: loongarch64
+            libc_package: libc6-dev-loong64-cross
             compiler_package: gcc-14-loongarch64-linux-gnu
             compiler: loongarch64-linux-gnu-gcc-14
             qemu: qemu-loongarch64
             make_arch: longarm64
             core_arch: loongarch64
           - arch: powerpc32
+            libc_package: libc6-dev-powerpc-cross
             compiler_package: gcc-powerpc-linux-gnu
             compiler: powerpc-linux-gnu-gcc
             qemu: qemu-ppc
             make_arch: powerpc32
             core_arch: powerpc32
           - arch: powerpc64
+            libc_package: libc6-dev-ppc64-cross
             compiler_package: gcc-powerpc64-linux-gnu
             compiler: powerpc64-linux-gnu-gcc
             qemu: qemu-ppc64
             make_arch: powerpc64
             core_arch: powerpc64
           - arch: riscv64
+            libc_package: libc6-dev-riscv64-cross
             compiler_package: gcc-riscv64-linux-gnu
             compiler: riscv64-linux-gnu-gcc
             qemu: qemu-riscv64
             make_arch: riscv64
             core_arch: riscv64
           - arch: sparc32
+            libc_package: libc6-dev-sparc-sparc64-cross
             compiler_package: gcc-13-multilib-sparc64-linux-gnu
             compiler: sparc64-linux-gnu-gcc
             qemu: qemu-sparc32plus
             make_arch: sparc32
             core_arch: sparc32
           - arch: sparc64
+            libc_package: libc6-dev-sparc64-cross
             compiler_package: gcc-sparc64-linux-gnu
             compiler: sparc64-linux-gnu-gcc
             qemu: qemu-sparc64
             make_arch: sparc64
             core_arch: sparc64
           - arch: x86
+            libc_package: libc6-dev-i386-cross
             compiler_package: gcc-i686-linux-gnu
             compiler: i686-linux-gnu-gcc
             qemu: qemu-i386
@@ -98,11 +107,12 @@ jobs:
       - name: Install native tools, emulator and cross-compiler
         env:
           CC_PACKAGE: ${{ matrix.compiler_package }}
+          LIBC_PACKAGE: ${{ matrix.libc_package }}
           ARCH: ${{ matrix.arch }}
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends nasm qemu-user "$CC_PACKAGE"
+          sudo apt-get install -y --no-install-recommends nasm qemu-user "$CC_PACKAGE" "$LIBC_PACKAGE"
           if [[ "$ARCH" == "sparc32" ]]; then
             sudo apt-get install -y --no-install-recommends gcc-sparc64-linux-gnu libc6-dev-sparc-sparc64-cross
           fi
