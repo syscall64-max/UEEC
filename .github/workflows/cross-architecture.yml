@@ -1,0 +1,180 @@
+name: UEEC cross-architecture tests
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/cross-architecture.yml"
+      - "scripts/build-riscv32-toolchain.sh"
+      - "docs/TEST_MATRIX.md"
+  workflow_dispatch:
+    inputs:
+      run_packaged:
+        description: "Run packaged cross-toolchains (9 architectures)"
+        type: boolean
+        required: true
+        default: true
+      build_riscv32:
+        description: "Build Linux RV32 GCC+glibc from upstream source and test it (large/slow)"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  packaged-cross:
+    name: Cross ${{ matrix.arch }}
+    if: github.event_name == 'pull_request' || inputs.run_packaged
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm32
+            libc_package: libc6-dev-armhf-cross
+            compiler_package: gcc-arm-linux-gnueabihf
+            compiler: arm-linux-gnueabihf-gcc
+            qemu: qemu-arm
+            make_arch: arm32
+            core_arch: arm32
+          - arch: arm64
+            libc_package: libc6-dev-arm64-cross
+            compiler_package: gcc-aarch64-linux-gnu
+            compiler: aarch64-linux-gnu-gcc
+            qemu: qemu-aarch64
+            make_arch: arm64
+            core_arch: arm64
+          - arch: loongarch64
+            libc_package: libc6-dev-loong64-cross
+            compiler_package: gcc-14-loongarch64-linux-gnu
+            compiler: loongarch64-linux-gnu-gcc-14
+            qemu: qemu-loongarch64
+            make_arch: longarm64
+            core_arch: loongarch64
+          - arch: powerpc32
+            libc_package: libc6-dev-powerpc-cross
+            compiler_package: gcc-powerpc-linux-gnu
+            compiler: powerpc-linux-gnu-gcc
+            qemu: qemu-ppc
+            make_arch: powerpc32
+            core_arch: powerpc32
+          - arch: powerpc64
+            libc_package: libc6-dev-ppc64-cross
+            compiler_package: gcc-powerpc64-linux-gnu
+            compiler: powerpc64-linux-gnu-gcc
+            qemu: qemu-ppc64
+            make_arch: powerpc64
+            core_arch: powerpc64
+          - arch: riscv64
+            libc_package: libc6-dev-riscv64-cross
+            compiler_package: gcc-riscv64-linux-gnu
+            compiler: riscv64-linux-gnu-gcc
+            qemu: qemu-riscv64
+            make_arch: riscv64
+            core_arch: riscv64
+          - arch: sparc32
+            libc_package: libc6-dev-sparc-sparc64-cross
+            compiler_package: gcc-13-multilib-sparc64-linux-gnu
+            compiler: sparc64-linux-gnu-gcc
+            qemu: qemu-sparc32plus
+            make_arch: sparc32
+            core_arch: sparc32
+          - arch: sparc64
+            libc_package: libc6-dev-sparc64-cross
+            compiler_package: gcc-sparc64-linux-gnu
+            compiler: sparc64-linux-gnu-gcc
+            qemu: qemu-sparc64
+            make_arch: sparc64
+            core_arch: sparc64
+          - arch: x86
+            libc_package: libc6-dev-i386-cross
+            compiler_package: gcc-i686-linux-gnu
+            compiler: i686-linux-gnu-gcc
+            qemu: qemu-i386
+            make_arch: x86
+            core_arch: x86
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install native tools, emulator and cross-compiler
+        env:
+          CC_PACKAGE: ${{ matrix.compiler_package }}
+          LIBC_PACKAGE: ${{ matrix.libc_package }}
+          ARCH: ${{ matrix.arch }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends nasm qemu-user "$CC_PACKAGE" "$LIBC_PACKAGE"
+          if [[ "$ARCH" == "sparc32" ]]; then
+            sudo apt-get install -y --no-install-recommends gcc-sparc64-linux-gnu libc6-dev-sparc-sparc64-cross
+          fi
+      - name: Validate compiler and QEMU availability
+        env:
+          COMPILER: ${{ matrix.compiler }}
+          QEMU: ${{ matrix.qemu }}
+        run: |
+          set -euo pipefail
+          command -v "$COMPILER"
+          "$COMPILER" --version | head -n 1
+          command -v "$QEMU"
+          "$QEMU" --version | head -n 1
+      - name: Test all existing stages for this architecture
+        env:
+          CORE_ARCH: ${{ matrix.core_arch }}
+          MAKE_ARCH: ${{ matrix.make_arch }}
+        run: |
+          set -euo pipefail
+          make -C 01_ueec_info "test-$CORE_ARCH"
+          make -C 02_ueec_load "test-$CORE_ARCH"
+          for stage in 03_reloc 04_convert 05_align 06_extract 07_pe 08_export 09_convert_export; do
+            make -C "$stage" "$MAKE_ARCH"
+          done
+
+  riscv32-from-source:
+    name: RV32 Linux toolchain from source
+    if: github.event_name == 'workflow_dispatch' && inputs.build_riscv32
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install native build dependencies and QEMU
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf automake bc bison build-essential cmake curl flex gawk git gperf \
+            libexpat1-dev libgmp-dev libmpc-dev libmpfr-dev libtool \
+            ninja-build patchutils python3 qemu-user nasm texinfo \
+            zlib1g-dev
+          df -h /
+          sudo install -d -o "$(id -un)" -g "$(id -gn)" /opt/riscv32
+      - name: Build RV32 Linux cross-toolchain from pinned upstream sources
+        run: bash scripts/build-riscv32-toolchain.sh
+      - name: Verify ELF32 RISC-V compiler output
+        run: |
+          set -euo pipefail
+          printf 'int main(void){return 0;}\n' > /tmp/rv32-smoke.c
+          /opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -static /tmp/rv32-smoke.c -o /tmp/rv32-smoke
+          file /tmp/rv32-smoke
+          readelf -h /tmp/rv32-smoke | grep -E 'Class:.*ELF32'
+          readelf -h /tmp/rv32-smoke | grep -E 'Machine:.*RISC-V'
+          qemu-riscv32 /tmp/rv32-smoke
+      - name: Run all existing RV32 tests
+        run: |
+          set -euo pipefail
+          make -C 01_ueec_info test-riscv32
+          make -C 02_ueec_load test-riscv32
+          for stage in 03_reloc 04_convert 05_align 06_extract 07_pe 08_export 09_convert_export; do
+            make -C "$stage" riscv32
+          done

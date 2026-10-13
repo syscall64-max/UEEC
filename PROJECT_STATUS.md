@@ -57,9 +57,10 @@ exceptions, consult the relevant stage `README.md` and Makefile.
 
 ## Open issues and limitations
 
-1. **Repeatable verification:** GitHub Actions CI is not yet set up.
-   The documented cross-architecture results need reproducible checks
-   with toolchain/QEMU versions and explicit pass/skip/fail records.
+1. **Repeatable verification:** Native GitHub Actions CI passed 9/9 stage jobs
+   on 2026-10-13 (run 38430051185). A separate cross-architecture matrix
+   is configured on a review branch; results are pending. Preserve exact
+   toolchain/QEMU versions and explicit pass/skip/fail records.
 2. **Execution safety:** the test loader paths run generated machine code.
    Keep tests isolated and run only trusted fixture binaries. The
    `03_reloc/README.md` explicitly documents a writable-and-executable
@@ -77,11 +78,11 @@ exceptions, consult the relevant stage `README.md` and Makefile.
 
 ## Prioritized next work
 
-- [ ] Review and merge the documentation-only project-memory PR.
-- [ ] Record a baseline native build and tests from a clean checkout,
-      with exact commands, platform, toolchain versions, and results.
-- [ ] Add narrowly scoped CI (begin with native compilation/basic tests),
-      then extend to QEMU architecture coverage with explicit skip rules.
+- [x] Review and merge the documentation-only project-memory PR (#1).
+- [x] Record a baseline native x86-64 CI run with GitHub logs (run 38430051185).
+      Cross-architecture CI results still pending.
+- [x] Add narrowly scoped native CI (9/9 stage jobs PASS).
+- [ ] Verify proposed cross-architecture QEMU matrix and the RV32 source-build job.
 - [ ] Audit `UEEC.zip` against the GitHub tree and classify each difference
       before bringing over any file. Never copy the archive over `main`.
 - [ ] Review file parsing bounds/overflow checks, mapping permissions,
@@ -121,3 +122,18 @@ documented result into a claim about the current checkout.
    and draft wire format.
 4. `docs/UEEC_DESIGN.md` — rationale and validation limits.
 5. Relevant stage `README.md`, `Makefile`, source, and latest commits.
+
+
+## Follow-up work log — 2026-10-13
+
+- PR #1 merged as `273b305d66ee41e12181dc8aeaed6c32342cdf06`.
+- PR #2 merged as `ae365b3ead19d4c29ceceecb3e9d13320e509c41`.
+- x86-64 native GitHub Actions run 38430051185 passed all nine matrix jobs
+  (01–09) on 2026-10-13. This **does not establish** 11-architecture CI.
+- Cross-architecture CI and pinned upstream RV32 Linux toolchain builder
+  proposed on branch `ci/cross-architecture-toolchains-20261013`.
+  Results **pending**. See `docs/TEST_MATRIX.md` for target coverage.
+- Archive reconciliation remains incomplete; no source files were imported
+  from the archive during this work.
+- Security review is a preliminary checklist, not a full security audit.
+- No version tag or GitHub Release has been published by these PRs.
