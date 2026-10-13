@@ -158,6 +158,7 @@ jobs:
             ninja-build patchutils python3 qemu-user nasm texinfo \
             zlib1g-dev
           df -h /
+          sudo install -d -o "$(id -un)" -g "$(id -gn)" /opt/riscv32
       - name: Build RV32 Linux cross-toolchain from pinned upstream sources
         run: bash scripts/build-riscv32-toolchain.sh
       - name: Verify ELF32 RISC-V compiler output
