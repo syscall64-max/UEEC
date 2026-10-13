@@ -8,12 +8,10 @@ readonly UPSTREAM_REV=d118e5335a33d4dc77fdc64e5a5223931ab422a0
 readonly PREFIX=/opt/riscv32
 readonly SRC="${RUNNER_TEMP:-/tmp}/riscv-gnu-toolchain-src"
 
-if [[ ! -w /opt ]]; then
-  echo "ERROR: /opt is not writable; run on a disposable runner with suitable permissions" >&2
+if [[ ! -d "$PREFIX" || ! -w "$PREFIX" ]]; then
+  echo "ERROR: $PREFIX must exist and be writable (CI provisions it first)" >&2
   exit 1
 fi
-
-mkdir -p "$PREFIX"
 if [[ -e "$SRC" ]]; then
   echo "ERROR: refusing to reuse a pre-existing source directory: $SRC" >&2
   exit 1
