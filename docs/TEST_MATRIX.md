@@ -11,21 +11,23 @@ Updated: 2026-10-13. Distinguish **configured**, **executed**, and **passed** te
   including by the project author. Original logs, environment, and toolchain
   versions were not imported into this CI record.
 - Cross-architecture workflow `.github/workflows/cross-architecture.yml`
-  added on a development branch. Its results are **pending**, not already PASS.
+  merged to main in PR #3. The nine packaged QEMU targets have **all passed** at commit
+  `bc33f78f5257f9ffaada62202472fb6eefddd342` in
+  [run 38432454430](https://github.com/syscall64-max/UEEC/actions/runs/38432454430).
 
 | Architecture | Test runner | Toolchain provisioning | CI status |
 | --- | --- | --- | --- |
 | x86-64 | Native | gcc (Ubuntu 24.04) | PASS (9 stage jobs, run 38430051185) |
-| x86 | qemu-i386 | Ubuntu gcc-i686-linux-gnu | Configured; pending |
-| ARM32 | qemu-arm | Ubuntu gcc-arm-linux-gnueabihf | Configured; pending |
-| ARM64 | qemu-aarch64 | Ubuntu gcc-aarch64-linux-gnu | Configured; pending |
-| LoongArch64 | qemu-loongarch64 | Ubuntu gcc-14-loongarch64-linux-gnu | Configured; pending |
-| PowerPC32 | qemu-ppc | Ubuntu gcc-powerpc-linux-gnu | Configured; pending |
-| PowerPC64 | qemu-ppc64 | Ubuntu gcc-powerpc64-linux-gnu | Configured; pending |
-| RISC-V32 | qemu-riscv32 | Source-built GCC/glibc (`scripts/build-riscv32-toolchain.sh`) | Opt-in manual workflow; pending |
-| RISC-V64 | qemu-riscv64 | Ubuntu gcc-riscv64-linux-gnu | Configured; pending |
-| SPARC32 | qemu-sparc32plus | Ubuntu SPARC64 GCC + 32-bit multilib | Configured; pending |
-| SPARC64 | qemu-sparc64 | Ubuntu gcc-sparc64-linux-gnu | Configured; pending |
+| x86 | qemu-i386 | Ubuntu gcc-i686-linux-gnu | PASS: run 38432454430 |
+| ARM32 | qemu-arm | Ubuntu gcc-arm-linux-gnueabihf | PASS: run 38432454430 |
+| ARM64 | qemu-aarch64 | Ubuntu gcc-aarch64-linux-gnu | PASS: run 38432454430 |
+| LoongArch64 | qemu-loongarch64 | Ubuntu gcc-14-loongarch64-linux-gnu | PASS: run 38432454430 |
+| PowerPC32 | qemu-ppc | Ubuntu gcc-powerpc-linux-gnu | PASS: run 38432454430 |
+| PowerPC64 | qemu-ppc64 | Ubuntu gcc-powerpc64-linux-gnu | PASS: run 38432454430 |
+| RISC-V32 | qemu-riscv32 | Source-built GCC/glibc (`scripts/build-riscv32-toolchain.sh`) | Source build: validating on dedicated PR, not yet PASS |
+| RISC-V64 | qemu-riscv64 | Ubuntu gcc-riscv64-linux-gnu | PASS: run 38432454430 |
+| SPARC32 | qemu-sparc32plus | Ubuntu SPARC64 GCC + 32-bit multilib | PASS: run 38432454430 |
+| SPARC64 | qemu-sparc64 | Ubuntu gcc-sparc64-linux-gnu | PASS: run 38432454430 |
 
 ## Workflow behavior
 
@@ -59,3 +61,14 @@ blocker or SKIP; a configured job is not a PASS.
    job; evaluate disk, build time, compile+link+QEMU execution results.
 5. Consider caching the verified toolchain by source SHA and compiler
    version without trusting mutable or foreign binary downloads.
+
+## RV32 source-build validation — trial branch
+
+The dedicated branch `ci/validate-riscv32-source-20261013` temporarily
+enables the RV32 source-build job for its pull request only. This allows
+GitHub-hosted CI to run the real upstream build without manually dispatching
+it or running the costly build for unrelated PRs. It downloads only the
+pinned GCC, binutils, and glibc submodules and reclaims unused hosted-runner
+disk space. Other PRs retain their existing packaged cross-architecture test
+coverage. **Do not record RV32 as PASS until this job's Linux GCC build,
+ELF32 smoke test, and nine UEEC stage tests all succeed.**
