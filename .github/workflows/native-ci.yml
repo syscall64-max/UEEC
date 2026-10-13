@@ -1,0 +1,71 @@
+name: UEEC native CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  x86_64:
+    name: Native ${{ matrix.stage }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - stage: "01_ueec_info"
+            targets: "native"
+          - stage: "02_ueec_load"
+            targets: "test-modes native"
+          - stage: "03_reloc"
+            targets: "x86_64"
+          - stage: "04_convert"
+            targets: "x86_64"
+          - stage: "05_align"
+            targets: "x86_64"
+          - stage: "06_extract"
+            targets: "x86_64"
+          - stage: "07_pe"
+            targets: "x86_64"
+          - stage: "08_export"
+            targets: "x86_64"
+          - stage: "09_convert_export"
+            targets: "x86_64"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install NASM
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends nasm
+          gcc --version
+          nasm -v
+      - name: Build and test selected stage
+        shell: bash
+        env:
+          STAGE: ${{ matrix.stage }}
+          TARGETS: ${{ matrix.targets }}
+        run: |
+          set -euo pipefail
+          for target in $TARGETS; do
+            make -C "$STAGE" "$target"
+          done
+      - name: Verify relocation round-trip
+        if: matrix.stage == '04_convert'
+        run: cmp 04_convert/input.ueec 04_convert/back_to_flat.ueec
+      - name: Verify named export round-trip
+        if: matrix.stage == '09_convert_export'
+        run: |
+          cmp 09_convert_export/input.ueec 09_convert_export/back_to_compact.ueec
+          cmp 09_convert_export/flat_from_compact.ueec 09_convert_export/flat_again.ueec
