@@ -78,11 +78,11 @@ exceptions, consult the relevant stage `README.md` and Makefile.
 
 ## Prioritized next work
 
-- [ ] Review and merge the documentation-only project-memory PR.
-- [ ] Record a baseline native build and tests from a clean checkout,
-      with exact commands, platform, toolchain versions, and results.
-- [ ] Add narrowly scoped CI (begin with native compilation/basic tests),
-      then extend to QEMU architecture coverage with explicit skip rules.
+- [x] Review and merge the documentation-only project-memory PR (#1).
+- [x] Record a baseline native x86-64 CI run with GitHub logs (run 38430051185).
+      Cross-architecture CI results still pending.
+- [x] Add narrowly scoped native CI (9/9 stage jobs PASS).
+- [ ] Verify proposed cross-architecture QEMU matrix and the RV32 source-build job.
 - [ ] Audit `UEEC.zip` against the GitHub tree and classify each difference
       before bringing over any file. Never copy the archive over `main`.
 - [ ] Review file parsing bounds/overflow checks, mapping permissions,
