@@ -1,0 +1,95 @@
+/* GNU assembler translation of the UEEC project's 11-architecture exit(0)
+ * NASM fixture (ueec.asm). Encodes actual machine-code bytes for each ISA.
+ * This .S file can be built with GNU as + objcopy when NASM is absent.
+ * This fixture has little-endian wire metadata and needs a little-endian assembler.
+ */
+.section .data
+.macro NODE machine, big=0
+    .long (1 << 27) | (2 << 20) | (2 << 18) | (\machine << 10) | (1 << 5) | (1 << 3) | (1 << 2) | \big
+    .short 0
+.endm
+.macro INFO index, section
+    .short \index
+    .long \section
+.endm
+.macro SEC kind, size, data_size
+    .short \kind, \size, \data_size
+.endm
+start:
+    .ascii "_GM"
+    .byte 1
+    .short 11, 1
+    NODE 0
+    NODE 1
+    NODE 2
+    NODE 3, 1
+    NODE 4, 1
+    NODE 5
+    NODE 6
+    NODE 7, 1
+    NODE 8, 1
+    NODE 9
+    NODE 10
+    INFO 0, 1
+    INFO 1, 2
+    INFO 2, 3
+    INFO 3, 4
+    INFO 4, 5
+    INFO 5, 6
+    INFO 6, 7
+    INFO 7, 8
+    INFO 8, 9
+    INFO 9, 10
+    INFO 10, 11
+    SEC 0, header_end-start, header_data_end-start
+    SEC 1, arm32_end-arm32, arm32_end-arm32
+    SEC 1, arm64_end-arm64, arm64_end-arm64
+    SEC 1, loongarch64_end-loongarch64, loongarch64_end-loongarch64
+    SEC 1, ppc32_end-ppc32, ppc32_end-ppc32
+    SEC 1, ppc64_end-ppc64, ppc64_end-ppc64
+    SEC 1, rv32_end-rv32, rv32_end-rv32
+    SEC 1, rv64_end-rv64, rv64_end-rv64
+    SEC 1, sparc32_end-sparc32, sparc32_end-sparc32
+    SEC 1, sparc64_end-sparc64, sparc64_end-sparc64
+    SEC 1, x86_end-x86, x86_end-x86
+    SEC 1, x64_end-x64, x64_end-x64
+    .byte 4
+    .rept 11
+        .short 0
+    .endr
+    .ascii "exit"
+header_data_end:
+header_end:
+arm32:
+    .byte 0x01,0x70,0xA0,0xE3,0x00,0x00,0xA0,0xE3,0x00,0x00,0x00,0xEF
+arm32_end:
+arm64:
+    .byte 0xA8,0x0B,0x80,0xD2,0x00,0x00,0x80,0xD2,0x01,0x00,0x00,0xD4
+arm64_end:
+loongarch64:
+    .byte 0x0B,0x74,0xC1,0x02,0x04,0x00,0xC0,0x02,0x00,0x00,0x2B,0x00
+loongarch64_end:
+ppc32:
+    .byte 0x38,0x00,0x00,0x01,0x38,0x60,0x00,0x00,0x44,0x00,0x00,0x02
+ppc32_end:
+ppc64:
+    .byte 0x38,0x00,0x00,0x01,0x38,0x60,0x00,0x00,0x44,0x00,0x00,0x02
+ppc64_end:
+rv32:
+    .byte 0x93,0x08,0xD0,0x05,0x13,0x05,0x00,0x00,0x73,0x00,0x00,0x00
+rv32_end:
+rv64:
+    .byte 0x93,0x08,0xD0,0x05,0x13,0x05,0x00,0x00,0x73,0x00,0x00,0x00
+rv64_end:
+sparc32:
+    .byte 0x82,0x10,0x20,0x01,0x90,0x10,0x20,0x00,0x91,0xD0,0x20,0x10
+sparc32_end:
+sparc64:
+    .byte 0x82,0x10,0x20,0x01,0x90,0x10,0x20,0x00,0x91,0xD0,0x20,0x6D
+sparc64_end:
+x86:
+    .byte 0xB8,0x01,0x00,0x00,0x00,0xBB,0x00,0x00,0x00,0x00,0xCD,0x80
+x86_end:
+x64:
+    .byte 0xB8,0x3C,0x00,0x00,0x00,0xBF,0x00,0x00,0x00,0x00,0x0F,0x05
+x64_end:

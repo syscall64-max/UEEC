@@ -50,6 +50,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
 | `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
 | `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
+| `10_tls_delivery/` | **Experimental C/OpenSSL TLS selective delivery** — distribute architecture-selected UEEC nodes, reconstruct compact or 4 KiB-granulated files, and run an 11-architecture native/QEMU validation matrix; see [local test evidence](10_tls_delivery/docs/LOCAL_TEST_RESULTS.md) and [limitations](10_tls_delivery/README.md) |
 
 ## Building
 
