@@ -156,3 +156,23 @@ riscv32.bin` ამ zip-ში საერთოდ არ იყო ჩად�
    `encode_block`-ის ანალოგიით.
 4. **PowerPC64 fdesc-ტრიუკი, DATA-endianness-ის target-მიხედვით
    არჩევა** — ორივე ხელახლა გამოყენებულია RELOC-ისეთივე ფორმით.
+
+
+## 12th architecture — IBM Z (s390x, Big-Endian)
+
+The 12-architecture variant adds machine ID **11** (`UEEC_MACHINE_S390X`),
+`arch/answer_s390x.bin` (6 bytes: `lghi %r2,42; br %r14`) and an
+`ARCH_TEST` target checking **COMPACT_GROUP** and **SIMPLE_FLAT** under
+`qemu-s390x`. The UEEC metadata remains Little-Endian; DATA values are
+encoded in the target CPU's native Big-Endian byte order.
+
+```sh
+make clean
+make check-layout          # 12 CPU × 2 export layouts; no QEMU needed
+make verify-s390x-bytes    # optional: requires s390x-linux-gnu-as/objcopy
+make s390x                # 2 real execution tests
+make all                  # 12 CPU × 2 layouts + x86-64 round trips
+```
+
+`ORDINAL` cannot be losslessly converted into name-based exports; it is
+intentionally outside this converter's scope.
