@@ -15,6 +15,7 @@ CC_SPARC32     ?= sparc64-linux-gnu-gcc
 CC_SPARC64     ?= sparc64-linux-gnu-gcc
 CC_X86         ?= i686-linux-gnu-gcc
 CC_X86_64      ?= gcc
+CC_S390X       ?= s390x-linux-gnu-gcc
 
 QEMU_ARM32       ?= qemu-arm
 QEMU_ARM64       ?= qemu-aarch64
@@ -26,23 +27,24 @@ QEMU_RISCV64     ?= qemu-riscv64
 QEMU_SPARC32     ?= qemu-sparc32plus
 QEMU_SPARC64     ?= qemu-sparc64
 QEMU_X86         ?= qemu-i386
+QEMU_S390X       ?= qemu-s390x
 
 ARCHES := arm32 arm64 loongarch64 powerpc32 powerpc64 riscv32 riscv64 \
-	sparc32 sparc64 x86 x86_64
+	sparc32 sparc64 x86 x86_64 s390x
 BINARIES := $(addprefix $(BUILD_DIR)/ueec-load-,$(ARCHES))
 BUILD_TARGETS := $(addprefix build-,$(ARCHES))
 TEST_TARGETS := $(addprefix test-,$(ARCHES))
 
-.PHONY: all build test ueec native test-modes $(BUILD_TARGETS) \
+.PHONY: all build test ueec native test-modes test-s390x-modes $(BUILD_TARGETS) \
 	$(TEST_TARGETS) clean
 
 all: test
 
 build: $(BINARIES)
-	@echo "UEEC loader: 11 architecture builds PASS"
+	@echo "UEEC loader: 12 architecture builds PASS"
 
 test: $(TEST_TARGETS)
-	@echo "UEEC loader: 11 architecture tests PASS"
+	@echo "UEEC loader: 12 architecture tests PASS"
 
 ueec: $(UEEC)
 
@@ -96,6 +98,9 @@ $(BUILD_DIR)/ueec-load-x86: ueec_load.c ueec.h | $(BUILD_DIR)/.dir
 $(BUILD_DIR)/ueec-load-x86_64: ueec_load.c ueec.h | $(BUILD_DIR)/.dir
 	$(CC_X86_64) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/ueec-load-s390x: ueec_load.c ueec.h | $(BUILD_DIR)/.dir
+	$(CC_S390X) $(CFLAGS) $< -o $@
+
 $(BUILD_TARGETS): build-%: $(BUILD_DIR)/ueec-load-%
 	@echo "$*: build PASS"
 
@@ -131,6 +136,16 @@ test-x86: $(UEEC) $(BUILD_DIR)/ueec-load-x86
 
 test-x86_64: $(UEEC) $(BUILD_DIR)/ueec-load-x86_64
 	$(BUILD_DIR)/ueec-load-x86_64 --node exit $(UEEC)
+
+test-s390x: $(UEEC) $(BUILD_DIR)/ueec-load-s390x
+	$(QEMU_S390X) $(BUILD_DIR)/ueec-load-s390x --node exit $(UEEC)
+
+# Exercise the actual S390X CODE in all three explicit loading layouts and auto.
+test-s390x-modes: $(UEEC) $(BUILD_DIR)/ueec-load-s390x
+	@set -e; for mode in auto monolithic scattered hybrid; do \
+	  echo "s390x: $$mode"; \
+	  $(QEMU_S390X) $(BUILD_DIR)/ueec-load-s390x --node 11 --load-mode $$mode $(UEEC); \
+	done
 
 clean:
 	rm -rf -- $(BUILD_DIR)

@@ -41,15 +41,15 @@ its own directory with its own `Makefile` and `README.md`:
 | `FORMAT_SPECIFICATION.md` | The versioned container format spec: header, endianness, node/section model, currently defined `design` variants |
 | `docs/UEEC_DESIGN.md` | Design rationale, novelty, and how UEEC compares to ELF/PE/Mach-O and prior art |
 | `00_shell_code/` | Earliest prototype — minimal shell-code-style payload |
-| `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 11 architectures |
-| `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 11 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
-| `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format; also demonstrates 11 nodes sharing one physical DATA section, each with its own architecture-correct relocation into it |
-| `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 11 architectures |
+| `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 12 architectures |
+| `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 12 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
+| `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format; also demonstrates 12 nodes sharing one physical DATA section, each with its own architecture-correct relocation into it |
+| `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 12 architectures |
 | `05_align/` | Section-granularity/alignment tooling |
 | `06_extract/` | Extracts a single node out of a multi-node UEEC file into a standalone one-node file |
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
-| `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
-| `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
+| `08_export/` | EXPORT examples: `COMPACT_GROUP` and `ORDINAL` parsers/generators/loaders; `SIMPLE_FLAT` is exercised in stage 09 converter |
+| `10_ueec_tls_c/` | Selective TLS delivery of one architecture-specific UEEC node, client-side compact/granulated reconstruction, and 12-CPU QEMU execution tests (research prototype; localhost) |\n| `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 12 architectures, including an executed machine-code function call through the loader |
 
 ## Building
 
@@ -78,24 +78,31 @@ required.
 
 Correctness is demonstrated end-to-end: working loaders execute real UEEC
 binaries — including an actual machine-code function call — under QEMU on
-11 CPU architectures (x86, x86-64, ARM32, ARM64, RISC-V32/64, PowerPC32/64,
-SPARC32/64, LoongArch64), with byte-identical round-trip checks
+12 CPU architectures (x86, x86-64, ARM32, ARM64, RISC-V32/64, PowerPC32/64,
+SPARC32/64, LoongArch64, IBM Z (s390x)), with byte-identical round-trip checks
 (`encode(decode(x)) == x`).
 
-A single container holding all 11 architectures at once is also validated:
-`02_ueec_load/` builds one physical file with 11 architecture-specific CODE
+A single container holding all 12 architectures at once is also validated:
+`02_ueec_load/` builds one physical file with 12 architecture-specific CODE
 nodes sharing one HEADER, and a loader — cross-compiled once per target —
 that opens that same file and correctly selects and runs only the node
 matching its own host, in each of three loading layouts (`monolithic`,
 `scattered`, `hybrid`).
 
 File-level section sharing is validated the same way: `03_reloc/` builds a
-container where all 11 architecture nodes reference one shared DATA
+container where all 12 architecture nodes reference one shared DATA
 section instead of each carrying its own copy, with a real, per-architecture
 relocation patching that shared section's address into each node's CODE.
 (This is a structural check of the generated file, not yet a full run of
 `03_reloc`'s own test suite; see `docs/UEEC_DESIGN.md` for the exact scope
 and current limits.)
+
+
+## 2026-11-04 experimental update: 12 architectures
+
+The latest Ubuntu/QEMU experimental test logs cover **12 CPU architectures**, including **IBM Z / s390x (machine ID 11, Big-Endian)**. See [the architecture and test matrix](docs/VALIDATION_12_ARCH_20261104.md) for per-stage coverage and limitations. The documented end-to-end TLS prototype uses a 397-byte multi-node source and transmits only the selected CPU node (45-byte s390x payload, compact), with optional 4096-byte granulation on the client. These are author-run QEMU tests, **not** GitHub CI or native-hardware proof. The format remains experimental.
+
+An optional indexed [METADATA section](docs/METADATA_DESIGN_DRAFT.md) has been designed but **not implemented**. Safe kernel-to-user-space loader launch, binfmt_misc integration, and controlled performance measurements remain future work.
 
 ## Roadmap
 

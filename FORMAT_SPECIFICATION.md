@@ -107,10 +107,12 @@ implementation, costs nothing and avoids a later incompatible renumbering.
 | 2 | loongarch64 | 8 | sparc64 |
 | 3 | powerpc32 | 9 | x86 |
 | 4 | powerpc64 | 10 | x86-64 |
-| 5 | riscv32 | | |
+| 5 | riscv32 | 11 | s390x (IBM Z) |
 
-These 11 values are exactly the architectures exercised by this
-repository's QEMU validation matrix (see the root `README.md`).
+These 12 values include IBM Z / s390x (Big-Endian), added in the
+2026-11-04 experimental 12-CPU matrix. See `docs/VALIDATION_12_ARCH_20261104.md`.
+This is a draft specification; actual compatibility depends on the reader's
+support for each machine ID.
 
 ### 2.3 `system_type`
 
@@ -183,7 +185,7 @@ typedef struct UEEC_PACKED { uint16_t type; uint64_t section_size, data_size; } 
 | 10 | STACK | reserved |
 | 11 | HEAP | reserved |
 | 12 | RESOURCE | reserved |
-| 13 | METADATA | reserved (planned: architecture-oriented metadata, see `docs/UEEC_DESIGN.md`) |
+| 13 | METADATA | reserved (proposed optional indexed section; draft only, see `docs/METADATA_DESIGN_DRAFT.md`) |
 
 `section_size` and `data_size` are given in the width selected by `format`
 (§4's own table above, independent of any `format` field inside the
@@ -254,7 +256,7 @@ exact.
 Reference implementation: `04_convert/convert.c` (decode → common
 intermediate `{target, source, offset, type}` list → re-encode into any of
 the three designs), validated round-trip-exact (byte-identical `cmp`)
-across all 11 architectures.
+across all 12 architectures in the 2026-11-04 research validation matrix.
 
 ### 6.2 EXPORT section
 
@@ -329,7 +331,7 @@ ueec_export → ueec_export_count{16,32,64}
 Reference implementation: `09_convert_export/convert_export.c` (decode →
 common intermediate `{section, offset, name, namelen}` list → re-encode
 into COMPACT_GROUP or SIMPLE_FLAT), validated round-trip-exact across all
-11 architectures, including an executed machine-code function call through
+12 architectures, including an executed machine-code function call through
 the loader (not just value lookups).
 
 ## 7. Implementation status

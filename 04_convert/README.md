@@ -42,3 +42,39 @@ make -k all                # თუ /opt/riscv32 არ გაქვთ
 UEEC ფაილებში (სადაც node-ის ყველა სექცია ერთ, გაერთიანებულ, page-aligned
 "ვირტუალურ image"-ად განიხილება, UEF-ის მოდელის ანალოგიით). ცალკე,
 დამატებით ეტაპად დარჩება.
+
+
+## S390X (IBM Z) — 12th architecture (2026-11-03)
+
+The UEEC input now has 12 CPU nodes and 26 physical sections: one shared DATA,
+12 CODE and 12 RELOCATION sections, plus HEADER. New node index 11 is s390x
+(code-endian big). The metadata remains little-endian. S390X code is 40 bytes,
+with an ABS64 relocation at CODE offset 0x20 into the shared DATA section.
+
+The baseline code and relocation bytes are inherited unchanged from the
+previously validated `03_reloc_12arch_s390x` stage.
+
+To run the S390X test on Ubuntu (cross-GCC/QEMU required):
+
+```sh
+make clean
+make s390x
+make run-all-directions
+make all
+```
+
+`make s390x` converts all 12 RELOCATION sections from FLAT to BLOCK_4096
+and BLOCK_N, then uses `qemu-s390x` to execute the s390x node in monolithic
+and scattered modes (expect `Hello world!` twice).
+
+`make run-all-directions` checks all six conversion directions on the native
+x86-64 host. This is not a full 12-architecture round-trip equivalence proof;
+it is a loader-based functional test suite. Other architectures use the same
+converted 12-node container and select their own node.
+
+NOTE: This reference converter is built for little-endian x86-64 hosts and
+is not itself endianness-independent; the S390X loader parses little-endian
+metadata correctly. Do not cross-compile the converter without first adapting
+its byte-order handling.
+
+Run `make check-roundtrip` to check byte-identical conversion on the supplied fixture.

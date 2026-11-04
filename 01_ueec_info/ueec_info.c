@@ -135,7 +135,8 @@ static const char *cpu_name(unsigned value)
 {
     static const char *const names[] = {
         "arm32", "arm64", "loongarch64", "powerpc32", "powerpc64",
-        "riscv32", "riscv64", "sparc32", "sparc64", "x86", "x86-64"
+        "riscv32", "riscv64", "sparc32", "sparc64", "x86", "x86-64",
+        "s390x"
     };
     return value < sizeof(names) / sizeof(names[0]) ? names[value] : "unknown";
 }

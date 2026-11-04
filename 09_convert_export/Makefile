@@ -74,6 +74,16 @@ arch/answer_sparc64.bin: arch/answer.c
 	sparc64-linux-gnu-gcc $(ANSWER_CFLAGS) -c arch/answer.c -o arch/answer_sparc64.o
 	sparc64-linux-gnu-objcopy -O binary --only-section=.text arch/answer_sparc64.o $@
 
+arch/answer_s390x.bin: arch/answer.c
+	s390x-linux-gnu-gcc $(ANSWER_CFLAGS) -c arch/answer.c -o arch/answer_s390x.o
+	s390x-linux-gnu-objcopy -O binary --only-section=.text arch/answer_s390x.o $@
+
+verify-s390x-bytes:
+	s390x-linux-gnu-as -o arch/answer_s390x_verify.o arch/answer_s390x.s
+	s390x-linux-gnu-objcopy -O binary --only-section=.text arch/answer_s390x_verify.o arch/answer_s390x_verify.bin
+	cmp arch/answer_s390x.bin arch/answer_s390x_verify.bin
+	@echo "S390X answer() bytes PASS"
+
 arch/answer_x86.bin: arch/answer.c
 	i686-linux-gnu-gcc $(ANSWER_CFLAGS) -c arch/answer.c -o arch/answer_x86.o
 	i686-linux-gnu-objcopy -O binary --only-section=.text arch/answer_x86.o $@
@@ -100,13 +110,19 @@ $(eval $(call ARCH_TEST,riscv64,riscv64-linux-gnu-gcc,qemu-riscv64,6,arch/answer
 $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus,7,arch/answer_sparc32.bin,be))
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64,8,arch/answer_sparc64.bin,be))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386,9,arch/answer_x86.bin,le))
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x,11,arch/answer_s390x.bin,be))
 
 x86_64: run-all-directions
 
-all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32
+all: check-layout arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32 s390x
+
+check-layout: gen_export convert_export loader_convert_export
+	python3 check_export_layout.py
+
+.PHONY: all clean check-layout verify-s390x-bytes run-all-directions x86_64 arm32 arm64 longarm64 powerpc32 powerpc64 riscv32 riscv64 sparc32 sparc64 x86 s390x
 
 clean:
 	rm -f input.asm input.ueec input_*.asm input_*.ueec *.ueec gen_export convert_export loader_convert_export \
 	      arch/*.o \
 	      loader_arm32 loader_arm64 loader_riscv64 loader_riscv32 \
-	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86
+	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86 loader_s390x

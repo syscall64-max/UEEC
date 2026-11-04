@@ -2,6 +2,17 @@
 
 Updated: 2026-10-13. Distinguish **configured**, **executed**, and **passed** tests.
 
+
+## 2026-11-04 research validation (author-run Ubuntu/QEMU, not GitHub CI)
+
+The test-log matrix now includes **12 CPU architectures**, adding **IBM Z / s390x**. The S390X target uses `s390x-linux-gnu-gcc` and `qemu-s390x`; it exercised the same functional stage set as the 11 other CPUs. The current 00–10 experimental scripts include a 12-node TLS prototype and compact/granulated client reconstruction. See [detailed results](VALIDATION_12_ARCH_20261104.md).
+
+The CI table below is an **earlier 2026-10-13 GitHub Actions snapshot** and must not be misread as 2026-11-04 CI evidence. **No new GitHub Actions CI result for this feature branch is claimed.**
+
+| Additional architecture | Author-run QEMU status | GitHub CI status |
+| --- | --- | --- |
+| IBM Z / S390X (machine 11, BE) | PASS: 00–10 functional prototype matrix | Pending on updated CI workflow |
+
 ## Current evidence
 
 - Native x86-64: **9/9 stage jobs PASS** in GitHub Actions run

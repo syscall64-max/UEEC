@@ -1,5 +1,8 @@
 # UEEC design rationale
 
+> **2026-11-04 update:** The older 11-architecture and 9/11 execution counts below describe the original test environment, not the latest research baseline. The newer author-run Ubuntu/QEMU validation covers **12 architectures (including IBM Z / S390X)** across experimental stages 00–10, with TLS selective-node transfer and compact/granulated reconstruction. See [validation evidence](VALIDATION_12_ARCH_20261104.md). The indexed [METADATA design](METADATA_DESIGN_DRAFT.md) is agreed as a draft but **not implemented**.
+
+
 This document explains *why* UEEC is built the way it is, and how it
 compares to ELF, PE/COFF and Mach-O. For the exact on-disk layout, see
 [`FORMAT_SPECIFICATION.md`](../FORMAT_SPECIFICATION.md).

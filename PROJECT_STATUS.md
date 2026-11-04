@@ -11,6 +11,20 @@
 > before relying on the snapshot; code, tests, and the format specification
 > take precedence over stale notes.
 
+
+## 2026-11-04: 12-architecture QEMU experimental milestone
+
+**Latest research result:** 12 architecture-specific nodes, now including IBM Z/s390x (machine=11, BE). This supersedes the *validation coverage* descriptions in earlier dated snapshots; it does not retroactively change the recorded 2026-10-13 GitHub CI results.
+
+- Author-supplied Ubuntu/QEMU terminal logs demonstrate functional test results across stages 00 through 10 (see [12-CPU validation matrix](docs/VALIDATION_12_ARCH_20261104.md)).
+- 03_reloc: 24/24 monolithic/scattered scenarios; 05_align: 48/48; 06_extract: 24/24; 07_pe: 12/12; 08_export: 24/24; 09_convert_export: 24/24; 10_ueec_tls_c: 24/24 TLS transfer and 24/24 compact/granulated loader execution scenarios.
+- 04_convert's 12-architecture execution matrix and 09_convert_export's 12-architecture output matrix were supplied and inspected.
+- TLS transfer was tested locally on 127.0.0.1; an initial server run produced `accept: Resource temporarily unavailable`, then a later server run served all test requests. Investigate idle accept error handling.
+- Latest reference source stages 00–10 were refreshed in Google Drive; **do not claim GitHub's existing source tree is synchronized until code has actually been reconciled and committed**.
+- Never publish `10_ueec_tls_c/key.pem` or generated binaries from Drive.
+- Proposed next stages: [METADATA](docs/METADATA_DESIGN_DRAFT.md), kernel launcher, binfmt_misc, then quantitative benchmarks. METADATA is currently a *design*, not implemented.
+- GitHub publication is being reviewed on branch `feature/12-architectures-s390x-20261104`; preserve `main` and earlier stage/history until reviewed.
+
 ## Project purpose
 
 UEEC (Universal Extensible Executable Container) is a proposed

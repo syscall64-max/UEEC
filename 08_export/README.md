@@ -42,14 +42,14 @@ ordinal=1  -> answer()=42  (1 cmp)
 ordinal=99 -> ვერ მოიძებნა (2 cmp)
 ```
 
-## Multi-architecture ვალიდაცია — 10/10 architecture, ორივე დიზაინით
+## Multi-architecture ვალიდაცია — 12 architecture, ორივე დიზაინით
 
 ```
 make all
 ```
 
-**ყველა 10 architecture** (`arm32, arm64, riscv32, riscv64, powerpc32,
-powerpc64, sparc32, sparc64, loongarch64, x86`) **+ x86-64** — `COMPACT_GROUP`
+**ყველა 12 architecture** (`arm32, arm64, riscv32, riscv64, powerpc32,
+powerpc64, sparc32, sparc64, loongarch64, x86`) **+ x86-64 და S390X** — `COMPACT_GROUP`
 -ისა და `ORDINAL`-ის ორივე demo-თი, `answer()` function-call-ისა და
 value-lookup-ის ჩათვლით.
 
@@ -84,6 +84,28 @@ value-lookup-ის ჩათვლით.
 ```
 make run              # COMPACT_GROUP, x86-64
 make run-ordinal       # ORDINAL, x86-64
-make all               # yvela 10 architecture, orive dizaini
+make check-layout      # 12 CPU x 2 დიზაინის სტრუქტურული შემოწმება
+make s390x             # IBM Z: COMPACT_GROUP + ORDINAL, QEMU
+make all               # ყველა 12 არქიტექტურა, ორივე დიზაინი
 make -k all             # Tu /opt/riscv32 an sparc32-is 32-bit multilib ar gaqvT
 ```
+
+## IBM Z / s390x (machine=11)
+
+`arch/answer_s390x.bin` შეიცავს 6-ბაიტიან დამოუკიდებელ ფუნქციას
+`lghi %r2,42; br %r14`, რომელიც s390x Linux ABI-ის მიხედვით 42-ს
+აბრუნებს `r2` რეგისტრში. მიკრო-კოდის წყაროა `arch/answer_s390x.s`.
+
+```sh
+make check-layout        # 24 ფაილის სტრუქტურული შემოწმება; QEMU არ სჭირდება
+make verify-s390x-bytes  # cross-assembler-ის შედეგად მიღებული ბაიტების შედარება
+make s390x              # ორი რეალური ფუნქციის გამოძახება qemu-s390x-ზე
+make all                # თორმეტივე არქიტექტურა, ორივე დიზაინი
+```
+
+სათაო UEEC მეტამონაცემები Little-Endian-ად რჩება; target DATA-ში
+`int32` მნიშვნელობები Big-Endian-ად იწერება, რათა s390x loader-მა
+პირდაპირ შეძლოს მათი წაკითხვა.
+
+შენიშვნა: `SIMPLE_FLAT` ამ ეტაპზე განსაზღვრულია მხოლოდ `ueec_export.h`-ში;
+მისი გენერატორი/loader და გაშვების ტესტი ჯერ არ არის წარმოდგენილი.

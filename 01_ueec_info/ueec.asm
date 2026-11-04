@@ -1,12 +1,12 @@
 ; UEEC v1 multi-architecture exit(0) container
-; 11 nodes, one implicit shared HEADER and 11 CODE sections
+; 12 nodes, one implicit shared HEADER and 12 CODE sections
 ; Wire metadata byte order: little endian
 
 [bits 64]
 
 %define UEEC_VERSION                 1
 %define UEEC_ENDIAN_LITTLE           0
-%define UEEC_NODE_COUNT              11
+%define UEEC_NODE_COUNT              12
 %define UEEC_NAME_COUNT              1
 
 %define UEEC_MACHINE_TYPE_CPU        0
@@ -24,6 +24,7 @@
 %define UEEC_MACHINE_SPARC64         8
 %define UEEC_MACHINE_X86             9
 %define UEEC_MACHINE_X86_64          10
+%define UEEC_MACHINE_S390X           11
 
 %define UEEC_FORMAT_SH16             0
 %define UEEC_SECTION_HEADER          0
@@ -69,7 +70,7 @@ db ((UEEC_ENDIAN_LITTLE & 1) << 7) | (UEEC_VERSION & 0x7F)
 dw UEEC_NODE_COUNT
 dw UEEC_NAME_COUNT
 
-; ueec_node_hdr[11]: 6 bytes each
+; ueec_node_hdr[12]: 6 bytes each
 UEEC_NODE_HEADER UEEC_MACHINE_ARM32,       0
 UEEC_NODE_HEADER UEEC_MACHINE_ARM64,       0
 UEEC_NODE_HEADER UEEC_MACHINE_LOONGARCH64, 0
@@ -81,8 +82,9 @@ UEEC_NODE_HEADER UEEC_MACHINE_SPARC32,     1
 UEEC_NODE_HEADER UEEC_MACHINE_SPARC64,     1
 UEEC_NODE_HEADER UEEC_MACHINE_X86,         0
 UEEC_NODE_HEADER UEEC_MACHINE_X86_64,      0
+UEEC_NODE_HEADER UEEC_MACHINE_S390X,       1
 
-; ueec_node_info[11]. HEADER membership is implicit; only CODE is mapped.
+; ueec_node_info[12]. HEADER membership is implicit; only CODE is mapped.
 UEEC_NODE_INFO 0,  1
 UEEC_NODE_INFO 1,  2
 UEEC_NODE_INFO 2,  3
@@ -94,8 +96,9 @@ UEEC_NODE_INFO 7,  8
 UEEC_NODE_INFO 8,  9
 UEEC_NODE_INFO 9,  10
 UEEC_NODE_INFO 10, 11
+UEEC_NODE_INFO 11, 12
 
-; ueec_sh16[12]. Descriptor order equals physical section order.
+; ueec_sh16[13]. Descriptor order equals physical section order.
 UEEC_SH16 UEEC_SECTION_HEADER, header_end - header_start, header_data_end - header_start
 UEEC_SH16 UEEC_SECTION_CODE, code_arm32_end - code_arm32,             code_arm32_end - code_arm32
 UEEC_SH16 UEEC_SECTION_CODE, code_arm64_end - code_arm64,             code_arm64_end - code_arm64
@@ -108,11 +111,12 @@ UEEC_SH16 UEEC_SECTION_CODE, code_sparc32_end - code_sparc32,         code_sparc
 UEEC_SH16 UEEC_SECTION_CODE, code_sparc64_end - code_sparc64,         code_sparc64_end - code_sparc64
 UEEC_SH16 UEEC_SECTION_CODE, code_x86_end - code_x86,                 code_x86_end - code_x86
 UEEC_SH16 UEEC_SECTION_CODE, code_x86_64_end - code_x86_64,           code_x86_64_end - code_x86_64
+UEEC_SH16 UEEC_SECTION_CODE, code_s390x_end - code_s390x,             code_s390x_end - code_s390x
 
 ; One unique logical name is shared by all architecture variants.
 db node_name_end - node_name
 
-; node_name_index[11]
+; node_name_index[12]
 times UEEC_NODE_COUNT dw 0
 
 node_name: db 'exit'
@@ -122,7 +126,7 @@ header_data_end:
 ; No optimization padding in this baseline file.
 header_end:
 
-; CODE sections[11]
+; CODE sections[12]
 code_arm32:
 db 0x01, 0x70, 0xA0, 0xE3, 0x00, 0x00, 0xA0, 0xE3, 0x00, 0x00, 0x00, 0xEF
 code_arm32_end:
@@ -166,3 +170,9 @@ code_x86_end:
 code_x86_64:
 db 0xB8, 0x3C, 0x00, 0x00, 0x00, 0xBF, 0x00, 0x00, 0x00, 0x00, 0x0F, 0x05
 code_x86_64_end:
+
+; s390x Linux: lghi %r2,0 ; svc 1 ; bcr 0,7 (NOP)
+; The wire metadata stays little-endian; the S390X code is big-endian.
+code_s390x:
+db 0xA7, 0x29, 0x00, 0x00, 0x0A, 0x01, 0x07, 0x07
+code_s390x_end:
