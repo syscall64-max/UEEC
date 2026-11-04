@@ -44,12 +44,22 @@ $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus))
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64))
 $(eval $(call ARCH_TEST,longarm64,loongarch64-linux-gnu-gcc-14,qemu-loongarch64))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386))
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x))
+
+# Checks byte-level equality for the supplied 12-node test fixture.
+check-roundtrip: run-all-directions
+	cmp input.ueec flat_from_flat.ueec
+	cmp input.ueec back_to_flat.ueec
+	cmp block4096.ueec block4096_from_blockn.ueec
+	cmp blockn.ueec blockn_from_block4096.ueec
+	@echo "UEEC convert: 12-node byte-identical roundtrip PASS"
 
 x86_64: run-all-directions
 
-all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32
+all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32 s390x
+	@echo "UEEC convert: 12 architecture tests PASS"
 
 clean:
 	rm -f input.ueec *.ueec convert loader \
 	      loader_arm32 loader_arm64 loader_riscv64 loader_riscv32 \
-	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86
+	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86 loader_s390x
