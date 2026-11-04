@@ -3,10 +3,10 @@
 ; ueec_hdr
 db 0x5f,0x47,0x4d ; magic _GM
 db 0x01 ; version=1(bit0-6), endian=0(bit7, LE)
-dw 11 ; nodes
+dw 12 ; nodes
 dw 1 ; names
 
-; ueec_node_hdr[11]
+; ueec_node_hdr[12]
 dd 0x1828002c ; node[0] arm32 section_count_field=3
 dw 0x0000 ; format=SH16
 dd 0x1828042c ; node[1] arm64 section_count_field=3
@@ -29,8 +29,10 @@ dd 0x1828242c ; node[9] x86 section_count_field=3
 dw 0x0000 ; format=SH16
 dd 0x1828282c ; node[10] x86_64 section_count_field=3
 dw 0x0000 ; format=SH16
+dd 0x18282c2d ; node[11] s390x section_count_field=3
+dw 0x0000 ; format=SH16
 
-; ueec_node_info[33]
+; ueec_node_info[36]
 dw 0
 dd 1
 dw 0
@@ -97,11 +99,17 @@ dw 10
 dd 22
 dw 10
 dd 23
+dw 11
+dd 1
+dw 11
+dd 24
+dw 11
+dd 25
 
-; ueec_sh16[24]
+; ueec_sh16[26]
 dw 0 ; type
-dw 444 ; section_size
-dw 444 ; data_size
+dw 482 ; section_size
+dw 482 ; data_size
 dw 2 ; type
 dw 13 ; section_size
 dw 13 ; data_size
@@ -171,6 +179,12 @@ dw 39 ; data_size
 dw 5 ; type
 dw 10 ; section_size
 dw 10 ; data_size
+dw 1 ; type
+dw 40 ; section_size
+dw 40 ; data_size
+dw 5 ; type
+dw 10 ; section_size
+dw 10 ; data_size
 
 ; name table
 db 5 ; name_len[0]
@@ -185,9 +199,10 @@ dw 0 ; node_name_index[7]
 dw 0 ; node_name_index[8]
 dw 0 ; node_name_index[9]
 dw 0 ; node_name_index[10]
+dw 0 ; node_name_index[11]
 db 0x68,0x65,0x6c,0x6c,0x6f ; "hello"
 
-; ===== header block ends here (444 bytes) =====
+; ===== header block ends here (482 bytes) =====
 
 ; ===== DATA (13 bytes): "Hello world!\n" =====
 db 0x48,0x65,0x6c,0x6c,0x6f,0x20,0x77,0x6f,0x72,0x6c,0x64,0x21,0x0a
@@ -312,4 +327,15 @@ dw 0 ; design=SECTION_FLAT
 dw 0x0001 ; target=1(CODE) source=0(DATA) format=0
 dw 1 ; count
 dw 0x1002 ; offset=2 type=ABS64
+
+; ===== node[11] s390x: CODE (40 bytes) =====
+db 0xa7,0x29,0x00,0x01,0xc0,0x30,0x00,0x00,0x00,0x0e,0xe3,0x30,0x30,0x00,0x00,0x04
+db 0xa7,0x49,0x00,0x0d,0x0a,0x04,0xa7,0x29,0x00,0x00,0x0a,0x01,0x07,0x07,0x07,0x07
+db 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+; ===== node[11] s390x: RELOCATION SECTION_FLAT (10 bytes) =====
+dw 0 ; format
+dw 0 ; design=SECTION_FLAT
+dw 0x0001 ; target=1(CODE) source=0(DATA) format=0
+dw 1 ; count
+dw 0x1020 ; offset=32 type=ABS64
 
