@@ -48,7 +48,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `05_align/` | Section-granularity/alignment tooling |
 | `06_extract/` | Extracts a single node out of a multi-node UEEC file into a standalone one-node file |
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
-| `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
+| `08_export/` | EXPORT examples: `COMPACT_GROUP` and `ORDINAL` parsers/generators/loaders; `SIMPLE_FLAT` is exercised in stage 09 converter |
 | `10_ueec_tls_c/` | Selective TLS delivery of one architecture-specific UEEC node, client-side compact/granulated reconstruction, and 12-CPU QEMU execution tests (research prototype; localhost) |\n| `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 12 architectures, including an executed machine-code function call through the loader |
 
 ## Building
