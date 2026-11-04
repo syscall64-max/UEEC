@@ -5,7 +5,7 @@ loader_pe:
 	gcc -Wall -Wextra -O2 -o loader_pe loader_pe.c
 
 # arch-indexebi: 0=arm32 1=arm64 2=longarm64 3=powerpc32 4=powerpc64
-#                5=riscv32 6=riscv64 7=sparc32 8=sparc64 9=x86 10=x86_64
+#                5=riscv32 6=riscv64 7=sparc32 8=sparc64 9=x86 10=x86_64 11=s390x
 
 run-x86_64: gen_pe loader_pe
 	./gen_pe 10 > node_x86_64.asm
@@ -31,12 +31,26 @@ $(eval $(call ARCH_TEST,riscv64,riscv64-linux-gnu-gcc,qemu-riscv64,6))
 $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus,7))
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64,8))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386,9))
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x,11))
 
 x86_64: run-x86_64
 
-all: arm32 arm64 longarm64 powerpc32 powerpc64 sparc32 sparc64 x86 x86_64 riscv64 riscv32
+all: check-layout arm32 arm64 longarm64 powerpc32 powerpc64 sparc32 sparc64 x86 x86_64 riscv64 riscv32 s390x
 
 clean:
-	rm -f node_*.ueec node_*.asm gen_pe loader_pe \
+	rm -f node_*.ueec node_*.asm check_native_x86_64.ueec gen_pe loader_pe \
 	      loader_pe_arm32 loader_pe_arm64 loader_pe_longarm64 loader_pe_powerpc32 loader_pe_powerpc64 \
-	      loader_pe_riscv32 loader_pe_riscv64 loader_pe_sparc32 loader_pe_sparc64 loader_pe_x86
+	      loader_pe_riscv32 loader_pe_riscv64 loader_pe_sparc32 loader_pe_sparc64 loader_pe_x86 loader_pe_s390x
+
+# Check that every single-node PE_STYLE file has the expected machine and ABS32/64 fixup.
+check-layout: gen_pe
+	python3 check_pe_layout.py
+
+.PHONY: all clean check-layout x86_64 run-x86_64
+
+# Optional: check the committed s390x machine code against a fresh assembly.
+verify-s390x-bytes:
+	s390x-linux-gnu-as -o /tmp/ueec_pe_s390x.o arch/s390x.s
+	s390x-linux-gnu-objcopy -O binary -j .text /tmp/ueec_pe_s390x.o /tmp/ueec_pe_s390x.bin
+	cmp arch/s390x.bin /tmp/ueec_pe_s390x.bin
+	rm -f /tmp/ueec_pe_s390x.o /tmp/ueec_pe_s390x.bin
