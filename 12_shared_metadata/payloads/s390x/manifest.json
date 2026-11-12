@@ -1,0 +1,14 @@
+[
+  {
+    "technology": "scalar",
+    "size": 128,
+    "sha256": "12203be04f450789450b1b5f0fd43d55d852fd9a2d9b9e9a3e00d4a9fb60fb68",
+    "instruction": ""
+  },
+  {
+    "technology": "vx",
+    "size": 448,
+    "sha256": "6ea5d6ac9d36d79f8c73bd1adea7a1df79e64bffe2c79d4e30ddde0eedb09979",
+    "instruction": "\\bvaf\\b"
+  }
+]

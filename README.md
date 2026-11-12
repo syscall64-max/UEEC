@@ -50,6 +50,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
 | `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
 | `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
+| `12_shared_metadata/` | Experimental CPU METADATA: fixed 16-bit node-indexed shared records, capability masks, priority-based selection, reader/writer and standalone regression example; see [metadata specification](docs/ARCHITECTURE_METADATA.md) |
 
 ## Building
 
@@ -100,8 +101,11 @@ and current limits.)
 ## Roadmap
 
 This repository covers the first stage of a longer-term plan: format
-specification, reference toolchain hardening, and three new section types
-(typed import/export, debug information, architecture metadata). A Linux
+specification, reference toolchain hardening, and new section work
+(typed import/export and debug information). CPU architecture metadata now has
+an experimental standalone implementation in `12_shared_metadata/`; its exact
+publication scope and validation limits are documented in
+[`docs/ARCHITECTURE_METADATA.md`](docs/ARCHITECTURE_METADATA.md). A Linux
 kernel-level loader, a microcontroller loader ecosystem, and a
 virtual-processor language/VM are planned as later, separately-scoped
 stages — see `docs/UEEC_DESIGN.md` for a short summary.

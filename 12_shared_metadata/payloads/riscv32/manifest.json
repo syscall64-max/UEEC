@@ -1,0 +1,14 @@
+[
+  {
+    "technology": "scalar",
+    "size": 28,
+    "sha256": "dfd303f691cfaa3973c1b61942aaaef155fe20907c6e6b67fc0c21f3bddbd15d",
+    "instruction": ""
+  },
+  {
+    "technology": "rvv",
+    "size": 48,
+    "sha256": "bc515df19dadb2053178a840b56f9973d1ee3e36d01c9d1225bca2809a2e1e08",
+    "instruction": "\\bvredsum\\.vs\\b"
+  }
+]

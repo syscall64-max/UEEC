@@ -1,8 +1,8 @@
 # UEEC — Project Status and Handoff
 
-**Snapshot date:** 2026-10-13  
+**Snapshot date:** 2026-11-12  
 **Repository:** https://github.com/syscall64-max/UEEC  
-**Baseline `main` commit inspected:** `5d238a15400dcf5eb8452105c403252fd05bcec7` (2026-09-24)  
+**Baseline `main` commit inspected:** `623fd685adad674d42ccf9e41b6903197c838a05` (2026-10-13)  
 **Format specification:** `FORMAT_SPECIFICATION.md`, draft v0.1 (pre-1.0)
 
 > This document is the project's **manually maintained working memory**. It records
@@ -37,6 +37,7 @@ not a production-grade loader, Linux kernel loader, or virtual machine.
 | `07_pe/` | PE-style relocation design; intentionally constrained to one-node, monolithic images |
 | `08_export/` | `COMPACT_GROUP`, `SIMPLE_FLAT`, and `ORDINAL` export representations and example loaders |
 | `09_convert_export/` | Lossless `COMPACT_GROUP` ↔ `SIMPLE_FLAT` export conversion; documented cross-architecture and function-call tests |
+| `12_shared_metadata/` | New standalone CPU METADATA prototype: shared node-indexed section, requirement masks and priority; publication tests and separately labelled author evidence are in its `VALIDATION.md` |
 
 These are **claims recorded in repository documentation**, not tests
 re-executed during creation of this status file. For exact coverage and
@@ -137,3 +138,27 @@ documented result into a claim about the current checkout.
   from the archive during this work.
 - Security review is a preliminary checklist, not a full security audit.
 - No version tag or GitHub Release has been published by these PRs.
+
+
+## Metadata-only publication — 2026-11-12
+
+- Starting GitHub `main`: `623fd685adad674d42ccf9e41b6903197c838a05`.
+- Work is published on a feature branch and proposed by PR, as required by
+  `AGENTS.md`; it is not described as merged or a stable release.
+- Scope: experimental CPU METADATA type 13, per-node design 0 and shared
+  node-indexed design 1, 16/32/64-bit count/offsets, fixed uint16 node indexes,
+  little/big-endian encoding, typed capability masks and selection priority.
+- Includes the isolated `12_shared_metadata/` reader/writer, CPU detection,
+  trusted leaf CODE fixtures/manifests and regression harness needed to
+  reproduce the metadata selection behavior. These are compared/imported as
+  a new stage; existing stages 00–09 are not overwritten.
+- No TLS, MCU, board/PCB, FPGA or VM implementation is part of this PR.
+- Fresh native/sanitizer commands and results are recorded in
+  `12_shared_metadata/VALIDATION.md`. The author's earlier 12-target QEMU
+  transcript is distinguished from this session's checks.
+- Core header/node layouts are unchanged. The new reader supports metadata
+  designs 0/1; legacy stage loaders are not claimed to read those layouts.
+- Metadata record IDs remain experimental. Added structures, serialization,
+  parser checks, fixtures and specification are updated together.
+- AI assistance is disclosed. This is not a full security audit, independent
+  human review or performance benchmark. No Git tag/release is created.

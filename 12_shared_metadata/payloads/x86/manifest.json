@@ -1,0 +1,20 @@
+[
+  {
+    "technology": "scalar",
+    "size": 45,
+    "sha256": "5bcb9f9498c3429cc95333a649468fddcaeead5783db62f76edbe821b188a3c0",
+    "instruction": ""
+  },
+  {
+    "technology": "sse2",
+    "size": 184,
+    "sha256": "e4dbdd193369d5c8ac1efb963d9c8359fce3fac1098332fd4b3fc31e4ab601ba",
+    "instruction": "\\bpaddd\\b"
+  },
+  {
+    "technology": "avx2",
+    "size": 233,
+    "sha256": "bcca3ed21e68af47f14a401a5ad7c969bff503ae7d9e84e5bba920794c9c247c",
+    "instruction": "\\bvpaddd\\b.*%ymm"
+  }
+]
