@@ -6,9 +6,9 @@ still being stress-tested; expect breaking changes before `1.0`. See
 
 This document specifies the on-disk layout of a UEEC container: the file
 header, the node/section model, and the currently defined `design` variants
-for the RELOCATION and EXPORT section types. It reflects the reference
+for the RELOCATION, EXPORT and experimental CPU METADATA section types. It reflects the reference
 implementation in this repository (`01_ueec_info/`, `04_convert/`,
-`08_export/`, `09_convert_export/`).
+`08_export/`, `09_convert_export/`, and `12_shared_metadata/`).
 
 ## 0. Conventions
 
@@ -112,6 +112,10 @@ implementation, costs nothing and avoids a later incompatible renumbering.
 These 11 values are exactly the architectures exercised by this
 repository's QEMU validation matrix (see the root `README.md`).
 
+The experimental `12_shared_metadata/` example additionally uses CPU machine
+value 11 for S390X in its isolated reference copy and metadata catalog.
+Existing stage-00–09 machine tables are unchanged by this metadata update.
+
 ### 2.3 `system_type`
 
 | value | meaning |
@@ -183,7 +187,7 @@ typedef struct UEEC_PACKED { uint16_t type; uint64_t section_size, data_size; } 
 | 10 | STACK | reserved |
 | 11 | HEAP | reserved |
 | 12 | RESOURCE | reserved |
-| 13 | METADATA | reserved (planned: architecture-oriented metadata, see `docs/UEEC_DESIGN.md`) |
+| 13 | METADATA | experimental CPU requirements/priority implementation in `12_shared_metadata/`; see §6.3 |
 
 `section_size` and `data_size` are given in the width selected by `format`
 (§4's own table above, independent of any `format` field inside the
@@ -199,7 +203,7 @@ Following the section-header array, in order:
 
 ## 6. Section-content designs
 
-Two section types currently have more than one defined wire encoding, each
+RELOCATION, EXPORT and the experimental METADATA section have defined wire encodings, each
 tagged by its own leading `design` field so a reader can dispatch correctly
 without out-of-band knowledge. This `design`-tag mechanism — plus the
 *lossless converters* this repository provides between the designs of a
@@ -332,6 +336,29 @@ into COMPACT_GROUP or SIMPLE_FLAT), validated round-trip-exact across all
 11 architectures, including an executed machine-code function call through
 the loader (not just value lookups).
 
+### 6.3 METADATA section (experimental CPU capability records)
+
+The standalone `12_shared_metadata/` example implements section type 13.
+The core file/node headers and node-to-section mappings are unchanged.
+A leading `uint16_t format, design` selects the metadata representation:
+format 0/1/2 uses 16/32/64-bit counts and offsets; this prototype rejects
+other metadata format values. Metadata fields use the file's byte order.
+
+- `design=0`: per-node type/offset index, exactly one owning node.
+- `design=1`: shared node-indexed table. Every entry contains a fixed
+  `uint16_t node_index`, a `uint16_t type`, and a format-width offset.
+- Count is followed by count index entries and one END sentinel, then data.
+  Offsets are relative to the data area's start. The sentinel is
+  node_index=0, type=0, offset=data_size; it is not a node-zero record.
+- Family-specific REQUIRED records contain a `uint64_t` requirement mask;
+  PRIORITY (type 2) contains `uint16_t`, defaulting to zero when absent.
+
+See [Architecture metadata](docs/ARCHITECTURE_METADATA.md) for the exact
+record registry, ownership/validation rules, compatibility limits and
+selection behavior. These assignments are experimental. Old loaders are
+not claimed to understand the new layouts. The new example accepts both
+designs and tests LE/BE × metadata 16/32/64 encodings.
+
 ## 7. Implementation status
 
 | Area | Status |
@@ -341,7 +368,8 @@ the loader (not just value lookups).
 | EXPORT: COMPACT_GROUP / SIMPLE_FLAT, universal converter | Implemented and validated, `09_convert_export/` |
 | EXPORT: ORDINAL | Parseable; deliberately not converted (see §6.2) |
 | RELOCATION: PE-style 4th design | Not implemented (see §6.1) |
-| IMPORT, DEBUG, METADATA section types | Defined in the enum (§4), not yet implemented — planned work |
+| METADATA | Experimental CPU capability/priority records, shared and per-node readers/writers in `12_shared_metadata/`; see §6.3 |
+| IMPORT, DEBUG section types | Defined in the enum (§4), not yet implemented — planned work |
 | MPU / VM / GPU / FPGA `machine_type` values | Defined in the enum (§2.1), not yet implemented — planned work |
 
 ## 8. Versioning

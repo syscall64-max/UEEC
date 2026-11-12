@@ -1,0 +1,20 @@
+[
+  {
+    "technology": "scalar",
+    "size": 68,
+    "sha256": "a265c5378c65f5432466fcf06e2e406d2018ae2f78d5aa584cb4855bb265a9a0",
+    "instruction": ""
+  },
+  {
+    "technology": "lsx",
+    "size": 228,
+    "sha256": "3110b457b9e918bddefcd0239b2dbf5ba8eb3cf796084e5d2cc0b88df679ffdd",
+    "instruction": "\\bvadd\\.w\\b"
+  },
+  {
+    "technology": "lasx",
+    "size": 268,
+    "sha256": "77e2f7679cf1e7d337f805195b4f97fa52364535b26d82dbf4dc6bfa13d10417",
+    "instruction": "\\bxvadd\\.w\\b"
+  }
+]

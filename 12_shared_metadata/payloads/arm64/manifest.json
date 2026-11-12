@@ -1,0 +1,20 @@
+[
+  {
+    "technology": "scalar",
+    "size": 48,
+    "sha256": "2fd1e2375c962b84ef61f87f588cf4eb1c45afcd0a3c17a910398a9545b34ef2",
+    "instruction": ""
+  },
+  {
+    "technology": "neon",
+    "size": 168,
+    "sha256": "74f338b3dbaf64b374cb1757890a4259d73abd6186dc10d53bdf8c574b3ef355",
+    "instruction": "\\badd\\s+v\\d+\\.4s"
+  },
+  {
+    "technology": "sve",
+    "size": 68,
+    "sha256": "d1cc8c89fa01ff655a0161a6e82d28609914cd8914de57ba8ed8971f96faa7df",
+    "instruction": "\\buaddv\\b"
+  }
+]

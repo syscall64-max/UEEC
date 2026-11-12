@@ -1,0 +1,14 @@
+[
+  {
+    "technology": "scalar",
+    "size": 52,
+    "sha256": "8a813c1fa7a69e5d431888fe9bb5a4f13d52c1376c906359c5b3e279621b353f",
+    "instruction": ""
+  },
+  {
+    "technology": "neon",
+    "size": 200,
+    "sha256": "68f34f5c32359c3fbd25a79e6515ea5cf8b9a716b3260623af1dda15bf9369e2",
+    "instruction": "\\bvadd\\.i32\\b"
+  }
+]
