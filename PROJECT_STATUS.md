@@ -1,8 +1,8 @@
 # UEEC — Project Status and Handoff
 
-**Snapshot date:** 2026-10-13  
+**Snapshot date:** 2026-11-16  
 **Repository:** https://github.com/syscall64-max/UEEC  
-**Baseline `main` commit inspected:** `5d238a15400dcf5eb8452105c403252fd05bcec7` (2026-09-24)  
+**Baseline `main` commit inspected:** `623fd685adad674d42ccf9e41b6903197c838a05` (inspected 2026-11-16; earlier baselines remain in the dated history below)  
 **Format specification:** `FORMAT_SPECIFICATION.md`, draft v0.1 (pre-1.0)
 
 > This document is the project's **manually maintained working memory**. It records
@@ -20,8 +20,9 @@ container, file-level section sharing, and versionable `design` encodings
 for relocations and exports. See `README.md`, `FORMAT_SPECIFICATION.md`,
 and `docs/UEEC_DESIGN.md` for details and the limits of the claims.
 
-The present repository contains a **reference toolchain and test harness**,
-not a production-grade loader, Linux kernel loader, or virtual machine.
+The repository contains a **reference toolchain and test harness** plus an
+experimental UEEC VM in stage 16. It is not a production-grade runtime or
+Linux kernel loader.
 
 ## Current implementation map
 
@@ -37,8 +38,9 @@ not a production-grade loader, Linux kernel loader, or virtual machine.
 | `07_pe/` | PE-style relocation design; intentionally constrained to one-node, monolithic images |
 | `08_export/` | `COMPACT_GROUP`, `SIMPLE_FLAT`, and `ORDINAL` export representations and example loaders |
 | `09_convert_export/` | Lossless `COMPACT_GROUP` ↔ `SIMPLE_FLAT` export conversion; documented cross-architecture and function-call tests |
+| `16_ueec_vm/` | Experimental VM, two selectable programs and shared INIT_DATA; 162 locally reproduced checks, plus a separate author-reported 165-check NASM run including leak detection |
 
-These are **claims recorded in repository documentation**, not tests
+The earlier-stage entries are **claims recorded in repository documentation**, not tests
 re-executed during creation of this status file. For exact coverage and
 exceptions, consult the relevant stage `README.md` and Makefile.
 
@@ -73,8 +75,9 @@ exceptions, consult the relevant stage `README.md` and Makefile.
    encodings; preserve their documented distinct semantic models.
 5. **Environment availability:** some cross-toolchains/QEMU targets are
    environment-dependent. Report missing tools as skips/blockers, not passes.
-6. **Absent later layers:** a kernel loader, embedded loader ecosystem,
-   and VM layer are roadmap items, not implemented features here.
+6. **Later layers:** stage 16 now implements a limited bytecode VM. A kernel
+   loader, a complete embedded ecosystem, joint library linking, a source
+   language/compiler and VM SIMD/128-bit operations remain future work.
 
 ## Prioritized next work
 
@@ -137,3 +140,31 @@ documented result into a claim about the current checkout.
   from the archive during this work.
 - Security review is a preliminary checklist, not a full security audit.
 - No version tag or GitHub Release has been published by these PRs.
+
+## Follow-up work log — 2026-11-16
+
+- Goal: publish the experimental UEEC VM as standalone stage `16_ueec_vm/`
+  through branch `feat/ueec-vm-min16-20261116` and a review PR, following
+  `AGENTS.md`. Starting `main`: `623fd685adad674d42ccf9e41b6903197c838a05`.
+- Compared the imported canonical header, original stage-02 loader and
+  stage-01 reader with the current GitHub blob SHAs; all three match. Only
+  the new stage and scoped documentation/CI updates are proposed. Stages
+  00–09 are preserved. Separate stages 10–15 are not imported.
+- Container wire layout unchanged. New runtime selects VM type 2 / machine
+  0. Operand FORMAT8 is removed from the active VM; formats 16/32/64 retain
+  codes 1/2/3. Original single-image UEF sources are retained as references.
+- Two program nodes (`hello`, `stack`) share one physical INIT_DATA section.
+  The compact fixture is 262 bytes. Monolithic, scattered and hybrid loading,
+  all three descriptor widths and both metadata byte orders are covered.
+- Local Linux x86-64: `make run`, `make test`, `make sanitize` PASS; 162
+  checks without NASM. Local sanitizer leak detection is disabled because
+  LeakSanitizer is blocked by the environment's ptrace supervisor.
+- Project-author x86-64 transcript: 165 checks PASS normally and with
+  ASan/UBSan, including an additional run with leak detection enabled.
+  NASM provides the extra three fixture-encoding comparisons. These are
+  author-host results, not local reproductions.
+- A VM-specific GitHub Actions workflow is added; remote CI results are
+  pending until its run is observed. No fresh foreign-CPU VM execution or
+  physical MCU measurement is claimed.
+- Remaining work: ABI versioning, arithmetic and branches, joint linking,
+  HEAP, source-language tools, FORMAT128 and SIMD specification/implementation.

@@ -1,0 +1,661 @@
+{
+  "host": "x86_64",
+  "binary": "ueec-vm",
+  "checks_passed": 162,
+  "asan_options": "not enabled",
+  "legacy_stack_fixture_bytes": 118,
+  "legacy_code_sha256": "7210df4fbd6a20dcf4e3efc80ae15b9e607d5c29eff989942bf4b2d1741d6350",
+  "converted_code_bytes": 104,
+  "converted_code_sha256": "b4393a22f56db1e2d9e66831b6032c7e74551522d6f044648d72fbd87d3f68e6",
+  "nasm_available": false,
+  "checks": [
+    {
+      "check": "compile original C interpreter",
+      "returncode": 0
+    },
+    {
+      "check": "original stack fixture",
+      "returncode": 0
+    },
+    {
+      "check": "original recursion bound",
+      "returncode": 1
+    },
+    {
+      "check": "original UEEC reader SH16/little/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH16/little/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/little/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH16/big/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH16/big/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH16/big/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH32/little/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH32/little/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/little/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH32/big/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH32/big/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH32/big/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH64/little/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH64/little/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/little/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH64/big/g1",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g1/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "original UEEC reader SH64/big/g4096",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/hello/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/hello/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/hello/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/hello/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/stack/auto",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/stack/monolithic",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/stack/scattered",
+      "returncode": 0
+    },
+    {
+      "check": "SH64/big/g4096/stack/hybrid",
+      "returncode": 0
+    },
+    {
+      "check": "correct VM target labels",
+      "returncode": 0
+    },
+    {
+      "check": "list both VM nodes",
+      "returncode": 0
+    },
+    {
+      "check": "select index 0",
+      "returncode": 0
+    },
+    {
+      "check": "select index 1",
+      "returncode": 0
+    },
+    {
+      "check": "default selects first compatible program",
+      "returncode": 0
+    },
+    {
+      "check": "load only",
+      "returncode": 0
+    },
+    {
+      "check": "trace original CALL/RET",
+      "returncode": 0
+    },
+    {
+      "check": "unknown name",
+      "returncode": 1
+    },
+    {
+      "check": "out of range node",
+      "returncode": 1
+    },
+    {
+      "check": "invalid step option",
+      "returncode": 2
+    },
+    {
+      "check": "old UEF wrapper is rejected",
+      "returncode": 1
+    },
+    {
+      "check": "truncated file",
+      "returncode": 1
+    },
+    {
+      "check": "bad version",
+      "returncode": 1
+    },
+    {
+      "check": "wrong machine",
+      "returncode": 1
+    },
+    {
+      "check": "CPU node never run as bytecode",
+      "returncode": 1
+    },
+    {
+      "check": "opposite bytecode endian",
+      "returncode": 1
+    },
+    {
+      "check": "library is not a program",
+      "returncode": 1
+    },
+    {
+      "check": "unknown opcode",
+      "returncode": 1
+    },
+    {
+      "check": "reserved 128-bit operand width",
+      "returncode": 1
+    },
+    {
+      "check": "old FORMAT8 CODE rejected",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 1",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 2",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 3",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 4",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 5",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 6",
+      "returncode": 1
+    },
+    {
+      "check": "format zero reserved for opcode 7",
+      "returncode": 1
+    },
+    {
+      "check": "all operand instructions width 16",
+      "returncode": 0
+    },
+    {
+      "check": "all operand instructions width 32",
+      "returncode": 0
+    },
+    {
+      "check": "all operand instructions width 64",
+      "returncode": 0
+    },
+    {
+      "check": "truncated operand",
+      "returncode": 1
+    },
+    {
+      "check": "odd CODE length",
+      "returncode": 1
+    },
+    {
+      "check": "odd IDATA length",
+      "returncode": 1
+    },
+    {
+      "check": "invalid register",
+      "returncode": 1
+    },
+    {
+      "check": "huge IDATA index",
+      "returncode": 1
+    },
+    {
+      "check": "huge STACK index",
+      "returncode": 1
+    },
+    {
+      "check": "HEAP not implemented",
+      "returncode": 1
+    },
+    {
+      "check": "POP underflow",
+      "returncode": 1
+    },
+    {
+      "check": "RET without CALL",
+      "returncode": 1
+    },
+    {
+      "check": "CALL into operand",
+      "returncode": 1
+    },
+    {
+      "check": "CALL signed overflow high",
+      "returncode": 1
+    },
+    {
+      "check": "CALL signed overflow low",
+      "returncode": 1
+    },
+    {
+      "check": "unknown syscall",
+      "returncode": 1
+    },
+    {
+      "check": "IDATA output bounds",
+      "returncode": 1
+    },
+    {
+      "check": "missing explicit exit",
+      "returncode": 1
+    },
+    {
+      "check": "bounded recursion",
+      "returncode": 1
+    },
+    {
+      "check": "instruction budget",
+      "returncode": 1
+    },
+    {
+      "check": "data stack overflow",
+      "returncode": 1
+    },
+    {
+      "check": "RET argument cleanup bound",
+      "returncode": 1
+    },
+    {
+      "check": "duplicate selected mapping",
+      "returncode": 1
+    },
+    {
+      "check": "two nodes reference the same physical IDATA",
+      "returncode": 0
+    }
+  ]
+}

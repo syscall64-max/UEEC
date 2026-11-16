@@ -1,0 +1,37 @@
+name: UEEC VM
+
+on:
+  pull_request:
+    paths:
+      - '16_ueec_vm/**'
+      - '.github/workflows/ueec-vm.yml'
+  push:
+    branches: [main]
+    paths:
+      - '16_ueec_vm/**'
+      - '.github/workflows/ueec-vm.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  vm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install fixture assembler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends nasm
+          gcc --version
+          python3 --version
+          nasm -v
+      - name: Run both programs and regression checks
+        run: make -C 16_ueec_vm run test
+      - name: Sanitizers including leak detection
+        run: make -C 16_ueec_vm sanitize ASAN_OPTIONS=detect_leaks=1:halt_on_error=1
