@@ -93,10 +93,10 @@ typedef struct UEEC_PACKED {
 | 3 | GPU (compute kernel) |
 | 4 | FPGA (bitstream) |
 
-Only `CPU` is implemented by the tools in this repository today. The other
-four values are reserved placeholders for the non-CPU execution targets
-described in `docs/UEEC_DESIGN.md` — defining the enum now, ahead of any
-implementation, costs nothing and avoids a later incompatible renumbering.
+The earlier stages implement `CPU`. Stage `16_ueec_vm/` additionally
+implements `machine_type=2`, `machine=0` (UEEC VM), using the unchanged
+container structures. MPU, GPU and FPGA remain unimplemented in this
+repository snapshot; enum values alone do not implement those targets.
 
 ### 2.2 `machine` (when `machine_type == CPU`)
 
@@ -132,6 +132,28 @@ repository's QEMU validation matrix (see the root `README.md`).
 | 4 | Windows |
 
 Only `Linux` is exercised by the current loaders and validation harness.
+
+### 2.5 UEEC VM target
+
+Stage `16_ueec_vm/` uses `machine_type=2`, `machine=0`, `encode=0`,
+`system_type=0`, `system=0`, and the user-program flags. It accepts exactly
+one CODE and at most one INIT_DATA section for the selected node. The
+VM-provided service ABI is independent of a guest OS; the interpreter itself
+runs in Linux user space. Bytecode and VM cells are little endian, independently
+of the container metadata endian flag. CODE begins at instruction index zero.
+
+The 16-bit instruction header has an 11-bit command and a 5-bit operand
+format. VM operand formats **differ from container SH width selectors**:
+codes 1/2/3 mean 16/32/64-bit operands; operand code 0 (former FORMAT8) is
+reserved and rejected. SYSCALL is a fixed-size instruction with header
+format=0 and a 16-bit service number. Codes 4–31 are unimplemented; 128-bit
+operands and SIMD are future work. Original FORMAT8 fixtures are historical
+references, not inputs accepted by the active VM.
+
+The container still uses SH16/SH32/SH64 selectors 0/1/2; the VM stage rejects
+other SH selectors. No core magic, layout, mapping or design tag is changed.
+The experimental VM ABI, supported commands, bounded execution behavior and
+compatibility impact are documented in [`16_ueec_vm/README.md`](16_ueec_vm/README.md).
 
 ## 3. Node → section mapping — `ueec_node_info` (6 bytes each)
 
@@ -342,7 +364,8 @@ the loader (not just value lookups).
 | EXPORT: ORDINAL | Parseable; deliberately not converted (see §6.2) |
 | RELOCATION: PE-style 4th design | Not implemented (see §6.1) |
 | IMPORT, DEBUG, METADATA section types | Defined in the enum (§4), not yet implemented — planned work |
-| MPU / VM / GPU / FPGA `machine_type` values | Defined in the enum (§2.1), not yet implemented — planned work |
+| VM `machine_type=2`, `machine=0` | Experimental interpreter and two-program example, `16_ueec_vm/`; §2.5 |
+| MPU / GPU / FPGA `machine_type` values | Defined in the enum (§2.1), not implemented in this repository snapshot |
 
 ## 8. Versioning
 

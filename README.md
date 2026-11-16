@@ -10,8 +10,9 @@ one wire-format, and the format can grow new section types and new encodings
 without breaking existing readers.
 
 This repository holds the format specification, the reference toolchain, and
-the multi-architecture validation harness. It does not yet include a kernel
-loader or virtual-machine layer — see [Roadmap](#roadmap) below.
+the multi-architecture validation harness. Stage [`16_ueec_vm/`](16_ueec_vm/)
+adds an experimental bytecode VM using the existing node/section format.
+A kernel loader remains future work — see [Roadmap](#roadmap) below.
 
 > **Status:** early, actively developed. The format is versioned `0.x` while
 > its extensibility mechanism (see [`FORMAT_SPECIFICATION.md`](FORMAT_SPECIFICATION.md))
@@ -50,6 +51,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
 | `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
 | `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
+| `16_ueec_vm/` | Two named UEEC VM programs sharing one physical INIT_DATA section; FORMAT16/32/64, three loading layouts, SH16/SH32/SH64 and cross-endian metadata checks |
 
 ## Building
 
@@ -99,12 +101,17 @@ and current limits.)
 
 ## Roadmap
 
-This repository covers the first stage of a longer-term plan: format
-specification, reference toolchain hardening, and three new section types
-(typed import/export, debug information, architecture metadata). A Linux
-kernel-level loader, a microcontroller loader ecosystem, and a
-virtual-processor language/VM are planned as later, separately-scoped
-stages — see `docs/UEEC_DESIGN.md` for a short summary.
+This repository includes the core format/toolchain and the first UEEC VM
+stage. The VM runs bytecode with 16-, 32- and 64-bit operands; its 165-check
+author-host result includes NASM comparisons and leak detection, while the
+separately reproduced local suite has 162 checks without NASM. See
+[`16_ueec_vm/README.md`](16_ueec_vm/README.md) for provenance and limits.
+
+Typed imports/exports, debugging support, a complete application/library
+runtime, a new source language/compiler, VM SIMD and FORMAT128, and a Linux
+kernel loader remain separate development targets. See `docs/UEEC_DESIGN.md`
+and the VM stage documentation. Stages 10–15 from separate working snapshots
+are not imported by this change.
 
 ## License
 
