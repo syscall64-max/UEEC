@@ -203,7 +203,8 @@ These GitHub-hosted results are distinct from both the 162-check local run and t
   approximately 9.73 GiB OS-visible RAM, no swap; Debian 13.6 x86-64,
   Linux 6.18.57, GCC 14.2.0, Python 3.12.14. Detection reports KVM plus
   `container-other`; hidden host resources/hypervisor version are unknown.
-  Full evidence and compressed raw samples are in `17_ueec_bench/evidence/`.
+  Full evidence and compressed raw samples are now in
+  `results/loader/2026-11-16-pilot/` (relocated after this pilot).
 - This is an exploratory warm-cache pilot, not VM throughput, physical-memory
   measurement, cross-format comparison, or evidence of a general speedup.
   Independent host repetitions and additional workloads remain to be run.
@@ -219,3 +220,23 @@ ASan/UBSan checks, with `detect_leaks=1:halt_on_error=1`. This verifies harness
 correctness on another environment; it is not a remote performance result.
 The run checked the PR's generated merge revision `a6359c10930cc0e2d76f59fb8509e731a0062060`.
 This follow-up changes documentation only; measured benchmark source is unchanged.
+
+## Separate implementations from performance results — 2026-11-16
+
+- Keep the VM implementation in `16_ueec_vm/` and benchmark/test source in
+  `17_ueec_bench/`. Move the loading pilot from the stage's `evidence/` into
+  `results/loader/2026-11-16-pilot/`. The four original data files are byte-for-byte
+  unchanged; a new manifest records hashes and measured source commit
+  `c76b748fca9a368399eb828449584a79fcb62488`. Historical JSON remains schema 1.
+- New runs write schema-2 reports under a unique timestamped
+  `results/local/loader-<UTC>-<unique>/`, ignored by Git. `--output` must name
+  a directory that does not exist; previous reports are never reused.
+- `make clean` now removes only the three known build outputs, preserving both
+  separate results and any older reports still under the stage's `build/results/`.
+- No VM/parser/format/ABI or C timing-boundary changes. Earlier stage layouts
+  and validation records are preserved. This is scoped to performance results.
+- Local validation: normal checks PASS (39); ASan/UBSan checks PASS (37, leak
+  detection disabled locally). A default-output quick run completed 24 cases /
+  480 measurements and its environment/source hashes were checked. Cleanup
+  preservation and all four archived data-file hashes were verified.
+- Remote correctness CI for this reorganization is pending observation.

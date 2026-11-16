@@ -1,5 +1,5 @@
 """Exploratory warm-cache measurements of selected-image loading, not VM execution."""
-import argparse,csv,hashlib,io,json,math,os,random,statistics,subprocess,sys,time
+import argparse,csv,hashlib,io,json,math,os,random,statistics,subprocess,sys,tempfile,time
 from datetime import datetime,timezone
 from pathlib import Path
 
@@ -10,6 +10,18 @@ from generate import container,instruction
 from environment import inventory,observe
 
 PHASES=('open_map_ns','parse_select_ns','load_ns','input_close_ns','release_ns','total_ns')
+RESULTS_ROOT=ROOT.parent/'results'/'local'
+
+def new_run_directory(output=None,results_root=None):
+    """Reserve a new directory atomically; never reuse an existing run."""
+    if output is not None:
+        output=Path(output).resolve()
+        output.mkdir(parents=True,exist_ok=False)
+        return output
+    parent=Path(results_root) if results_root is not None else RESULTS_ROOT
+    parent.mkdir(parents=True,exist_ok=True)
+    prefix='loader-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')+'-'
+    return Path(tempfile.mkdtemp(prefix=prefix,dir=parent)).resolve()
 
 def fixture(nodes,size,sharing,granule):
     """One shared CODE; shared or per-node IDATA. Chosen node is last.
@@ -43,7 +55,7 @@ def stats(values):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--binary',type=Path,default=ROOT/'build/bench-load')
-    ap.add_argument('--output',type=Path,default=ROOT/'build/results')
+    ap.add_argument('--output',type=Path,help='New run directory (must not exist); default: ../results/local/loader-<UTC>-<unique>/')
     ap.add_argument('--samples',type=int,default=200)
     ap.add_argument('--warmups',type=int,default=20)
     ap.add_argument('--rounds',type=int,default=3)
@@ -66,7 +78,7 @@ def main():
         ap.error('A fixture would exceed the 128 MiB conservative size limit')
     for field in ('nodes','sizes','granules'):
         if len(getattr(a,field))!=len(set(getattr(a,field))):ap.error('Duplicate matrix values')
-    a.binary=a.binary.resolve();a.output=a.output.resolve()
+    a.binary=a.binary.resolve()
     binary_bytes=a.binary.read_bytes()
     if b'__asan_init' in binary_bytes or b'__ubsan_handle_' in binary_bytes:
         ap.error('Use the normal optimized binary, not a sanitizer build, for timing')
@@ -76,7 +88,9 @@ def main():
         os.sched_setaffinity(0,{a.cpu});affinity=[a.cpu]
     info=json.loads(subprocess.check_output([str(a.binary),'--info'],text=True))
     environment=inventory(affinity,a.environment_note)
-    a.output.mkdir(parents=True,exist_ok=True);fixtures=a.output/'fixtures';fixtures.mkdir(exist_ok=True)
+    try:a.output=new_run_directory(a.output)
+    except OSError as e:ap.error('Cannot create a new output directory: '+str(e))
+    fixtures=a.output/'fixtures';fixtures.mkdir()
     cases=[]
     for size in a.sizes:
         for nodes in a.nodes:
@@ -120,7 +134,7 @@ def main():
                         'round_median_load_ns':[r['median_load_ns'] for r in round_summaries if r['case']==case['case']]})
     git=subprocess.run(['git','-C',str(ROOT.parent),'rev-parse','HEAD'],capture_output=True,text=True)
     source_paths=[ROOT/'bench_load.c',ROOT/'benchmark.py',ROOT/'environment.py',ROOT/'Makefile',VM/'ueec_vm.c',VM/'ueec.h',VM/'vm_runtime.c',VM/'vm_runtime.h',VM/'generate.py']
-    report={'schema_version':1,'started_utc':started_utc,'scope':'warm-cache selected-image loading only; no VM instructions executed',
+    report={'schema_version':2,'run_id':a.output.name,'started_utc':started_utc,'scope':'warm-cache selected-image loading only; no VM instructions executed',
             'samples_per_round':a.samples,'warmups_per_case_per_round':a.warmups,'rounds':a.rounds,
             'random_seed':a.seed,'cache_policy':'warm repeats; no cache eviction requested or claimed',
             'node_selection':'last node by explicit numeric index','clock':info,

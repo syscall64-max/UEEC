@@ -16,7 +16,11 @@ make quick       # 24 configurations, 480 measured samples; plumbing/pilot run
 make bench       # 72 configurations, 43,200 measured samples
 ```
 
-Outputs in `build/results/`:
+Outputs are separate from source and binaries: each run creates a new
+`../results/local/loader-<UTC>-<unique>/` directory and prints its path.
+The archived pilot is in [`../results/loader/2026-11-16-pilot/`](../results/loader/2026-11-16-pilot/).
+
+Files in each new run:
 
 | File | Contents |
 | --- | --- |
@@ -26,12 +30,12 @@ Outputs in `build/results/`:
 | `environment.json` | CPU, memory, OS, virtualization evidence, toolchain, binary hash and before/after observations |
 | `fixtures/*.ueec` | Exact generated workload files; hashes in the report |
 
-Each run overwrites these report names. Use distinct output directories for
-independent runs:
+Existing runs are never overwritten. `--output` may name a custom directory,
+which must not exist. `make clean` removes compiled files and preserves results:
 
 ```sh
-python3 benchmark.py --output build/run-01
-python3 benchmark.py --output build/run-02 --cpu 0 \
+python3 benchmark.py --output ../results/local/run-01
+python3 benchmark.py --output ../results/local/run-02 --cpu 0 \
   --environment-note 'Host details supplied by the operator: VirtualBox version ..., assigned RAM ..., host RAM type/speed ...'
 ```
 
@@ -123,9 +127,10 @@ format comparisons require separate experiments.
 ### ქართულად
 
 ჯერ გაუშვი `make test`, შემდეგ `make bench`. შედეგებთან ერთად
-`build/results/environment.json` ავტომატურად შეინახავს CPU-ის, მეხსიერების,
+`../results/local/loader-<UTC>-<unique>/environment.json` შეინახავს CPU-ის, მეხსიერების,
 ოპერაციული სისტემისა და აღმოჩენილი ვირტუალური გარემოს მონაცემებს.
 რაც გარემოდან არ ჩანს, უცნობად დარჩება; დამატებითი ცნობილი ინფორმაცია
 შეგიძლია ჩაწერო `--environment-note` პარამეტრით.
+ყოველი გაშვება ქმნის ახალ საქაღალდეს და წინა შედეგებს არ გადააწერს.
 იზომება არჩეული ნოდის **ჩატვირთვა და გათავისუფლება**; VM-ის ინსტრუქციების
 შესრულების სიჩქარე ამ ტესტში არ იზომება. შეინახე მთლიანი შედეგების საქაღალდე.

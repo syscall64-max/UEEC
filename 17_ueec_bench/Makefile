@@ -31,4 +31,4 @@ sanitize: | $(BUILD)
 	ASAN_OPTIONS=$(ASAN_OPTIONS) UBSAN_OPTIONS=halt_on_error=1 $(PYTHON) test_benchmark.py --binary $(BUILD)/bench-load-san
 
 clean:
-	rm -rf $(BUILD)
+	rm -f $(BUILD)/bench-load $(BUILD)/bench-load-san $(BUILD)/build-command.txt

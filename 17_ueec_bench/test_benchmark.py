@@ -2,7 +2,7 @@
 import argparse,csv,io,json,subprocess,tempfile
 import sys
 from pathlib import Path
-from benchmark import ROOT,fixture,parse_samples,PHASES
+from benchmark import ROOT,fixture,parse_samples,PHASES,new_run_directory
 from environment import inventory
 
 def main():
@@ -22,6 +22,16 @@ def main():
     json.dumps(env);checks+=1
     with tempfile.TemporaryDirectory(prefix='ueec-bench-check-') as temp:
         d=Path(temp)
+        # Repeated default runs must be distinct; existing results must survive.
+        one=new_run_directory(results_root=d/'local')
+        two=new_run_directory(results_root=d/'local')
+        assert one!=two and one.parent==two.parent==d/'local'
+        marker=one/'keep.txt';marker.write_text('previous result')
+        try:new_run_directory(one)
+        except FileExistsError:pass
+        else:raise AssertionError('Existing result directory was reused')
+        assert marker.read_text()=='previous result'
+        checks+=1
         for nodes in [1,8]:
             for sharing in ['shared','duplicated']:
                 for granule in [1,4096]:
@@ -55,9 +65,19 @@ def main():
             assert report['environment']['user_supplied_environment_note']=='test note'
             assert json.loads((out/'environment.json').read_text())['environment']==report['environment']
             assert report['build']['build_command']
+            assert report['run_id']==out.name and report['schema_version']==2
             for case in report['summary']:
                 values=sorted(int(r['load_ns']) for r in raw if r['case']==case['case'])
                 assert case['metrics']['load_ns']['median_ns']==(values[1]+values[2])/2
+            checks+=1
+            # Exercise the public CLI's overwrite rejection, preserving outputs.
+            original=(out/'summary.json').read_bytes()
+            p=subprocess.run([sys.executable,str(ROOT/'benchmark.py'),'--binary',binary,
+                '--output',str(out),'--samples','1','--warmups','0','--rounds','1',
+                '--sizes','1024','--nodes','1','--granules','1'],
+                capture_output=True,text=True,timeout=30)
+            assert p.returncode==2 and 'new output directory' in p.stderr
+            assert (out/'summary.json').read_bytes()==original
             checks+=1
     print(f'Benchmark harness: {checks} checks PASS; no speed threshold asserted')
 

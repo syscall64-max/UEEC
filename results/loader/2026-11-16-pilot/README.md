@@ -29,3 +29,12 @@ architectures, physical devices and the author's own host were not benchmarked.
 Timings are noisy warm-cache loader measurements. The workload never executes
 VM instructions. Runtime virtual allocation counters are not RSS. No universal
 ranking of modes or comparison against other executable formats is inferred.
+
+## Measured revision and relocation
+
+These files were moved unchanged from `17_ueec_bench/evidence/` into the
+separate results tree. [`manifest.json`](manifest.json) records their exact hashes
+and [measured source commit c76b748](https://github.com/syscall64-max/UEEC/tree/c76b748fca9a368399eb828449584a79fcb62488).
+The current runner can have newer source hashes; moving this pilot does not
+constitute a rerun. Source paths in the original JSON remain relative to the
+repository root at the measured revision.
