@@ -177,3 +177,35 @@ For VM source commit `46bde6f9193f75923e3181452cdbd14a93f0fbcb` (PR #8), both wo
 - [UEEC native CI run 43821943064](https://github.com/syscall64-max/UEEC/actions/runs/43821943064): completed successfully for the existing native stage workflow. This is not a foreign-architecture VM matrix.
 
 These GitHub-hosted results are distinct from both the 162-check local run and the author-provided 165-check terminal transcript. This follow-up changes this status note only; VM source is unchanged.
+
+## Selected-image loading benchmark — 2026-11-16
+
+- New standalone `17_ueec_bench/`, based on VM branch commit
+  `74a282982129ec2cc199d5db6756f5fbba970a77`. Proposed on separate branch
+  `perf/ueec-loader-bench-20261116`, stacked on the VM PR branch.
+- Measures selected-image loading/release only: open/map, parse/select,
+  runtime-image construction, input close and image release. No guest VM
+  instruction executes and no production loader or wire format changes.
+- Matrix: monolithic/scattered/hybrid; 1/8 nodes; shared/duplicated IDATA;
+  1 KiB/64 KiB/1 MiB payloads; file granules 1/4096. SH32/LE fixed.
+  Defaults: 20 warmups, 200 samples, 3 randomized rounds per case.
+- Every report captures CPU model/features/topology/affinity, available
+  frequency/cache evidence, RAM/swap/page size, OS/kernel, separate VM and
+  container detection, available cgroup-v2 limits, compiler/build command,
+  source/binary hashes and before/after memory/load observations. Unavailable
+  DIMM parameters, hypervisor versions and hidden host limits remain unknown.
+- Verified locally: `make -C 17_ueec_bench test` PASS (37 checks, including
+  report/raw-CSV integration); `make -C 17_ueec_bench sanitize` PASS (36
+  checks, ASan/UBSan with leak detection disabled in this supervised host).
+  Sanitizer runs exclude the timing-report integration and are not timings.
+- Local optimized pilot: `make -C 17_ueec_bench bench` completed 72 cases /
+  43,200 measured samples. Guest-visible Xeon Platinum 8573C, 9 logical CPUs,
+  approximately 9.73 GiB OS-visible RAM, no swap; Debian 13.6 x86-64,
+  Linux 6.18.57, GCC 14.2.0, Python 3.12.14. Detection reports KVM plus
+  `container-other`; hidden host resources/hypervisor version are unknown.
+  Full evidence and compressed raw samples are in `17_ueec_bench/evidence/`.
+- This is an exploratory warm-cache pilot, not VM throughput, physical-memory
+  measurement, cross-format comparison, or evidence of a general speedup.
+  Independent host repetitions and additional workloads remain to be run.
+- A benchmark-correctness workflow is proposed. Its remote result is pending
+  until observed; it deliberately has no performance PASS threshold.

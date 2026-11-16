@@ -52,6 +52,7 @@ its own directory with its own `Makefile` and `README.md`:
 | `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
 | `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
 | `16_ueec_vm/` | Two named UEEC VM programs sharing one physical INIT_DATA section; FORMAT16/32/64, three loading layouts, SH16/SH32/SH64 and cross-endian metadata checks |
+| `17_ueec_bench/` | Reproducible selected-image loading measurements: three allocation modes, sharing, granulation, raw samples and CPU/RAM/OS/virtualization evidence |
 
 ## Building
 
@@ -122,3 +123,4 @@ kernel-space code; it is out of scope for this repository.)
 ## Author
 
 George Modebadze — Tbilisi, Georgia.
+
