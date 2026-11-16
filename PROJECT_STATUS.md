@@ -168,3 +168,12 @@ documented result into a claim about the current checkout.
   physical MCU measurement is claimed.
 - Remaining work: ABI versioning, arithmetic and branches, joint linking,
   HEAP, source-language tools, FORMAT128 and SIMD specification/implementation.
+
+### Remote CI observed on 2026-11-16
+
+For VM source commit `46bde6f9193f75923e3181452cdbd14a93f0fbcb` (PR #8), both workflows completed successfully:
+
+- [UEEC VM run 43821943172](https://github.com/syscall64-max/UEEC/actions/runs/43821943172): Ubuntu 24.04 x86-64, GCC 13.3.0, Python 3.12.3, NASM 2.16.01. Both program examples ran; 165 checks passed normally and 165 with ASan/UBSan and leak detection enabled.
+- [UEEC native CI run 43821943064](https://github.com/syscall64-max/UEEC/actions/runs/43821943064): completed successfully for the existing native stage workflow. This is not a foreign-architecture VM matrix.
+
+These GitHub-hosted results are distinct from both the 162-check local run and the author-provided 165-check terminal transcript. This follow-up changes this status note only; VM source is unchanged.
