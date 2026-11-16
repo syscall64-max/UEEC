@@ -209,3 +209,13 @@ These GitHub-hosted results are distinct from both the 162-check local run and t
   Independent host repetitions and additional workloads remain to be run.
 - A benchmark-correctness workflow is proposed. Its remote result is pending
   until observed; it deliberately has no performance PASS threshold.
+
+### Benchmark correctness CI observed on 2026-11-16
+
+For benchmark source commit `c76b748fca9a368399eb828449584a79fcb62488`,
+[run 43848952938](https://github.com/syscall64-max/UEEC/actions/runs/43848952938)
+completed successfully on Ubuntu 24.04.5 x86-64: 37 normal checks and 36
+ASan/UBSan checks, with `detect_leaks=1:halt_on_error=1`. This verifies harness
+correctness on another environment; it is not a remote performance result.
+The run checked the PR's generated merge revision `a6359c10930cc0e2d76f59fb8509e731a0062060`.
+This follow-up changes documentation only; measured benchmark source is unchanged.
