@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-11-16-pilot",
+  "kind": "exploratory warm-cache selected-image loading",
+  "measured_source_commit": "c76b748fca9a368399eb828449584a79fcb62488",
+  "measured_source_url": "https://github.com/syscall64-max/UEEC/tree/c76b748fca9a368399eb828449584a79fcb62488",
+  "original_directory": "17_ueec_bench/evidence",
+  "note": "Original measurements unchanged; relocation only. Source hashes in pilot-summary.json refer to the measured revision, not necessarily the latest runner.",
+  "files": {
+    "pilot-summary.json": {
+      "sha256": "424adef582864a6f9d3fbeddacdd9dd039818ba0c5bdceda0a07e61f19d3172d",
+      "bytes": 115944
+    },
+    "pilot-samples.csv.gz": {
+      "sha256": "2bfc8443d796411c5ad699b4fff094a7d960fbe9269df0a51c9e7aa776e40328",
+      "bytes": 876447
+    },
+    "pilot-summary.csv": {
+      "sha256": "e5c08044ff7d88e5eadacbb1c5e469dfac775fcd349688f916fa9e4d9aa20491",
+      "bytes": 6695
+    },
+    "pilot-environment.json": {
+      "sha256": "990733e0dfd38bb648f5bd5ef1a101fad89f8e69a5fa837a520d0b1e29656ee5",
+      "bytes": 5406
+    }
+  }
+}

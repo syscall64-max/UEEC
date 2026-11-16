@@ -1,0 +1,166 @@
+{
+  "started_utc": "2026-11-16T10:24:17.713401+00:00",
+  "environment": {
+    "os": {
+      "system": "Linux",
+      "kernel": "6.18.57",
+      "machine": "x86_64",
+      "distribution": {
+        "NAME": "Debian GNU/Linux",
+        "ID": "debian",
+        "PRETTY_NAME": "Debian GNU/Linux 13 (trixie)",
+        "VERSION_ID": "13",
+        "VERSION": "13 (trixie)",
+        "VERSION_CODENAME": "trixie",
+        "DEBIAN_VERSION_FULL": "13.6",
+        "HOME_URL": "https://www.debian.org/",
+        "SUPPORT_URL": "https://www.debian.org/support",
+        "BUG_REPORT_URL": "https://bugs.debian.org/"
+      },
+      "python": "3.12.14"
+    },
+    "cpu": {
+      "visible_logical_cpus": 9,
+      "allowed_cpu_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "first_visible_processor": {
+        "processor": "0",
+        "vendor_id": "GenuineIntel",
+        "cpu family": "6",
+        "model": "207",
+        "model name": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "stepping": "2",
+        "microcode": "0x1",
+        "cpu MHz": "2300.000",
+        "cache size": "266240 KB",
+        "physical id": "0",
+        "siblings": "9",
+        "core id": "0",
+        "cpu cores": "9",
+        "apicid": "0",
+        "initial apicid": "0",
+        "fpu": "yes",
+        "fpu_exception": "yes",
+        "cpuid level": "28",
+        "wp": "yes",
+        "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 arat avx512vbmi umip waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid cldemote movdiri movdir64b fsrm serialize tsxldtrk avx512_fp16 arch_capabilities",
+        "bugs": "spectre_v1 spectre_v2 spec_store_bypass swapgs retbleed bhi spectre_v2_user its",
+        "bogomips": "4600.00",
+        "clflush size": "64",
+        "cache_alignment": "64",
+        "address sizes": "46 bits physical, 57 bits virtual",
+        "power management": ""
+      },
+      "lscpu": {
+        "status": "nonzero",
+        "exit_code": 1,
+        "stdout": null
+      },
+      "frequency_snapshot_khz": {
+        "scaling_driver": null,
+        "scaling_governor": null,
+        "cpuinfo_min_freq": null,
+        "cpuinfo_max_freq": null,
+        "scaling_min_freq": null,
+        "scaling_max_freq": null,
+        "scaling_cur_freq": null
+      },
+      "cache_for_representative_cpu": [],
+      "representative_cpu": 0,
+      "frequency_note": "Snapshot/limits only; clock is not fixed by this benchmark."
+    },
+    "memory": {
+      "MemTotal_bytes": 10451423232,
+      "MemAvailable_bytes": 9838202880,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "page_size_bytes": 4096,
+      "physical_DIMM_type": null,
+      "physical_DIMM_speed_MT_s": null,
+      "note": "Guest/OS-visible RAM and swap; physical DIMM parameters are not inferred."
+    },
+    "virtualization": {
+      "detectors": {
+        "vm": {
+          "status": "ok",
+          "exit_code": 0,
+          "stdout": "kvm"
+        },
+        "container": {
+          "status": "ok",
+          "exit_code": 0,
+          "stdout": "container-other"
+        }
+      },
+      "dmi_product_evidence": {
+        "sys_vendor": null,
+        "product_name": null,
+        "product_version": null
+      },
+      "hypervisor_version": null,
+      "container_markers": {
+        "/.dockerenv": false,
+        "/run/.containerenv": false
+      },
+      "note": "Record observed VM/container identifiers. Missing evidence does not prove bare metal; nested host details may be hidden."
+    },
+    "cgroup": {
+      "version": null,
+      "status": "unavailable or unsupported layout"
+    },
+    "user_supplied_environment_note": null
+  },
+  "build": {
+    "git_head": null,
+    "binary_sha256": "c471ad0a07cc78e2c4ace40f809d4ae1175312c736eb0257f955dfaa82277dca",
+    "build_command": "cc -D_DEFAULT_SOURCE -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Wconversion -Wshadow bench_load.c ../16_ueec_vm/vm_runtime.c  -o build/bench-load"
+  },
+  "clock": {
+    "clock": "CLOCK_MONOTONIC_RAW",
+    "resolution_ns": 1,
+    "compiler": "14.2.0"
+  },
+  "observations_before": {
+    "memory": {
+      "MemTotal_bytes": 10451423232,
+      "MemAvailable_bytes": 9801949184,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0
+    },
+    "cgroup": {
+      "version": null,
+      "status": "unavailable or unsupported layout"
+    },
+    "load_average_1_5_15_minutes": [
+      0.0224609375,
+      0.03076171875,
+      0.0029296875
+    ]
+  },
+  "observations_after": {
+    "memory": {
+      "MemTotal_bytes": 10451423232,
+      "MemAvailable_bytes": 9771249664,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0
+    },
+    "cgroup": {
+      "version": null,
+      "status": "unavailable or unsupported layout"
+    },
+    "load_average_1_5_15_minutes": [
+      0.25341796875,
+      0.07958984375,
+      0.01904296875
+    ]
+  }
+}
