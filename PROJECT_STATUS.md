@@ -1,6 +1,6 @@
 # UEEC — Project Status and Handoff
 
-**Snapshot date:** 2026-11-16  
+**Snapshot date:** 2026-11-24\
 **Repository:** https://github.com/syscall64-max/UEEC  
 **Baseline `main` commit inspected:** `623fd685adad674d42ccf9e41b6903197c838a05` (inspected 2026-11-16; earlier baselines remain in the dated history below)  
 **Format specification:** `FORMAT_SPECIFICATION.md`, draft v0.1 (pre-1.0)
@@ -39,6 +39,7 @@ Linux kernel loader.
 | `08_export/` | `COMPACT_GROUP`, `SIMPLE_FLAT`, and `ORDINAL` export representations and example loaders |
 | `09_convert_export/` | Lossless `COMPACT_GROUP` ↔ `SIMPLE_FLAT` export conversion; documented cross-architecture and function-call tests |
 | `16_ueec_vm/` | Experimental VM, two selectable programs and shared INIT_DATA; 162 locally reproduced checks, plus a separate author-reported 165-check NASM run including leak detection |
+| `17_ueec_native/` | Linux load-time compilation experiment for four VM instructions, with separate mappings for generated code, source bytecode, and temporary relocations |
 
 The earlier-stage entries are **claims recorded in repository documentation**, not tests
 re-executed during creation of this status file. For exact coverage and
@@ -177,3 +178,20 @@ For VM source commit `46bde6f9193f75923e3181452cdbd14a93f0fbcb` (PR #8), both wo
 - [UEEC native CI run 43821943064](https://github.com/syscall64-max/UEEC/actions/runs/43821943064): completed successfully for the existing native stage workflow. This is not a foreign-architecture VM matrix.
 
 These GitHub-hosted results are distinct from both the 162-check local run and the author-provided 165-check terminal transcript. This follow-up changes this status note only; VM source is unchanged.
+
+## Follow-up work log — 2026-11-24
+
+- Stage 17 uses the existing compact little-endian SH16 format for one VM
+  node and one CODE section. It compiles a subset of CALL, MOV, RET and
+  SYSCALL 0 at load time, applies native call displacements, then verifies
+  that the source and temporary relocation mappings are gone before entry.
+- The matrix passed all 11 targets. x86-64 ran directly on Debian 13 and
+  ten targets ran under QEMU user mode 10.0.13. Each target matched three
+  VM exit statuses and rejected two malformed fixtures. The existing
+  stage-16 suite passed 162 checks. See
+  [the recorded results](17_ueec_native/results.txt).
+- The project author independently ran
+  `python3 run_matrix.py --arch x86-64` on Ubuntu and reported
+  `1/1 targets passed` with the same three fixture SHA-256 hashes.
+- Block compilation on first entry and a persistent compiled-code cache
+  remain future work.

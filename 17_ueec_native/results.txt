@@ -1,0 +1,21 @@
+Linux 6.18.57 x86_64 GNU/Linux
+Debian 13.7
+gcc (Debian 14.2.0-19) 14.2.0
+Debian clang version 19.1.7 (3+b1)
+qemu-arm version 10.0.13 (Debian 1:10.0.13+ds-0+deb13u1)
+VM status 0 sha256 f48e6735edf95c814b49f6c49d568eded76f41e59be82dee3ef2499ce2595f08
+VM status 42 sha256 a5157f105ab454495eb64d07960c40b7e2f46ea0f395489551cf27643e09c61f
+VM status 255 sha256 dd8657d4dbcbd1a877f4dff11da6a082ec55b65460f8fb467e64071601cc9a5b
+PASS x86-64      native exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS x86         QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS ARM32       QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS AArch64     QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS LoongArch64 QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS PowerPC32   QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS PowerPC64   QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS RISC-V32    QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS RISC-V64    QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS SPARC32     QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+PASS SPARC64     QEMU   exit=0,42,255; both mappings absent before entry; 2 invalid fixtures rejected
+11/11 targets passed
+UEEC VM: 162 checks PASS (x86_64; ueec-vm)
