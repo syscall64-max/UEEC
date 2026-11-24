@@ -1,6 +1,6 @@
 # UEEC load-time compilation experiment
 
-This stage compiles a small UEEC VM program to machine code while loading it on Linux. The same three fixture files are used on all 11 CPU targets. Each fixture exercises a forward call followed by a nested backward call. The inner function sets VM register r1. After both functions return, VM service 0 exits with the value in r1.
+This stage compiles a small UEEC VM program to machine code while loading it on Linux. The same three fixture files are used on all 12 CPU targets, including IBM Z (s390x). Each fixture exercises a forward call followed by a nested backward call. The inner function sets VM register r1. After both functions return, VM service 0 exits with the value in r1.
 
 1. Map the compact UEEC file read-only and locate its VM CODE.
 2. Allocate an anonymous writable mapping for the generated CODE and a second anonymous mapping for the temporary relocation table.

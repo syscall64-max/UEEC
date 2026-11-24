@@ -53,6 +53,28 @@ linux_call:
     ret
 enter_code:
     jmp *4(%esp)
+#elif defined(__s390x__)
+_start:
+    lg %r2, 0(%r15)
+    la %r3, 8(%r15)
+    aghi %r15, -160
+    brasl %r14, run
+    .short 0
+linux_call:
+    /* The Linux ABI takes the syscall number in r1 and arguments in r2-r7. */
+    stmg %r6, %r7, 48(%r15)
+    lgr %r1, %r2
+    lgr %r2, %r3
+    lgr %r3, %r4
+    lgr %r4, %r5
+    lgr %r5, %r6
+    lg %r6, 160(%r15)
+    lg %r7, 168(%r15)
+    svc 0
+    lmg %r6, %r7, 48(%r15)
+    br %r14
+enter_code:
+    br %r2
 #elif defined(__arm__)
 .syntax unified
 .arm

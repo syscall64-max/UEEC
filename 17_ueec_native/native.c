@@ -13,6 +13,8 @@ extern void enter_code(const Byte *) __attribute__((noreturn));
 enum { SYS_WRITE=1, SYS_MAP=9, SYS_PROTECT=10, SYS_UNMAP=11, SYS_CHECK=27, SYS_EXIT=60 };
 #elif defined(__i386__)
 enum { SYS_WRITE=4, SYS_MAP=192, SYS_PROTECT=125, SYS_UNMAP=91, SYS_CHECK=218, SYS_EXIT=1 };
+#elif defined(__s390x__)
+enum { SYS_WRITE=4, SYS_MAP=90, SYS_PROTECT=125, SYS_UNMAP=91, SYS_CHECK=218, SYS_EXIT=1 };
 #elif defined(__arm__)
 enum { SYS_WRITE=4, SYS_MAP=192, SYS_PROTECT=125, SYS_UNMAP=91, SYS_CHECK=219, SYS_EXIT=1 };
 #elif defined(__powerpc__)
@@ -61,7 +63,13 @@ static void die(const char *reason, Size length)
 
 static Byte *map(Size length, Word protection, Word flags, Word fd)
 {
+#if defined(__s390x__)
+    /* Linux s390x mmap takes a pointer to six machine-word arguments. */
+    Word args[] = {0, length, protection, flags, fd, 0};
+    SWord address = sys3(SYS_MAP, (Word)args, 0, 0);
+#else
     SWord address = linux_call(SYS_MAP, 0, length, protection, flags, fd, 0);
+#endif
     REQUIRE((Word)address < (Word)-4095, "mmap failed\n");
     return (Byte *)(Word)address;
 }
@@ -117,6 +125,14 @@ static void emit8(Code *code, Byte value)
 }
 #endif
 
+#if defined(__s390x__)
+static void emit16(Code *code, U16 value)
+{
+    code->bytes[code->size++] = (Byte)(value >> 8);
+    code->bytes[code->size++] = (Byte)value;
+}
+#endif
+
 static void emit32(Code *code, U32 value)
 {
     put32(code->bytes + code->size, value);
@@ -130,6 +146,8 @@ static void emit_mov(Code *code, U32 value)
     emit8(code, 0xbf); emit32(code, value);             /* mov edi, imm32 */
 #elif defined(__i386__)
     emit8(code, 0xbb); emit32(code, value);             /* mov ebx, imm32 */
+#elif defined(__s390x__)
+    emit32(code, 0xa7290000 | value);                   /* lghi r2, imm */
 #elif defined(__arm__)
     emit32(code, 0xe3a00000 | value);                   /* mov r0, #imm8 */
 #elif defined(__aarch64__)
@@ -149,7 +167,11 @@ static U32 emit_call(Code *code)
 {
     /* Save each ISA's link register around nested calls. x86 CALL does so
        on its own. SPARC uses a new register window and a delay slot. */
-#if defined(__arm__)
+#if defined(__s390x__)
+    emit32(code, 0xa7fbfff0); /* aghi r15,-16 */
+    emit32(code, 0xe3e0f000); emit16(code, 0x0024); /* stg r14,0(r15) */
+    emit16(code, 0xc0e5); /* brasl r14, displacement */
+#elif defined(__arm__)
     emit32(code, 0xe92d4010); /* push {r4,lr} */
 #elif defined(__aarch64__)
     emit32(code, 0xf81f0ffe); /* str x30, [sp,#-16]! */
@@ -180,7 +202,10 @@ static U32 emit_call(Code *code)
 #endif
     U32 location = (U32)code->size;
     emit32(code, 0);
-#if defined(__arm__)
+#if defined(__s390x__)
+    emit32(code, 0xe3e0f000); emit16(code, 0x0004); /* lg r14,0(r15) */
+    emit32(code, 0xa7fb0010); /* aghi r15,16 */
+#elif defined(__arm__)
     emit32(code, 0xe8bd4010); /* pop {r4,lr} */
 #elif defined(__aarch64__)
     emit32(code, 0xf84107fe); /* ldr x30,[sp],#16 */
@@ -216,6 +241,9 @@ static void patch_call(Byte *code, U32 location, U32 target)
     int delta = (int)target - (int)location;
 #if defined(__x86_64__) || defined(__i386__)
     U32 instruction = (U32)(delta - 4);
+#elif defined(__s390x__)
+    /* BRASL measures halfwords from the start of the instruction. */
+    U32 instruction = (U32)((delta + 2) / 2);
 #elif defined(__arm__)
     U32 instruction = 0xeb000000 | ((U32)((delta - 8) / 4) & 0xffffff);
 #elif defined(__aarch64__)
@@ -240,6 +268,8 @@ static void emit_return(Code *code)
 {
 #if defined(__x86_64__) || defined(__i386__)
     emit8(code, 0xc3);
+#elif defined(__s390x__)
+    emit16(code, 0x07fe); /* br r14 */
 #elif defined(__arm__)
     emit32(code, 0xe12fff1e); /* bx lr */
 #elif defined(__aarch64__)
@@ -266,6 +296,9 @@ static void emit_exit(Code *code)
     emit8(code, 0xcd); emit8(code, 0x80);               /* int 0x80 */
 #endif
     emit8(code, 0x0f); emit8(code, 0x0b);               /* ud2 */
+#elif defined(__s390x__)
+    emit16(code, 0x0a00 | SYS_EXIT);                    /* svc exit */
+    emit16(code, 0);
 #elif defined(__arm__)
     emit32(code, 0xe3a07000 | SYS_EXIT); emit32(code, 0xef000000);
     emit32(code, 0xe7f000f0);                          /* udf #0 */
@@ -291,7 +324,10 @@ static void emit_exit(Code *code)
 
 static void sync_code(Byte *p, Size size)
 {
-#if defined(__arm__)
+#if defined(__s390x__)
+    __asm__ volatile("bcr 15,0" ::: "memory");
+    (void)p; (void)size;
+#elif defined(__arm__)
     REQUIRE(sys3(0x0f0002, (Word)p, (Word)(p + size), 0) == 0, "ARM cacheflush failed\n");
 #elif defined(__aarch64__)
     for (Size i = 0; i < size; i += 4) __asm__ volatile("dc cvau, %0" :: "r"(p + i) : "memory");

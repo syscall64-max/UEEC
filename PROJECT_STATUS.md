@@ -195,3 +195,9 @@ These GitHub-hosted results are distinct from both the 162-check local run and t
   `1/1 targets passed` with the same three fixture SHA-256 hashes.
 - Block compilation on first entry and a persistent compiled-code cache
   remain future work.
+
+- Added IBM Z (s390x) as the twelfth load-time compilation target. The
+  matrix passed 12/12 with native x86-64 and eleven QEMU user-mode
+  targets. The s390x run checked exit statuses 0, 42, and 255, the
+  release of both temporary mappings before native entry, and rejection
+  of both malformed fixtures. The s390x executable is big-endian ELF64.

@@ -1,4 +1,4 @@
-"""Build and run the load-time compiler on the 11 original UEEC CPU targets."""
+"""Build and run the load-time compiler on the UEEC CPU targets."""
 import argparse
 from hashlib import sha256
 import os
@@ -25,6 +25,7 @@ TARGETS = {
     "RISC-V64": ("riscv64-linux-gnu", "riscv64", ["-march=rv64gc", "-mabi=lp64"]),
     "SPARC32": ("sparc-linux-gnu", "sparc", ["-mcpu=v8"]),
     "SPARC64": ("sparcv9-linux-gnu", "sparc64", []),
+    "s390x": ("s390x-linux-gnu", "s390x", []),
 }
 CLEAN = b"native CODE is RX; VM CODE and relocations unmapped\n"
 
