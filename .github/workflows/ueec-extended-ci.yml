@@ -89,6 +89,11 @@ jobs:
           "$RUNNER_TEMP/qemu-10.0.3/configure" --target-list=arm-linux-user --disable-system --disable-tools --disable-docs --disable-guest-agent --disable-werror
           ninja -j2 qemu-arm
           mkdir -p "$RUNNER_TEMP/ueec-qemu-bin"
+          for emulator in /usr/bin/qemu-*; do
+            [[ -x "$emulator" ]] || continue
+            [[ "$(basename "$emulator")" == qemu-arm ]] && continue
+            ln -sf "$emulator" "$RUNNER_TEMP/ueec-qemu-bin/$(basename "$emulator")"
+          done
           install -m755 qemu-arm "$RUNNER_TEMP/ueec-qemu-bin/qemu-arm"
           echo "$RUNNER_TEMP/ueec-qemu-bin" >> "$GITHUB_PATH"
           "$RUNNER_TEMP/ueec-qemu-bin/qemu-arm" --version
@@ -98,12 +103,11 @@ jobs:
           STAGE: ${{ matrix.stage }}
         run: |
           set -euo pipefail
-          command -v qemu-arm
-          qemu-arm --version | grep -F "version 10.0.3"
+          "$RUNNER_TEMP/ueec-qemu-bin/qemu-arm" --version | grep -F "version 10.0.3"
           case "$STAGE" in
-            18) python3 18_ueec_native/run_matrix.py --clang clang-19 --lld ld.lld-19 ;;
-            19) for status in 42 173; do python3 19_ueec_client_compile/run_demo.py --status "$status"; done ;;
-            20) for status in 42 173; do python3 20_ueec_server_compile/run_stage20.py --status "$status"; done ;;
-            21) for status in 42 173; do python3 21_ueec2elf/run_stage21.py --status "$status"; done ;;
+            18) python3 18_ueec_native/run_matrix.py --qemu-dir "$RUNNER_TEMP/ueec-qemu-bin" --clang clang-19 --lld ld.lld-19 ;;
+            19) for status in 42 173; do python3 19_ueec_client_compile/run_demo.py --qemu-dir "$RUNNER_TEMP/ueec-qemu-bin" --status "$status"; done ;;
+            20) for status in 42 173; do python3 20_ueec_server_compile/run_stage20.py --qemu-dir "$RUNNER_TEMP/ueec-qemu-bin" --status "$status"; done ;;
+            21) for status in 42 173; do python3 21_ueec2elf/run_stage21.py --qemu-dir "$RUNNER_TEMP/ueec-qemu-bin" --status "$status"; done ;;
             *) exit 2 ;;
           esac
