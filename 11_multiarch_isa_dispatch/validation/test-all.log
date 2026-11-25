@@ -1,0 +1,17 @@
+arm32: 36 dispatch/format checks PASS; CODE executed=neon,scalar; backend=QEMU; negative=cpu-model+capability-mask
+arm64: 37 dispatch/format checks PASS; CODE executed=neon,scalar,sve; backend=QEMU; negative=cpu-model+capability-mask
+loongarch64: 37 dispatch/format checks PASS; CODE executed=lasx,lsx,scalar; backend=QEMU; negative=cpu-model+capability-mask
+powerpc32: 36 dispatch/format checks PASS; CODE executed=altivec,scalar; backend=QEMU; negative=cpu-model+capability-mask
+powerpc64: CPU-model check unavailable: independent libc probe fails on power5+ (exit=-4); negative dispatch checked with --limit-isa scalar
+powerpc64: 33 dispatch/format checks PASS; CODE executed=altivec,scalar; backend=QEMU; negative=capability-mask
+riscv32: 36 dispatch/format checks PASS; CODE executed=rvv,scalar; backend=QEMU; negative=cpu-model+capability-mask
+riscv64: CPU-model check unavailable: independent libc probe fails on rv64,v=false (exit=-4); negative dispatch checked with --limit-isa scalar
+riscv64: 33 dispatch/format checks PASS; CODE executed=rvv,scalar; backend=QEMU; negative=capability-mask
+sparc32: 33 dispatch/format checks PASS; CODE executed=scalar,vis; backend=QEMU; negative=capability-mask
+sparc64: 33 dispatch/format checks PASS; CODE executed=scalar,vis; backend=QEMU; negative=capability-mask
+x86: 37 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=QEMU; negative=cpu-model+capability-mask
+x86_64: 38 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=QEMU; negative=cpu-model+capability-mask
+s390x: CPU-model check unavailable: independent libc probe fails on max,vx=off (exit=-8); negative dispatch checked with --limit-isa scalar
+s390x: 33 dispatch/format checks PASS; CODE executed=scalar,vx; backend=QEMU; negative=capability-mask
+x86_64: 35 dispatch/format checks PASS; CODE executed=avx2,avx512f,scalar,sse2; backend=native; negative=capability-mask
+UEEC ISA dispatch: 12 architecture suites + native suite PASS (no skipped targets)

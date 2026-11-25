@@ -1,0 +1,14 @@
+{
+  "architecture": "x86_64",
+  "backend": "native",
+  "cpu": "host",
+  "checks": 56,
+  "executed": [
+    "avx2",
+    "scalar",
+    "sse2"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": null,
+  "loader": "ueec-loader-x86_64"
+}

@@ -1,0 +1,6 @@
+rv64,v=true,vlen=128,elen=64: exit=-4
+
+max,vlen=128,elen=64: exit=0
+UEEC ABI baseline probe PASS: libc-baseline; HWCAP=2101549
+
+rv64,v=false: exit=-4

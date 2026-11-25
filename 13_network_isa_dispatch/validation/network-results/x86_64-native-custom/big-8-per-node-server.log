@@ -1,0 +1,2 @@
+TLS server host=127.0.0.1 port=37215 source_nodes=29
+SERVE machine=10 system=2 source_node=4 technology=avx2 nodes=1 source=6745B payload=169B status=PASS

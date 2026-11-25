@@ -67,6 +67,17 @@ arch/answer_sparc64.bin: arch/answer.c
 	sparc64-linux-gnu-gcc $(ANSWER_CFLAGS) -c arch/answer.c -o arch/answer_sparc64.o
 	sparc64-linux-gnu-objcopy -O binary --only-section=.text arch/answer_sparc64.o $@
 
+# IBM Z / s390x: GCC generated .text can also be regenerated on Ubuntu.
+arch/answer_s390x.bin: arch/answer_s390x.s
+	s390x-linux-gnu-as -o arch/answer_s390x.o arch/answer_s390x.s
+	s390x-linux-gnu-objcopy -O binary --only-section=.text arch/answer_s390x.o $@
+
+verify-s390x-bytes:
+	s390x-linux-gnu-as -o arch/answer_s390x.o arch/answer_s390x.s
+	s390x-linux-gnu-objcopy -O binary --only-section=.text arch/answer_s390x.o arch/answer_s390x.check.bin
+	cmp arch/answer_s390x.bin arch/answer_s390x.check.bin
+	@echo 'UEEC S390X function bytes: PASS'
+
 arch/answer_x86.bin: arch/answer.c
 	i686-linux-gnu-gcc $(ANSWER_CFLAGS) -c arch/answer.c -o arch/answer_x86.o
 	i686-linux-gnu-objcopy -O binary --only-section=.text arch/answer_x86.o $@
@@ -96,9 +107,11 @@ $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus,7,ar
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64,8,arch/answer_sparc64.bin,be))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386,9,arch/answer_x86.bin,le))
 
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x,11,arch/answer_s390x.bin,be))
+
 x86_64: run run-ordinal
 
-all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32
+all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32 s390x
 
 clean:
 	rm -f demo*.asm demo*.ueec gen_export loader_export gen_export_ordinal loader_export_ordinal \
@@ -106,4 +119,10 @@ clean:
 	      loader_arm32 loader_arm64 loader_riscv64 loader_riscv32 \
 	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86 \
 	      loader_ord_arm32 loader_ord_arm64 loader_ord_riscv64 loader_ord_riscv32 \
-	      loader_ord_powerpc32 loader_ord_powerpc64 loader_ord_sparc32 loader_ord_sparc64 loader_ord_longarm64 loader_ord_x86
+	      loader_ord_powerpc32 loader_ord_powerpc64 loader_ord_sparc32 loader_ord_sparc64 loader_ord_longarm64 loader_ord_x86 \
+	      loader_s390x loader_ord_s390x arch/answer_s390x.check.bin
+
+check-layout: gen_export gen_export_ordinal
+	python3 check_export_layout.py
+
+.PHONY: all clean check-layout verify-s390x-bytes

@@ -1,0 +1,18 @@
+{
+  "architecture": "loongarch64",
+  "backend": "QEMU",
+  "cpu": "max",
+  "checks": 37,
+  "executed": [
+    "lasx",
+    "lsx",
+    "scalar"
+  ],
+  "negative_test_mode": "cpu-model+capability-mask",
+  "abi_preflight": {
+    "cpu": "max,lasx=off",
+    "returncode": 0,
+    "output": "UEEC ABI baseline probe PASS: libc-baseline; HWCAP=94\n",
+    "status": "supported"
+  }
+}

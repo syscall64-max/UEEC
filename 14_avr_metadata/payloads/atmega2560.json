@@ -1,0 +1,21 @@
+{
+  "model": "atmega2560",
+  "signature": [
+    30,
+    152,
+    1
+  ],
+  "gcc_arch": 6,
+  "pc_bytes": 3,
+  "sp_bytes": 2,
+  "flash_bytes": 262144,
+  "sram_bytes": 8192,
+  "eeprom_bytes": 4096,
+  "clock_hz": 16000000,
+  "required": 255,
+  "port": "B",
+  "pin": 7,
+  "half_period_ms": 100,
+  "priority": 100,
+  "sha256": "28935820d446a2a06d76d51715f0f4195f071ef79b745fe3a048f308a6064fe5"
+}

@@ -1,0 +1,9 @@
+python3 generate.py
+/workspace/scratch/0b86d98e3c0f/avr-work/15_avr_metadata/build/blink.ueec: 3 AVR models, 3 CODE + 1 shared METADATA, 840 bytes
+mkdir -p build
+cc -std=c11 -O1 -g -D_DEFAULT_SOURCE -D_FILE_OFFSET_BITS=64 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer -isystem /workspace/scratch/0b86d98e3c0f/avr-work/runtime/usr/include/simavr loader.c -o build/ueec-avr-sanitize -L/workspace/scratch/0b86d98e3c0f/avr-work/runtime/usr/lib/x86_64-linux-gnu -Wl,-rpath,/workspace/scratch/0b86d98e3c0f/avr-work/runtime/usr/lib/x86_64-linux-gnu -lsimavr
+python3 test_avr.py --loader build/ueec-avr-sanitize
+attiny85: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+atmega328p: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+atmega2560: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+UEEC AVR: 3 models, 24 observed GPIO transitions, 76 selection/format/simulation checks PASS (no skips)

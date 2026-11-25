@@ -1,0 +1,18 @@
+{
+  "model": "stm32f407vg",
+  "model_id": 2,
+  "core_part": 3108,
+  "flash_base": 134217728,
+  "flash_bytes": 1048576,
+  "ram_base": 536870912,
+  "ram_bytes": 131072,
+  "clock_hz": 16000000,
+  "required": 1,
+  "gpio_base": 1073875968,
+  "port": "D",
+  "pin": 12,
+  "half_period_ms": 100,
+  "priority": 100,
+  "code_bytes": 256,
+  "sha256": "81dc00a609fe6e9d9b0a258c66c5c205857d3360145c19b8047305c08487bfbd"
+}

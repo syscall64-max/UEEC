@@ -1,5 +1,5 @@
 // gen.c -- აწარმოებს 03_reloc.asm-ს: 1 HEADER + 1 DATA("Hello world!\n",
-// გაზიარებული) + 11 x (CODE+RELOCATION), ახალი _GM header-ფორმატით,
+// გაზიარებული) + 12 x (CODE+RELOCATION), ახალი _GM header-ფორმატით,
 // SECTION_FLAT (couple+info, page-ის გარეშე) RELOC-დიზაინით.
 //
 #include <stdio.h>
@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define N 11
+#define N 12
 
 typedef struct {
     const char *arch;
@@ -29,6 +29,7 @@ static arch_info archs[N] = {
     {"sparc64",     8, 1, 40, 8},
     {"x86",         9, 0,  1, 4},
     {"x86_64",     10, 0,  2, 8},
+    {"s390x",      11, 1, 32, 8},
 };
 
 static uint8_t *load_bin(const char *arch, long *out_size) {

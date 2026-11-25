@@ -1,0 +1,10 @@
+{
+  "checks": 95,
+  "selector_checks": 87,
+  "renode_checks": 8,
+  "models": 3,
+  "primary_gpio_transitions": 24,
+  "extra_big_endian_gpio_transitions": 8,
+  "loader": "ueec-stm32",
+  "no_skips": true
+}

@@ -1,0 +1,14 @@
+python3 tools/build_firmware.py
+attiny85: firmware build PASS; core=avr25 CODE=84B signature=1e930b required=0x7
+atmega328p: firmware build PASS; core=avr5 CODE=164B signature=1e950f required=0x1f
+atmega2560: firmware build PASS; core=avr6 CODE=290B signature=1e9801 required=0xff
+make test
+make[1]: Entering directory '/workspace/scratch/0b86d98e3c0f/avr-work/15_avr_metadata'
+python3 generate.py
+/workspace/scratch/0b86d98e3c0f/avr-work/15_avr_metadata/build/blink.ueec: 3 AVR models, 3 CODE + 1 shared METADATA, 840 bytes
+python3 test_avr.py
+attiny85: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+atmega328p: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+atmega2560: signature selection, virtual Flash, 8 timed GPIO edges and VCD PASS
+UEEC AVR: 3 models, 24 observed GPIO transitions, 76 selection/format/simulation checks PASS (no skips)
+make[1]: Leaving directory '/workspace/scratch/0b86d98e3c0f/avr-work/15_avr_metadata'

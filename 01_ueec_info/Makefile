@@ -15,6 +15,7 @@ CC_SPARC32     ?= sparc64-linux-gnu-gcc
 CC_SPARC64     ?= sparc64-linux-gnu-gcc
 CC_X86         ?= i686-linux-gnu-gcc
 CC_X86_64      ?= gcc
+CC_S390X       ?= s390x-linux-gnu-gcc
 
 QEMU_ARM32       ?= qemu-arm
 QEMU_ARM64       ?= qemu-aarch64
@@ -26,23 +27,24 @@ QEMU_RISCV64     ?= qemu-riscv64
 QEMU_SPARC32     ?= qemu-sparc32plus
 QEMU_SPARC64     ?= qemu-sparc64
 QEMU_X86         ?= qemu-i386
+QEMU_S390X       ?= qemu-s390x
 
 ARCHES := arm32 arm64 loongarch64 powerpc32 powerpc64 riscv32 riscv64 \
-	sparc32 sparc64 x86 x86_64
+	sparc32 sparc64 x86 x86_64 s390x
 
 BINARIES := $(addprefix $(BUILD_DIR)/ueec-info-,$(ARCHES))
 BUILD_TARGETS := $(addprefix build-,$(ARCHES))
 TEST_TARGETS  := $(addprefix test-,$(ARCHES))
 
-.PHONY: all build test ueec native $(BUILD_TARGETS) $(TEST_TARGETS) clean
+.PHONY: all build test ueec native test-layout $(BUILD_TARGETS) $(TEST_TARGETS) clean
 
 all: test
 
 build: $(BINARIES)
-	@echo "UEEC info: 11 architecture builds PASS"
+	@echo "UEEC info: 12 architecture builds PASS"
 
-test: $(TEST_TARGETS)
-	@echo "UEEC info: 11 architecture tests PASS"
+test: $(TEST_TARGETS) test-layout
+	@echo "UEEC info: 12 architecture tests and layout check PASS"
 
 ueec: $(UEEC)
 
@@ -89,6 +91,9 @@ $(BUILD_DIR)/ueec-info-x86: ueec_info.c ueec.h | $(BUILD_DIR)/.dir
 $(BUILD_DIR)/ueec-info-x86_64: ueec_info.c ueec.h | $(BUILD_DIR)/.dir
 	$(CC_X86_64) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/ueec-info-s390x: ueec_info.c ueec.h | $(BUILD_DIR)/.dir
+	$(CC_S390X) $(CFLAGS) $< -o $@
+
 $(BUILD_TARGETS): build-%: $(BUILD_DIR)/ueec-info-%
 	@echo "$*: build PASS"
 
@@ -124,6 +129,18 @@ test-x86: $(UEEC) $(BUILD_DIR)/ueec-info-x86
 
 test-x86_64: $(UEEC) $(BUILD_DIR)/ueec-info-x86_64
 	$(BUILD_DIR)/ueec-info-x86_64 $(UEEC)
+
+test-s390x: $(UEEC) $(BUILD_DIR)/ueec-info-s390x
+	$(QEMU_S390X) $(BUILD_DIR)/ueec-info-s390x $(UEEC)
+
+# Native structural assertions: count, node identification, shared section map.
+test-layout: $(UEEC) $(BUILD_DIR)/ueec-info-x86_64
+	@set -e; output="$$($(BUILD_DIR)/ueec-info-x86_64 $(UEEC))"; \
+	printf '%s\n' "$$output" | grep -Eq '^[[:space:]]*nodes:[[:space:]]*12$$'; \
+	printf '%s\n' "$$output" | grep -Eq '^[[:space:]]*global sections:[[:space:]]*13$$'; \
+	printf '%s\n' "$$output" | grep -Fq '[11] name="exit" machine=CPU/s390x system=general-os/Linux code-endian=big'; \
+	printf '%s\n' "$$output" | grep -Fq '[12] type=CODE offset=391 section_size=8 data_size=8 nodes=11'; \
+	echo "UEEC info: 12-node layout PASS"
 
 clean:
 	rm -f $(UEEC) $(BINARIES) $(BUILD_DIR)/.dir

@@ -1,0 +1,42 @@
+Linux 6.18.57 x86_64 GNU/Linux
+Debian 13.7
+Debian clang version 19.1.7 (3+b1)
+qemu-aarch64 version 10.0.13 (Debian 1:10.0.13+ds-0+deb13u1)
+
+Direct ELF execution in isolated network namespaces
+UEEC loader reference: 42; stage 20 passed on 12 architectures
+PASS x86-64/baseline: identical ELF from both layouts; exit=42 (native)
+PASS x86/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS ARM32/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS AArch64/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS LoongArch64/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS PowerPC32/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS PowerPC64/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS RISC-V32/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS RISC-V64/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS SPARC32/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS SPARC64/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS s390x/baseline: identical ELF from both layouts; exit=42 (QEMU)
+PASS x86-64/sse2: identical ELF from both layouts; exit=42 (native)
+PASS x86-64/avx2: identical ELF from both layouts; exit=42 (native)
+PASS AVX2 requirement: ELF exited 126 on QEMU without AVX2
+PASS VM and truncated inputs rejected; existing output preserved
+12/12 architectures; 28 ELF launches passed
+UEEC loader reference: 173; stage 20 passed on 12 architectures
+PASS x86-64/baseline: identical ELF from both layouts; exit=173 (native)
+PASS x86/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS ARM32/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS AArch64/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS LoongArch64/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS PowerPC32/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS PowerPC64/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS RISC-V32/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS RISC-V64/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS SPARC32/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS SPARC64/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS s390x/baseline: identical ELF from both layouts; exit=173 (QEMU)
+PASS x86-64/sse2: identical ELF from both layouts; exit=173 (native)
+PASS x86-64/avx2: identical ELF from both layouts; exit=173 (native)
+PASS AVX2 requirement: ELF exited 126 on QEMU without AVX2
+PASS VM and truncated inputs rejected; existing output preserved
+12/12 architectures; 28 ELF launches passed

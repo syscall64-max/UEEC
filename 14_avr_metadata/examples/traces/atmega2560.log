@@ -1,0 +1,12 @@
+DEVICE model=atmega2560 simulator_core=atmega2560 signature=1e9801 core=avr6 clock=16000000 Flash=262144 SRAM=8192 EEPROM=4096 PC_bytes=3
+SELECTED model=atmega2560 node=2 CODE=3 METADATA=4 priority=100 mode=automatic
+FLASH bytes=290 address=0 verified=yes metadata_written=no
+GPIO edge=1 port=B pin=7 level=1 cycle=22 time_us=1 LED=ON
+GPIO edge=2 port=B pin=7 level=0 cycle=1600027 time_us=100001 LED=OFF
+GPIO edge=3 port=B pin=7 level=1 cycle=3200032 time_us=200002 LED=ON
+GPIO edge=4 port=B pin=7 level=0 cycle=4800037 time_us=300002 LED=OFF
+GPIO edge=5 port=B pin=7 level=1 cycle=6400042 time_us=400002 LED=ON
+GPIO edge=6 port=B pin=7 level=0 cycle=8000047 time_us=500002 LED=OFF
+GPIO edge=7 port=B pin=7 level=1 cycle=9600052 time_us=600003 LED=ON
+GPIO edge=8 port=B pin=7 level=0 cycle=11200057 time_us=700003 LED=OFF
+PASS: virtual Flash + AVR execution + 8 GPIO transitions; half_period_ms=100; timing_tolerance=1%

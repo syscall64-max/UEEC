@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-16",
+  "host": "Linux x86_64",
+  "inputs": [
+    {
+      "file": "vm.zip",
+      "sha256": "a0d295ec88af883214c291e3655e48e4b024e6cc982ff7bad0376d12e81d6529"
+    },
+    {
+      "file": "UEEC.zip",
+      "sha256": "ea380dc76219f695b12f982419e998cdeb5c5224df4fe71751bf67b3cca8888e"
+    }
+  ],
+  "unchanged_canonical_header_sha256": "74fdcd7d5b6489cfa2d8ef14ec1a2795906fea5729287d5f5f7f0ccdcf6ca202",
+  "original_vm_source_sha256": "976af8ce5dbf1c163bdb8c913f0f50659f9e788b220b5d830cf4896bbe464a7b",
+  "source_changes": "Removed FORMAT8 from active VM. FORMAT16/32/64 remain codes 1/2/3; operand code 0 reserved. SYSCALL format=0 unchanged. Converted CODE-only stack fixture. Existing UEEC container definitions unchanged.",
+  "generated_files": {},
+  "files": {
+    "LICENSE": "65b0dda7124596d8883aaf9fe7d905440398814581e6316bce1eed87e16eb413",
+    "Makefile": "c68928432c957f3b8f9480ec6e1be755f5494753aa18f00b82c8a9c0c953ac9f",
+    "README.md": "dda6f38fa06a9102dbbf23d8d06b4f6f134d9ac1303fd6646d2647917509d224",
+    "README_KA.md": "3ac313afc8f62e74b16a8035e79fb2b9bf7f39a61ee8b9590ea943893a84ac18",
+    "asm_subset.py": "30a0726ca31f978f04c0f07da04cee9aaf18e97794341ff3e2149d533516ae5e",
+    "examples/programs.ueec": "9f71742b6a8c6cc33815dcdb3846d72399eb326b5cf9b58a69d188e82496cece",
+    "examples/stack16.asm": "0cec62e4310cd0d30ee24defa07a76b0e01e37314eda5ceb6d8434e41b504a89",
+    "generate.py": "0775df8826f85147fb42b30f4c7be4c097ce7d7d61962a85608b63ffc95f62ac",
+    "reference/README.txt": "5d2a359ce91b079f26fc912f8dee6ba6d447543786f104a44e576f8214091a6f",
+    "reference/final_stack.asm": "1f5bb8aaf445b7e3739877b3df19def9d8c5e2888af27daa719bf9f52432b3fe",
+    "reference/recursive_overflow.asm": "e68aad2fcddf389b3dc842c6457a78c1e4f8b3146ee75608d75785fe952430e2",
+    "reference/ueec_info_original.c": "04ca5c3f56b3a1244364a92a1c7e39b4756848eef84e54630ecaf9f58352cbed",
+    "reference/uef_vm_original.c": "976af8ce5dbf1c163bdb8c913f0f50659f9e788b220b5d830cf4896bbe464a7b",
+    "test_vm.py": "a98953c35e6033b44a8a96f11548c971b54ed206b7355b727ccecc714692355c",
+    "ueec.h": "74fdcd7d5b6489cfa2d8ef14ec1a2795906fea5729287d5f5f7f0ccdcf6ca202",
+    "ueec_info.c": "da71e11a51962f1c52a66f194e377e1a3b0ee8bd222b934245f1c50ced90b7f7",
+    "ueec_vm.c": "cc4d17797ca9b296ac07e847ecefa717535ab7fa954cc32fa0b3ed53d6615fb3",
+    "vm_runtime.c": "1010de7a9b2e6780d30b2ee66f5414b49d79f4feebe19bea263d542cfc79e3f8",
+    "vm_runtime.h": "7be12e637204616364650d6859a7b469a4d63314e2c5cebf9afd07098b9d9ecc"
+  },
+  "revision": "min16",
+  "implemented_operand_widths": [
+    16,
+    32,
+    64
+  ],
+  "future_only": [
+    "FORMAT128",
+    "SIMD vector/scalar backends"
+  ]
+}

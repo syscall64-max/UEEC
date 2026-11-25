@@ -1,0 +1,4 @@
+python3 generate.py
+/workspace/scratch/0b86d98e3c0f/network-isa-work/14_network_isa_dispatch/build/sum.ueec: 12 architectures, 29 nodes, 29 CODE + 1 METADATA, layout=shared, 5719 bytes
+python3 test_network.py --synthetic
+TLS transfer-only: 58 checks PASS; 12 architectures, 29 CODE variants x 2 modes; profiles=synthetic; target execution=not-run

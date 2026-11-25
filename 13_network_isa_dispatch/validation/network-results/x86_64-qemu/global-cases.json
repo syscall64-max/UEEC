@@ -1,0 +1,7 @@
+{
+  "checks": 25,
+  "source_formats": 12,
+  "source_node_256_reindexed": true,
+  "certificate_identity": true,
+  "hostile_responses": 9
+}

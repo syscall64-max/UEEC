@@ -1,0 +1,1 @@
+powerpc64: 33 dispatch/format checks PASS; CODE executed=altivec,scalar; backend=QEMU

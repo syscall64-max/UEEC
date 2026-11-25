@@ -1,0 +1,17 @@
+{
+  "architecture": "powerpc32",
+  "backend": "QEMU",
+  "cpu": "g4",
+  "checks": 36,
+  "executed": [
+    "altivec",
+    "scalar"
+  ],
+  "negative_test_mode": "cpu-model+capability-mask",
+  "abi_preflight": {
+    "cpu": "750",
+    "returncode": 0,
+    "output": "UEEC ABI baseline probe PASS: libc-baseline; HWCAP=134217728\n",
+    "status": "supported"
+  }
+}

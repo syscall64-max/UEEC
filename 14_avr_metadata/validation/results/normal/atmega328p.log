@@ -1,0 +1,12 @@
+DEVICE model=atmega328p simulator_core=atmega328 signature=1e950f core=avr5 clock=16000000 Flash=32768 SRAM=2048 EEPROM=1024 PC_bytes=2
+SELECTED model=atmega328p node=1 CODE=2 METADATA=4 priority=100 mode=automatic
+FLASH bytes=164 address=0 verified=yes metadata_written=no
+GPIO edge=1 port=B pin=5 level=1 cycle=20 time_us=1 LED=ON
+GPIO edge=2 port=B pin=5 level=0 cycle=1600025 time_us=100001 LED=OFF
+GPIO edge=3 port=B pin=5 level=1 cycle=3200030 time_us=200001 LED=ON
+GPIO edge=4 port=B pin=5 level=0 cycle=4800035 time_us=300002 LED=OFF
+GPIO edge=5 port=B pin=5 level=1 cycle=6400040 time_us=400002 LED=ON
+GPIO edge=6 port=B pin=5 level=0 cycle=8000045 time_us=500002 LED=OFF
+GPIO edge=7 port=B pin=5 level=1 cycle=9600050 time_us=600003 LED=ON
+GPIO edge=8 port=B pin=5 level=0 cycle=11200055 time_us=700003 LED=OFF
+PASS: virtual Flash + AVR execution + 8 GPIO transitions; half_period_ms=100; timing_tolerance=1%

@@ -1,0 +1,24 @@
+$timescale 1ns $end
+$scope module ueec_stm32 $end
+$var wire 1 ! LED $end
+$upscope $end
+$enddefinitions $end
+$dumpvars
+x!
+$end
+#0
+1!
+#99993800
+0!
+#199987600
+1!
+#299981400
+0!
+#399975200
+1!
+#499969000
+0!
+#599962800
+1!
+#699956600
+0!

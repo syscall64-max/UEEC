@@ -1,0 +1,14 @@
+{
+  "architecture": "x86_64",
+  "backend": "native",
+  "cpu": "host",
+  "checks": 35,
+  "executed": [
+    "avx2",
+    "avx512f",
+    "scalar",
+    "sse2"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": null
+}

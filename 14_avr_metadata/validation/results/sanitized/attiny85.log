@@ -1,0 +1,12 @@
+DEVICE model=attiny85 simulator_core=attiny85 signature=1e930b core=avr25 clock=8000000 Flash=8192 SRAM=512 EEPROM=512 PC_bytes=2
+SELECTED model=attiny85 node=0 CODE=1 METADATA=4 priority=100 mode=automatic
+FLASH bytes=84 address=0 verified=yes metadata_written=no
+GPIO edge=1 port=B pin=0 level=1 cycle=18 time_us=2 LED=ON
+GPIO edge=2 port=B pin=0 level=0 cycle=800023 time_us=100002 LED=OFF
+GPIO edge=3 port=B pin=0 level=1 cycle=1600028 time_us=200003 LED=ON
+GPIO edge=4 port=B pin=0 level=0 cycle=2400033 time_us=300004 LED=OFF
+GPIO edge=5 port=B pin=0 level=1 cycle=3200038 time_us=400004 LED=ON
+GPIO edge=6 port=B pin=0 level=0 cycle=4000043 time_us=500005 LED=OFF
+GPIO edge=7 port=B pin=0 level=1 cycle=4800048 time_us=600006 LED=ON
+GPIO edge=8 port=B pin=0 level=0 cycle=5600053 time_us=700006 LED=OFF
+PASS: virtual Flash + AVR execution + 8 GPIO transitions; half_period_ms=100; timing_tolerance=1%

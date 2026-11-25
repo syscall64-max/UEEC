@@ -1,0 +1,146 @@
+Linux 6.18.57 x86_64 GNU/Linux
+Debian 13.7
+Debian clang version 19.1.7 (3+b1)
+qemu-aarch64 version 10.0.13 (Debian 1:10.0.13+ds-0+deb13u1)
+
+Server compilation, HTTP delivery and offline execution
+Stored VM: 65 B; interpreter exit=42
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features= HTTP/1.1" 200 -
+x86-64/baseline: HTTP 70 B; local padded 8192 B; sha256=cdc8c2edb7460d9bba6b711f49bb8b6c81cae00b4b90f5c01992356652b75dc6
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86&features= HTTP/1.1" 200 -
+x86/baseline: HTTP 70 B; local padded 8192 B; sha256=c80707e7a7558f8cf06a836ca7bdeb9bca9cb1d5b071b4b52a6f681786fbc5b7
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features= HTTP/1.1" 200 -
+ARM32/baseline: HTTP 91 B; local padded 8192 B; sha256=fc09b862dc691e85b95bb8239677727c4fbe53f599d7c63ff3c2deedf727eaaf
+127.0.0.1 - - [25/Nov/2026 06:42:35] "GET /nodes/call?os=Linux&abi=linux-user&arch=AArch64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=AArch64&features= HTTP/1.1" 200 -
+AArch64/baseline: HTTP 91 B; local padded 8192 B; sha256=d5534f961d1303fd9a3d6c01fe896eacbb2b4786178407ca17b808e23c2efd04
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=LoongArch64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=LoongArch64&features= HTTP/1.1" 200 -
+LoongArch64/baseline: HTTP 107 B; local padded 8192 B; sha256=d4e3336caf32a5ce5505c311c4982f3d0f0f4a2bdaf6f559492bc183ce950803
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC32&features= HTTP/1.1" 200 -
+PowerPC32/baseline: HTTP 123 B; local padded 8192 B; sha256=704daaabeab33de61d0b50770063e6a745cdfac901231fb78f61008dc051786a
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:36] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC64&features= HTTP/1.1" 200 -
+PowerPC64/baseline: HTTP 123 B; local padded 8192 B; sha256=20be8d2b345035b1da9ae886e2c44d54868a899cccc2a9da90d1c1a2c0e274d2
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V32&features= HTTP/1.1" 200 -
+RISC-V32/baseline: HTTP 107 B; local padded 8192 B; sha256=b9c04fa403203d636a23e5f1be722f72e04df78cc64d67112e569d84e3fc3650
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V64&features= HTTP/1.1" 200 -
+RISC-V64/baseline: HTTP 107 B; local padded 8192 B; sha256=52e0107db04097999365bbab82b942e874f4ea2177dcbfa07fbfc2f6bd5eaeb7
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC32&features= HTTP/1.1" 200 -
+SPARC32/baseline: HTTP 111 B; local padded 8192 B; sha256=3eb1d6cc94740a91c45891d8c2d0c792605c797749b8c14823911cea1e11a895
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:37] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC64&features= HTTP/1.1" 200 -
+SPARC64/baseline: HTTP 111 B; local padded 8192 B; sha256=08f1bd8196cf4650348d3b3e54f6c519409b9df0a76deef229ef03b3ecd77ebc
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=s390x&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=s390x&features= HTTP/1.1" 200 -
+s390x/baseline: HTTP 107 B; local padded 8192 B; sha256=2a61b87fa9add5121f100454cce3d6a85c00896c8d99eaf128850ea71e8b4d5e
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=sse2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=sse2 HTTP/1.1" 200 -
+x86-64/sse2: HTTP 136 B; local padded 12288 B; sha256=6c8c4061e1678b7347e850b99a9ae66da370342c36b78a10479c509e9b51dc95
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx%2Cavx2%2Csse2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx%2Cavx2%2Csse2 HTTP/1.1" 200 -
+x86-64/avx2: HTTP 142 B; local padded 12288 B; sha256=103d1d30d97eb88af24bbe45373f5b06cf75b678a8768812a5ec3e95c87ab683
+127.0.0.1 - - [25/Nov/2026 06:42:38] code 400, message only Linux user ABI is supported
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Windows&abi=linux-user&arch=x86-64&features= HTTP/1.1" 400 -
+127.0.0.1 - - [25/Nov/2026 06:42:38] code 400, message this target accepts only the baseline profile
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features=sse2 HTTP/1.1" 400 -
+127.0.0.1 - - [25/Nov/2026 06:42:38] code 400, message invalid x86-64 feature set
+127.0.0.1 - - [25/Nov/2026 06:42:38] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx2 HTTP/1.1" 400 -
+Server stopped; HTTP connection failed as expected
+x86-64 profile instructions verified: baseline, pshufd, vpbroadcastd
+PASS x86-64/baseline: compact and granulated exit=42 (native)
+PASS x86/baseline: compact and granulated exit=42 (QEMU)
+PASS ARM32/baseline: compact and granulated exit=42 (QEMU)
+PASS AArch64/baseline: compact and granulated exit=42 (QEMU)
+PASS LoongArch64/baseline: compact and granulated exit=42 (QEMU)
+PASS PowerPC32/baseline: compact and granulated exit=42 (QEMU)
+PASS PowerPC64/baseline: compact and granulated exit=42 (QEMU)
+PASS RISC-V32/baseline: compact and granulated exit=42 (QEMU)
+PASS RISC-V64/baseline: compact and granulated exit=42 (QEMU)
+PASS SPARC32/baseline: compact and granulated exit=42 (QEMU)
+PASS SPARC64/baseline: compact and granulated exit=42 (QEMU)
+PASS s390x/baseline: compact and granulated exit=42 (QEMU)
+PASS x86-64/sse2: compact and granulated exit=42 (native)
+PASS x86-64/avx2: compact and granulated exit=42 (native)
+PASS feature mismatch: AVX2 file rejected before entry on QEMU without AVX2
+12/12 architectures; 28 offline launches passed
+Stored VM: 65 B; interpreter exit=173
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features= HTTP/1.1" 200 -
+x86-64/baseline: HTTP 70 B; local padded 8192 B; sha256=45df4e6a3862fc4301de2f945c6a70900e3c9d4802a18c8849f1534d5c74ac8d
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86&features= HTTP/1.1" 200 -
+x86/baseline: HTTP 70 B; local padded 8192 B; sha256=9547ec23bf2472075e52ef795a630854a676355a37dfc724edb16661b2199806
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features= HTTP/1.1" 200 -
+ARM32/baseline: HTTP 91 B; local padded 8192 B; sha256=30367403af9e6b1904475a9f93a97284b111eca5199c942a91dd0f5f97c3b7d0
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=AArch64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=AArch64&features= HTTP/1.1" 200 -
+AArch64/baseline: HTTP 91 B; local padded 8192 B; sha256=8d055ba88060793d4c118fd555d41a2ca51989e5c0253be46913e6ac53713020
+127.0.0.1 - - [25/Nov/2026 06:43:03] "GET /nodes/call?os=Linux&abi=linux-user&arch=LoongArch64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=LoongArch64&features= HTTP/1.1" 200 -
+LoongArch64/baseline: HTTP 107 B; local padded 8192 B; sha256=e456ef13df66d7f25350abf65f2bda527a4bbf643f7b9acb41f91e21340aaea9
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC32&features= HTTP/1.1" 200 -
+PowerPC32/baseline: HTTP 123 B; local padded 8192 B; sha256=513c74cf4af387ab3b774df102198da39ca81c214d3b5421aff9caff8469431a
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=PowerPC64&features= HTTP/1.1" 200 -
+PowerPC64/baseline: HTTP 123 B; local padded 8192 B; sha256=c72a01609708436f03388af5f4e6c4862021031724aa00de0e1283409038fca8
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V32&features= HTTP/1.1" 200 -
+RISC-V32/baseline: HTTP 107 B; local padded 8192 B; sha256=17a65d63fc9bc01cc6065b9897796b8a3fd59fa88aa547fa918232486df9d34e
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=RISC-V64&features= HTTP/1.1" 200 -
+RISC-V64/baseline: HTTP 107 B; local padded 8192 B; sha256=862059b8cd5ba0200fe549b51f4eaf8d4be54157f40d53c70246f9c15a90ca1f
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC32&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC32&features= HTTP/1.1" 200 -
+SPARC32/baseline: HTTP 111 B; local padded 8192 B; sha256=049c67aa71b46999153b2faa3f2dfcdf69a18f579f0a28ab826f282edb5011e0
+127.0.0.1 - - [25/Nov/2026 06:43:04] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC64&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=SPARC64&features= HTTP/1.1" 200 -
+SPARC64/baseline: HTTP 111 B; local padded 8192 B; sha256=988536c41191cd7a4e9d3610d7fe2875e47864321d605866a1a2472f87c282b5
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=s390x&features= HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=s390x&features= HTTP/1.1" 200 -
+s390x/baseline: HTTP 107 B; local padded 8192 B; sha256=aabdb5fc4fa7b3663cd279a8dd6c58ae8cc30232ebfad904ac99cfeb2bf63ff5
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=sse2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=sse2 HTTP/1.1" 200 -
+x86-64/sse2: HTTP 136 B; local padded 12288 B; sha256=99c5eb27671409b449d170b68a18bc4d359374a53ce3d872d921b5cb73e6c80f
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx%2Cavx2%2Csse2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx%2Cavx2%2Csse2 HTTP/1.1" 200 -
+x86-64/avx2: HTTP 142 B; local padded 12288 B; sha256=5b12efe221b314870e977f2e8e01edd33ae624bb8ab59cd46c7c0426647e7b60
+127.0.0.1 - - [25/Nov/2026 06:43:05] code 400, message only Linux user ABI is supported
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Windows&abi=linux-user&arch=x86-64&features= HTTP/1.1" 400 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] code 400, message this target accepts only the baseline profile
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=ARM32&features=sse2 HTTP/1.1" 400 -
+127.0.0.1 - - [25/Nov/2026 06:43:05] code 400, message invalid x86-64 feature set
+127.0.0.1 - - [25/Nov/2026 06:43:05] "GET /nodes/call?os=Linux&abi=linux-user&arch=x86-64&features=avx2 HTTP/1.1" 400 -
+Server stopped; HTTP connection failed as expected
+x86-64 profile instructions verified: baseline, pshufd, vpbroadcastd
+PASS x86-64/baseline: compact and granulated exit=173 (native)
+PASS x86/baseline: compact and granulated exit=173 (QEMU)
+PASS ARM32/baseline: compact and granulated exit=173 (QEMU)
+PASS AArch64/baseline: compact and granulated exit=173 (QEMU)
+PASS LoongArch64/baseline: compact and granulated exit=173 (QEMU)
+PASS PowerPC32/baseline: compact and granulated exit=173 (QEMU)
+PASS PowerPC64/baseline: compact and granulated exit=173 (QEMU)
+PASS RISC-V32/baseline: compact and granulated exit=173 (QEMU)
+PASS RISC-V64/baseline: compact and granulated exit=173 (QEMU)
+PASS SPARC32/baseline: compact and granulated exit=173 (QEMU)
+PASS SPARC64/baseline: compact and granulated exit=173 (QEMU)
+PASS s390x/baseline: compact and granulated exit=173 (QEMU)
+PASS x86-64/sse2: compact and granulated exit=173 (native)
+PASS x86-64/avx2: compact and granulated exit=173 (native)
+PASS feature mismatch: AVX2 file rejected before entry on QEMU without AVX2
+12/12 architectures; 28 offline launches passed
+
+Stage 18 load-time compilation regression
+12/12 targets passed
+
+Stage 19 client compilation regression
+12/12 targets passed

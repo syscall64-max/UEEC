@@ -1,0 +1,83 @@
+$ ueec-vm --list build/programs.ueec
+0 hello machine_type=2 machine=0 compatible=yes
+1 stack machine_type=2 machine=0 compatible=yes
+
+$ ueec-vm --node hello build/programs.ueec
+UEEC VM loader: machine_type=2 machine=0 (UEEC VM)
+  node:                0 (hello)
+  requested mode:      auto
+  actual mode:         monolithic
+  runtime sections:    3
+  mapped regions:      1
+  runtime HEADER bytes:64
+  section_address[0]:  0x7f9b3b06d000
+  entry:               0x7f9b3b06e000
+Hello from UEEC VM!
+RESULT r4=1234 r5=0 r6=0 r7=0 r8=0 r9=0 r10=0 sp=0 bp=0 exit=0 steps=6
+VM context released: frames=0
+
+$ ueec-vm --node stack build/programs.ueec
+UEEC VM loader: machine_type=2 machine=0 (UEEC VM)
+  node:                1 (stack)
+  requested mode:      auto
+  actual mode:         monolithic
+  runtime sections:    3
+  mapped regions:      1
+  runtime HEADER bytes:64
+  section_address[0]:  0x7fcc21bf1000
+  entry:               0x7fcc21bf2000
+RESULT r4=111 r5=222 r6=85 r7=333 r8=111 r9=122 r10=305419896 sp=0 bp=0 exit=0 steps=20
+VM context released: frames=0
+
+$ ueec-vm --node stack --load-mode scattered build/programs.ueec
+UEEC VM loader: machine_type=2 machine=0 (UEEC VM)
+  node:                1 (stack)
+  requested mode:      scattered
+  actual mode:         scattered
+  runtime sections:    3
+  mapped regions:      3
+  runtime HEADER bytes:64
+  section_address[0]:  0x7f8d54a11000
+  entry:               0x7f8d54a10000
+RESULT r4=111 r5=222 r6=85 r7=333 r8=111 r9=122 r10=305419896 sp=0 bp=0 exit=0 steps=20
+VM context released: frames=0
+
+$ ueec-vm --node stack --load-mode hybrid build/programs.ueec
+UEEC VM loader: machine_type=2 machine=0 (UEEC VM)
+  node:                1 (stack)
+  requested mode:      hybrid
+  actual mode:         hybrid
+  runtime sections:    3
+  mapped regions:      2
+  runtime HEADER bytes:64
+  section_address[0]:  0x7f4928892000
+  entry:               0x7f4928890000
+RESULT r4=111 r5=222 r6=85 r7=333 r8=111 r9=122 r10=305419896 sp=0 bp=0 exit=0 steps=20
+VM context released: frames=0
+
+$ ueec-info build/programs.ueec
+UEEC file
+  signature:          _GM
+  version:            1
+  metadata endian:    little
+  file bytes:         262
+  nodes:              2
+  unique names:       2
+  node mappings:      4
+  global sections:    4
+  section format:     SH16
+  HEADER data bytes:  84
+
+Nodes
+  [0] name="hello" machine=VM/UEEC-VM system=bare-metal/none code-endian=little
+       flags: kernel=0 user=1 program=1 library=0 console=1 service=0
+       sections: 0 1 3
+  [1] name="stack" machine=VM/UEEC-VM system=bare-metal/none code-endian=little
+       flags: kernel=0 user=1 program=1 library=0 console=1 service=0
+       sections: 0 2 3
+
+Sections
+  [0] type=HEADER offset=0 section_size=84 data_size=84 nodes=all (implicit)
+  [1] type=CODE offset=84 section_size=32 data_size=32 nodes=0
+  [2] type=CODE offset=116 section_size=104 data_size=104 nodes=1
+  [3] type=INIT_DATA offset=220 section_size=42 data_size=42 nodes=0,1

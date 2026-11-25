@@ -1,0 +1,143 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: avr-libc: Standard C library for Atmel AVR development
+Upstream-Contact: avr-chat@nongnu.org
+Source: https://github.com/avrdudes/avr-libc
+License: BSD-3-Clause
+
+Files: *
+Copyright: 2003-2005, Keith Gudger
+           1999-2010, Bjoern Haase
+           2002, Steinar Haugen
+           2002, Peter Jansen
+           2002, Reinhard Jessich <reinhard.jessich@telering.at>
+           1999-2010, Magnus Johansson
+           1999-2010, Artur Lipowski
+           2002-2007, Marek Michalkiewicz <marekm@amelek.gda.pl>
+           2002-2006, Colin O'Flynn <coflynn@newae.com>
+           2004-2006, Bob Paddock
+           2002-2007, Reiner Patommel
+           1999-2010, Michael Rickman
+           2002-2009, Theodore A. Roth
+           2002-2005, Juergen Schilling <juergen.schilling@honeywell.com>
+           2002-2007, Philip Soeberg
+           2005-2009, Anatoly Sokolov <aesok@post.ru>
+           2002, Nils Kristian Strom <nilsst@omegav.ntnu.no>
+           1999-2009, Michael Stumpf <mistumpf@de.pepperl-fuchs.com>
+           1999-2010, Stefan Swanepoel
+           2002-2010, Eric B. Weddington
+           2002-2013, Joerg Wunsch
+           2005-2013, Dmitry Xmelkov
+           2011-2013, Frédéric Nadeau
+           1999-2010, The Regents of the University of California
+           1992-2021, Free Software Foundation, Inc.
+           2007-2009, Atmel Corporation
+           2020-2022, Microchip Technology Inc. and its subsidiaries ("Microchip")
+           1994, X Consortium
+           2012, Georg-Johann Lay
+           2007, Florin-Viorel Petrov
+           2007, Dean Camera
+           2005-2007, Carlos Lamas
+           2007, Cliff Lawson
+           2013 Dave Hylands
+           2001-2002 by egnite Software GmbH
+           1999-2005, Rich Neswold
+           2001-2002, Harald Kipp
+           Werner Boellmann
+           Pieter Conradie
+           Brian Dean
+           Wouter van Gulik
+           Todd C. Miller
+           Andrey Pashchenko
+           Alexander Popov
+           Helmut Wallner
+License: BSD-3-Clause
+
+Files: doc/api/inline_asm.dox
+       doc/api/optimize.dox
+       doc/api/sections.dox
+       doc/api/using-avrprog.dox
+       doc/examples/all-demos.dox
+       doc/examples/demo/demo.dox
+       doc/examples/twitest/twitest.dox
+Copyright: 2002-2013, Joerg Wunsch
+           2001-2002, Harald Kipp
+           2007 Eric B. Weddington
+           2010 Jan Waclawek
+           2002-2006, Theodore Roth
+           2002 Brian Dean
+License: BSD-2-Clause
+
+Files: devtools/findreg.xsl
+       devtools/ioreg.pl
+       devtools/specs2libtree.py
+       doc/api/unjs.pl
+       doc/examples/asmdemo/asmdemo.c
+       doc/examples/asmdemo/isrs.S
+       doc/examples/demo/iocompat.h
+       doc/examples/stdiodemo/defines.h
+       doc/examples/stdiodemo/uart.c
+Copyright: 2013, Joerg Wunsch
+           Knut Schwichtenberg
+           j@uriah.heep.sax.de
+License: Beerware
+
+Files: debian/*
+Copyright: 2023-2024, Steve Meliza
+           2023, Bastian Germann
+           2000-2022, Hakan Ardo
+License: BSD-3-Clause
+
+
+License: BSD-3-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and
+ /or other materials provided with the distribution.
+ .
+ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without
+ specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and
+ /or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+License: Beerware
+ As long as you retain this notice you can do whatever you want with this
+ stuff. If we meet some day, and you think this stuff is worth it, you can
+ buy me a beer in return.

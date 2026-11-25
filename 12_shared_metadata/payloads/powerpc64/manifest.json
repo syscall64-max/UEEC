@@ -1,0 +1,14 @@
+[
+  {
+    "technology": "scalar",
+    "size": 184,
+    "sha256": "db19116b7e6baea934c634b1d09a6cd98f1b4c7cba8a854053c550c6635af99f",
+    "instruction": ""
+  },
+  {
+    "technology": "altivec",
+    "size": 440,
+    "sha256": "9104ce46bed6ab6565850be8f4d4c4d94bd8d780c904bad39e154fee726ce733",
+    "instruction": "\\bvadduwm\\b"
+  }
+]

@@ -1,0 +1,8 @@
+GCC 15.3 -O0 scalar: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -O0 altivec: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -O2 scalar: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -O2 altivec: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -O3 scalar: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -O3 altivec: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -Os scalar: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)
+GCC 15.3 -Os altivec: PASS (256 alignment/length, 32 guard-page, NULL/zero, tails, overflow)

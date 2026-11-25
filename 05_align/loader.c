@@ -31,6 +31,8 @@
 #  define HOST_MACHINE UEEC_MACHINE_SPARC32
 #elif defined(__loongarch64)
 #  define HOST_MACHINE UEEC_MACHINE_LOONGARCH64
+#elif defined(__s390x__)
+#  define HOST_MACHINE UEEC_MACHINE_S390X
 #else
 #  error "unknown host architecture"
 #endif

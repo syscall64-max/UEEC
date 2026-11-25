@@ -1,0 +1,12 @@
+python3 tools/build.py loader --arch x86_64
+x86_64: loader + request build PASS
+python3 generate.py
+/workspace/scratch/0b86d98e3c0f/network-isa-work/release with spaces (1)/14_network_isa_dispatch/build/sum.ueec: 12 architectures, 29 nodes, 29 CODE + 1 METADATA, layout=shared, 5719 bytes
+mkdir -p build
+cc -std=c11 -O2 -D_DEFAULT_SOURCE -D_FILE_OFFSET_BITS=64 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror net/ueec_net.c net/ueec_wire.c -o build/ueec-net -lssl -lcrypto
+python3 test_dispatch.py --arch x86_64
+x86_64: 56 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=native; negative=capability-mask
+python3 test_network.py --arch x86_64
+x86_64: 23 TLS selection/reconstruction/execution checks PASS; CODE executed=avx2,scalar,sse2; profile=native; transport=native-TLS
+TLS global: 26 source-format, identity, protocol and hostile-response checks PASS
+UEEC network ISA selection PASS (no skipped targets)

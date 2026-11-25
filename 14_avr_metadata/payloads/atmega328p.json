@@ -1,0 +1,21 @@
+{
+  "model": "atmega328p",
+  "signature": [
+    30,
+    149,
+    15
+  ],
+  "gcc_arch": 5,
+  "pc_bytes": 2,
+  "sp_bytes": 2,
+  "flash_bytes": 32768,
+  "sram_bytes": 2048,
+  "eeprom_bytes": 1024,
+  "clock_hz": 16000000,
+  "required": 31,
+  "port": "B",
+  "pin": 5,
+  "half_period_ms": 100,
+  "priority": 100,
+  "sha256": "1e78f6df93df3b3dd16ad7cc611906eeb7babd8b3a448f1b2762c29ebe894f9e"
+}

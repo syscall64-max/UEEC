@@ -1,0 +1,3 @@
+x86_64: 23 TLS selection/reconstruction/execution checks PASS; CODE executed=avx2,scalar,sse2; profile=native; transport=native-TLS
+TLS global: 26 source-format, identity, protocol and hostile-response checks PASS
+UEEC network ISA selection PASS (no skipped targets)
