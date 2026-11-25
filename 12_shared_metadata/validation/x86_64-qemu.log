@@ -1,0 +1,1 @@
+x86_64: 59 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=QEMU; negative=cpu-model+capability-mask

@@ -1,0 +1,5 @@
+CPU architecture: powerpc64 | powerpc64
+Detection: Linux AT_HWCAP/AT_HWCAP2 (OS-advertised capabilities)
+OS usable: altivec,vsx,arch_2_06,arch_2_07,dfp,crypto
+SELECTED architecture=powerpc64 technology=scalar node=11 CODE=23 priority=100 mode=requested
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped

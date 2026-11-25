@@ -8,6 +8,7 @@ TESTS := \
 	test_riscv64 \
 	test_sparc32 \
 	test_sparc64 \
+	test_s390x \
 	test_x86 \
 	test_x86_64
 
@@ -44,6 +45,9 @@ test_sparc32:
 test_sparc64:
 	nasm -f bin sparc64.asm -o sparc64.bin && sparc64-linux-gnu-gcc -Wall -Wextra -O2 -static loader.c -o loader && qemu-sparc64 ./loader sparc64.bin
 
+test_s390x:
+	nasm -f bin s390x.asm -o s390x.bin && s390x-linux-gnu-gcc -Wall -Wextra -O2 -static loader.c -o loader && qemu-s390x ./loader s390x.bin
+
 test_x86:
 	nasm -f bin x86.asm -o x86.bin && i686-linux-gnu-gcc -Wall -Wextra -O2 -static loader.c -o loader && qemu-i386 ./loader x86.bin
 
@@ -65,6 +69,8 @@ install:
 		gcc-riscv64-linux-gnu \
 		gcc-powerpc-linux-gnu \
 		gcc-powerpc64-linux-gnu \
+		gcc-s390x-linux-gnu \
+		binutils-s390x-linux-gnu \
 		gcc-14-loongarch64-linux-gnu
 	@echo ""
 	@echo "=== დაინსტალირდა ==="
@@ -76,6 +82,7 @@ install:
 	@echo "longarm64 -> loongarch64-linux-gnu-gcc-14 + qemu-loongarch64"
 	@echo "sparc32   -> sparc64-linux-gnu-gcc -m32 + qemu-sparc32plus"
 	@echo "sparc64   -> sparc64-linux-gnu-gcc + qemu-sparc64"
+	@echo "s390x     -> s390x-linux-gnu-gcc + qemu-s390x"
 	@echo "x86       -> i686-linux-gnu-gcc + qemu-i386"
 	@echo "x86-64    -> gcc (native)"
 	@echo ""

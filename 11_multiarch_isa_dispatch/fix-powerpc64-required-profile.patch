@@ -1,0 +1,21 @@
+--- a/test_dispatch.py
++++ b/test_dispatch.py
+@@ -19,7 +19,6 @@
+     "arm64": ("cortex-a53", "neon", "sve"),
+     "loongarch64": ("max,lasx=off", "lsx", "lasx"),
+     "powerpc32": ("750", "scalar", "altivec"),
+-    "powerpc64": ("power5+", "scalar", "altivec"),
+     "riscv32": ("rv32,v=false", "scalar", "rvv"),
+     "riscv64": ("rv64,v=false", "scalar", "rvv"),
+     "x86": ("pentium3", "scalar", "sse2"),
+@@ -30,6 +29,10 @@
+ # CPU-model cases run only if an independent libc/ABI probe can execute on
+ # that model. The three reduced-mask cases always run, including when the
+ # toolchain's libc requires an extension that the model deliberately removes.
++# PowerPC64 is deliberately not in this table: this demo's supported runtime
++# profile is POWER8. A small ABI probe cannot certify that every path through
++# a complete statically linked loader is safe on POWER5+. PowerPC64 still runs
++# scalar/AltiVec plus selection, rejection and fallback tests on POWER8.
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)

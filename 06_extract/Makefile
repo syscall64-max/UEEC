@@ -41,12 +41,33 @@ $(eval $(call ARCH_TEST,riscv64,riscv64-linux-gnu-gcc,qemu-riscv64,6))
 $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus,7))
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64,8))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386,9))
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x,11))
 
 x86_64: run-x86_64
 
-all: arm32 arm64 longarm64 powerpc32 powerpc64 sparc32 sparc64 x86 x86_64 riscv64 riscv32
+# Confirm one node and a preserved (DATA, CODE, RELOCATION) section set.
+check-s390x-layout: default
+	./extract multi.ueec node_s390x.ueec --machine-type 0 --machine 11 --system-type 2 --system 2
+	python3 check_extracted.py multi.ueec node_s390x.ueec 11
+
+check-x86_64-layout: default
+	./extract multi.ueec node_x86_64.ueec --machine 10
+	python3 check_extracted.py multi.ueec node_x86_64.ueec 10
+
+check-all-layout: default
+	@set -e; for m in 0 1 2 3 4 5 6 7 8 9 10 11; do \
+		./extract multi.ueec node_check_$$m.ueec --machine $$m; \
+		python3 check_extracted.py multi.ueec node_check_$$m.ueec $$m; \
+	done
+	@echo "UEEC extract: 12/12 one-node layout tests PASS"
+
+check-layout: check-all-layout
+
+all: arm32 arm64 longarm64 powerpc32 powerpc64 sparc32 sparc64 x86 x86_64 riscv64 riscv32 s390x check-layout
+	@echo "UEEC extract: 12 architectures x 2 load modes = 24 executions PASS"
+
 
 clean:
 	rm -f multi.ueec node_*.ueec extract loader loader_x86 \
 	      loader_arm32 loader_arm64 loader_longarm64 loader_powerpc32 loader_powerpc64 \
-	      loader_riscv32 loader_riscv64 loader_sparc32 loader_sparc64
+	      loader_riscv32 loader_riscv64 loader_sparc32 loader_sparc64 loader_s390x

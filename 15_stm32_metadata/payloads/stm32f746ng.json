@@ -1,0 +1,18 @@
+{
+  "model": "stm32f746ng",
+  "model_id": 3,
+  "core_part": 3111,
+  "flash_base": 134217728,
+  "flash_bytes": 1048576,
+  "ram_base": 536870912,
+  "ram_bytes": 327680,
+  "clock_hz": 16000000,
+  "required": 1,
+  "gpio_base": 1073881088,
+  "port": "I",
+  "pin": 1,
+  "half_period_ms": 100,
+  "priority": 100,
+  "code_bytes": 248,
+  "sha256": "03c294ac544a30e44298de9c7a0d56fa6de50ad4ccee6810e7f4f9df491cedef"
+}

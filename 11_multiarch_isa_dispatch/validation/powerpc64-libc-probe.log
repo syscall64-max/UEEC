@@ -1,0 +1,5 @@
+power8: exit=0
+libc startup PASS
+
+power5+: exit=-4
+qemu: uncaught target signal 4 (Illegal instruction) - core dumped

@@ -1,0 +1,46 @@
+python3 generate.py
+/workspace/scratch/0b86d98e3c0f/stm32-work/16_stm32_metadata/build/blink.ueec: 3 STM32 models, 3 CODE + 1 shared METADATA, 1070 bytes
+mkdir -p build
+cc -std=c11 -O1 -g -D_DEFAULT_SOURCE -D_FILE_OFFSET_BITS=64 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer loader.c -o build/ueec-stm32-sanitize
+python3 test_stm32.py --loader build/ueec-stm32-sanitize
+C selector: 87 format/compatibility/extraction checks PASS
+PROBE model=stm32f103rb cpuid=0x410fc231 Flash=131072 RAM=20480 clock=8000000
+DEVICE_PROFILE model=stm32f103rb cpuid=0x410fc231 clock=8000000
+SELECTED model=stm32f103rb node=0 CODE=1 METADATA=4 priority=100 mode=automatic
+FLASH bytes=252 address=0x08000000 verified=yes metadata_written=no
+GPIO edge=1 port=A pin=5 level=1 time_us=0 LED=ON
+GPIO edge=2 port=A pin=5 level=0 time_us=99987 LED=OFF
+GPIO edge=3 port=A pin=5 level=1 time_us=199975 LED=ON
+GPIO edge=4 port=A pin=5 level=0 time_us=299962 LED=OFF
+GPIO edge=5 port=A pin=5 level=1 time_us=399950 LED=ON
+GPIO edge=6 port=A pin=5 level=0 time_us=499937 LED=OFF
+GPIO edge=7 port=A pin=5 level=1 time_us=599925 LED=ON
+GPIO edge=8 port=A pin=5 level=0 time_us=699912 LED=OFF
+PASS: Renode virtual Flash + Cortex-M execution + 8 GPIO transitions; half_period_ms=100
+PROBE model=stm32f407vg cpuid=0x410fc240 Flash=1048576 RAM=131072 clock=16000000
+DEVICE_PROFILE model=stm32f407vg cpuid=0x410fc240 clock=16000000
+SELECTED model=stm32f407vg node=1 CODE=2 METADATA=4 priority=100 mode=automatic
+FLASH bytes=256 address=0x08000000 verified=yes metadata_written=no
+GPIO edge=1 port=D pin=12 level=1 time_us=0 LED=ON
+GPIO edge=2 port=D pin=12 level=0 time_us=99993 LED=OFF
+GPIO edge=3 port=D pin=12 level=1 time_us=199987 LED=ON
+GPIO edge=4 port=D pin=12 level=0 time_us=299981 LED=OFF
+GPIO edge=5 port=D pin=12 level=1 time_us=399975 LED=ON
+GPIO edge=6 port=D pin=12 level=0 time_us=499969 LED=OFF
+GPIO edge=7 port=D pin=12 level=1 time_us=599962 LED=ON
+GPIO edge=8 port=D pin=12 level=0 time_us=699956 LED=OFF
+PASS: Renode virtual Flash + Cortex-M execution + 8 GPIO transitions; half_period_ms=100
+PROBE model=stm32f746ng cpuid=0x411fc272 Flash=1048576 RAM=327680 clock=16000000
+DEVICE_PROFILE model=stm32f746ng cpuid=0x411fc272 clock=16000000
+SELECTED model=stm32f746ng node=2 CODE=3 METADATA=4 priority=100 mode=automatic
+FLASH bytes=248 address=0x08000000 verified=yes metadata_written=no
+GPIO edge=1 port=I pin=1 level=1 time_us=0 LED=ON
+GPIO edge=2 port=I pin=1 level=0 time_us=99993 LED=OFF
+GPIO edge=3 port=I pin=1 level=1 time_us=199987 LED=ON
+GPIO edge=4 port=I pin=1 level=0 time_us=299981 LED=OFF
+GPIO edge=5 port=I pin=1 level=1 time_us=399975 LED=ON
+GPIO edge=6 port=I pin=1 level=0 time_us=499969 LED=OFF
+GPIO edge=7 port=I pin=1 level=1 time_us=599962 LED=ON
+GPIO edge=8 port=I pin=1 level=0 time_us=699956 LED=OFF
+PASS: Renode virtual Flash + Cortex-M execution + 8 GPIO transitions; half_period_ms=100
+UEEC STM32: 3 Cortex-M targets, 24 primary + 8 endian-test GPIO transitions; 95 checks PASS (no skips)

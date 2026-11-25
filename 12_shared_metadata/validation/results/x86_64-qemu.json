@@ -1,0 +1,18 @@
+{
+  "architecture": "x86_64",
+  "backend": "QEMU",
+  "cpu": "max",
+  "checks": 59,
+  "executed": [
+    "avx2",
+    "scalar",
+    "sse2"
+  ],
+  "negative_test_mode": "cpu-model+capability-mask",
+  "abi_preflight": {
+    "cpu": "qemu64",
+    "returncode": 0,
+    "output": "UEEC ABI baseline probe PASS: libc-baseline; HWCAP=2\n",
+    "status": "supported"
+  }
+}

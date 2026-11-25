@@ -1,0 +1,12 @@
+{
+  "architecture": "x86_64",
+  "profile_backend": "native",
+  "transport": "native OpenSSL TLS",
+  "checks": 23,
+  "executed": [
+    "avx2",
+    "scalar",
+    "sse2"
+  ],
+  "usable": "0x1ffba0003fe7"
+}

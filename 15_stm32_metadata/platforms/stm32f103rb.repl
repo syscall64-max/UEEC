@@ -1,0 +1,16 @@
+flash: Memory.MappedMemory @ { sysbus 0x00000000; sysbus 0x08000000 }
+    size: 0x20000
+sram: Memory.MappedMemory @ sysbus 0x20000000
+    size: 0x5000
+nvic: IRQControllers.NVIC @ sysbus 0xe000e000
+    systickFrequency: 8000000
+    IRQ -> cpu@0
+cpu: CPU.CortexM @ sysbus
+    cpuType: "cortex-m3"
+    nvic: nvic
+    PerformanceInMips: 20
+gpio: GPIOPort.STM32F1GPIOPort @ sysbus <0x40010800, +0x400>
+    5 -> led@0
+led: Miscellaneous.LED @ gpio
+rcc: Memory.MappedMemory @ sysbus 0x40021000
+    size: 0x400

@@ -1,0 +1,21 @@
+{
+  "model": "attiny85",
+  "signature": [
+    30,
+    147,
+    11
+  ],
+  "gcc_arch": 25,
+  "pc_bytes": 2,
+  "sp_bytes": 2,
+  "flash_bytes": 8192,
+  "sram_bytes": 512,
+  "eeprom_bytes": 512,
+  "clock_hz": 8000000,
+  "required": 7,
+  "port": "B",
+  "pin": 0,
+  "half_period_ms": 100,
+  "priority": 100,
+  "sha256": "b33bd90e9f8c5c5e9136cf3d46c5b0e49695dfd2abdb3a6b7f8c32d9446c497d"
+}

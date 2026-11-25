@@ -1,5 +1,7 @@
 # 09_convert_export — უნივერსალური EXPORT-კონვერტერი (COMPACT_GROUP ↔ SIMPLE_FLAT)
 
+**Current status / მიმდინარე სტატუსი — 2026-11-04:** tested and working on all 12 CPU architectures; the full 00–10 matrix is completed. Earlier environment-specific counts below are historical.
+
 `04_convert`-ის ანალოგიური, უნივერსალური კონვერტერი — მაგრამ EXPORT-სექციისთვის.
 კითხულობს UEEC EXPORT-სექციას `COMPACT_GROUP`(`design=0`) ან `SIMPLE_FLAT`(`design=1`)
 დიზაინით და გადაჰყავს **ნებისმიერ** ამ ორთაგან, ნებისმიერი მიმართულებით.
@@ -57,7 +59,7 @@ make run-all-directions
 (round-trip) → `SIMPLE_FLAT`(round-trip). **ორივე round-trip
 ბაიტობრივად იდენტურია** ორიგინალთან (`cmp` — სხვაობა ვერ მოიძებნა).
 
-## Multi-architecture ვალიდაცია — 10/10 architecture, ორივე დიზაინით
+## ისტორიული ვალიდაცია — 10 cross-target და native x86-64, ორივე დიზაინით
 
 ```
 make all
@@ -123,7 +125,7 @@ COMPACT_GROUP/ORDINAL დემოები) დაუფიქსირებ�
    შემთხვევაში `volatile unsigned long fdesc[3] = {addr,0,0}`
    descriptor-ტრიუკით.
 
-## 10/10 architecture — დამოწმებულია მომხმარებლის მანქანაზე
+## ისტორიული 10 cross-target — დამოწმებულია მომხმარებლის მანქანაზე
 
 ეს პროექტი თავდაპირველად 8/10-ზე შედგა ამ სესიის კონტეინერში (`sparc32`
 -ს 32-ბიტიანი multilib header-ები აკლდა, `riscv32`-ს toolchain არ
@@ -156,3 +158,23 @@ riscv32.bin` ამ zip-ში საერთოდ არ იყო ჩად�
    `encode_block`-ის ანალოგიით.
 4. **PowerPC64 fdesc-ტრიუკი, DATA-endianness-ის target-მიხედვით
    არჩევა** — ორივე ხელახლა გამოყენებულია RELOC-ისეთივე ფორმით.
+
+
+## 12th architecture — IBM Z (s390x, Big-Endian)
+
+The 12-architecture variant adds machine ID **11** (`UEEC_MACHINE_S390X`),
+`arch/answer_s390x.bin` (6 bytes: `lghi %r2,42; br %r14`) and an
+`ARCH_TEST` target checking **COMPACT_GROUP** and **SIMPLE_FLAT** under
+`qemu-s390x`. The UEEC metadata remains Little-Endian; DATA values are
+encoded in the target CPU's native Big-Endian byte order.
+
+```sh
+make clean
+make check-layout          # 12 CPU × 2 export layouts; no QEMU needed
+make verify-s390x-bytes    # optional: requires s390x-linux-gnu-as/objcopy
+make s390x                # 2 real execution tests
+make all                  # 12 CPU × 2 layouts + x86-64 round trips
+```
+
+`ORDINAL` cannot be losslessly converted into name-based exports; it is
+intentionally outside this converter's scope.

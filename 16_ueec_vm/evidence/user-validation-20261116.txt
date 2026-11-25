@@ -1,0 +1,23 @@
+Project-author terminal transcript supplied in conversation on 16 November 2026.
+Prompts and local directory paths omitted; commands/results preserved.
+These are author-reported x86_64 results, not executions on the assistant host.
+NASM was available; the suite adds three NASM output-comparison checks.
+
+$ make run
+Hello from UEEC VM!
+RESULT r4=1234 r5=0 r6=0 r7=0 r8=0 r9=0 r10=0 sp=0 bp=0 exit=0 steps=6
+VM context released: frames=0
+RESULT r4=111 r5=222 r6=85 r7=333 r8=111 r9=122 r10=305419896 sp=0 bp=0 exit=0 steps=20
+VM context released: frames=0
+
+$ make test
+python3 test_vm.py --binary build/ueec-vm
+UEEC VM: 165 checks PASS (x86_64; ueec-vm)
+
+$ make sanitize
+ASAN_OPTIONS=detect_leaks=0:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 python3 test_vm.py --binary build/ueec-vm-san
+UEEC VM: 165 checks PASS (x86_64; ueec-vm-san)
+
+$ make sanitize ASAN_OPTIONS=detect_leaks=1:halt_on_error=1
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 python3 test_vm.py --binary build/ueec-vm-san
+UEEC VM: 165 checks PASS (x86_64; ueec-vm-san)

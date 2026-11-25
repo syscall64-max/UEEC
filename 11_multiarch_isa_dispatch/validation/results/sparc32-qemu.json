@@ -1,0 +1,12 @@
+{
+  "architecture": "sparc32",
+  "backend": "QEMU",
+  "cpu": "TI UltraSparc II",
+  "checks": 33,
+  "executed": [
+    "scalar",
+    "vis"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": null
+}

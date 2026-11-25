@@ -1,0 +1,18 @@
+{
+  "architecture": "arm64",
+  "backend": "QEMU",
+  "cpu": "max",
+  "checks": 37,
+  "executed": [
+    "neon",
+    "scalar",
+    "sve"
+  ],
+  "negative_test_mode": "cpu-model+capability-mask",
+  "abi_preflight": {
+    "cpu": "cortex-a53",
+    "returncode": 0,
+    "output": "UEEC ABI baseline probe PASS: libc-baseline; HWCAP=2299\n",
+    "status": "supported"
+  }
+}

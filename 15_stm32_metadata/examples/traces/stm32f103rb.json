@@ -1,0 +1,49 @@
+{
+  "model": "stm32f103rb",
+  "device_profile_hex": "535450310100000031c20f410000000800000200000000200050000000127a0001000000000000000008014041050000",
+  "selected": {
+    "node": 0,
+    "code_bytes": 252,
+    "flash_base": 134217728,
+    "sp": 536891392,
+    "reset": 134217793,
+    "gpio_base": 1073809408,
+    "port": 65,
+    "pin": 5,
+    "half_period_ms": 100
+  },
+  "events": [
+    {
+      "time_ns": 0,
+      "level": 1
+    },
+    {
+      "time_ns": 99987500,
+      "level": 0
+    },
+    {
+      "time_ns": 199975000,
+      "level": 1
+    },
+    {
+      "time_ns": 299962500,
+      "level": 0
+    },
+    {
+      "time_ns": 399950000,
+      "level": 1
+    },
+    {
+      "time_ns": 499937500,
+      "level": 0
+    },
+    {
+      "time_ns": 599925000,
+      "level": 1
+    },
+    {
+      "time_ns": 699912500,
+      "level": 0
+    }
+  ]
+}

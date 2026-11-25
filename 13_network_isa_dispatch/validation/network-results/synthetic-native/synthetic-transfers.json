@@ -1,0 +1,350 @@
+[
+  {
+    "architecture": "arm32",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 136
+  },
+  {
+    "architecture": "arm32",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "arm32",
+    "technology": "neon",
+    "mode": "compact",
+    "output_bytes": 284
+  },
+  {
+    "architecture": "arm32",
+    "technology": "neon",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "arm64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 132
+  },
+  {
+    "architecture": "arm64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "arm64",
+    "technology": "neon",
+    "mode": "compact",
+    "output_bytes": 252
+  },
+  {
+    "architecture": "arm64",
+    "technology": "neon",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "arm64",
+    "technology": "sve",
+    "mode": "compact",
+    "output_bytes": 152
+  },
+  {
+    "architecture": "arm64",
+    "technology": "sve",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 152
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "lsx",
+    "mode": "compact",
+    "output_bytes": 312
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "lsx",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "lasx",
+    "mode": "compact",
+    "output_bytes": 352
+  },
+  {
+    "architecture": "loongarch64",
+    "technology": "lasx",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "powerpc32",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 236
+  },
+  {
+    "architecture": "powerpc32",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "powerpc32",
+    "technology": "altivec",
+    "mode": "compact",
+    "output_bytes": 548
+  },
+  {
+    "architecture": "powerpc32",
+    "technology": "altivec",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "powerpc64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 268
+  },
+  {
+    "architecture": "powerpc64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "powerpc64",
+    "technology": "altivec",
+    "mode": "compact",
+    "output_bytes": 524
+  },
+  {
+    "architecture": "powerpc64",
+    "technology": "altivec",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "riscv32",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 112
+  },
+  {
+    "architecture": "riscv32",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "riscv32",
+    "technology": "rvv",
+    "mode": "compact",
+    "output_bytes": 132
+  },
+  {
+    "architecture": "riscv32",
+    "technology": "rvv",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "riscv64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 112
+  },
+  {
+    "architecture": "riscv64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "riscv64",
+    "technology": "rvv",
+    "mode": "compact",
+    "output_bytes": 132
+  },
+  {
+    "architecture": "riscv64",
+    "technology": "rvv",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "sparc32",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 136
+  },
+  {
+    "architecture": "sparc32",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "sparc32",
+    "technology": "vis",
+    "mode": "compact",
+    "output_bytes": 276
+  },
+  {
+    "architecture": "sparc32",
+    "technology": "vis",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "sparc64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 128
+  },
+  {
+    "architecture": "sparc64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "sparc64",
+    "technology": "vis",
+    "mode": "compact",
+    "output_bytes": 276
+  },
+  {
+    "architecture": "sparc64",
+    "technology": "vis",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 129
+  },
+  {
+    "architecture": "x86",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86",
+    "technology": "sse2",
+    "mode": "compact",
+    "output_bytes": 268
+  },
+  {
+    "architecture": "x86",
+    "technology": "sse2",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86",
+    "technology": "avx2",
+    "mode": "compact",
+    "output_bytes": 317
+  },
+  {
+    "architecture": "x86",
+    "technology": "avx2",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 105
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "sse2",
+    "mode": "compact",
+    "output_bytes": 166
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "sse2",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "avx2",
+    "mode": "compact",
+    "output_bytes": 169
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "avx2",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "avx512f",
+    "mode": "compact",
+    "output_bytes": 177
+  },
+  {
+    "architecture": "x86_64",
+    "technology": "avx512f",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "s390x",
+    "technology": "scalar",
+    "mode": "compact",
+    "output_bytes": 212
+  },
+  {
+    "architecture": "s390x",
+    "technology": "scalar",
+    "mode": "granulated",
+    "output_bytes": 12288
+  },
+  {
+    "architecture": "s390x",
+    "technology": "vx",
+    "mode": "compact",
+    "output_bytes": 532
+  },
+  {
+    "architecture": "s390x",
+    "technology": "vx",
+    "mode": "granulated",
+    "output_bytes": 12288
+  }
+]

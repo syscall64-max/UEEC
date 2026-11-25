@@ -1,5 +1,7 @@
 # 07_pe — PE_STYLE RELOC
 
+**Current status / მიმდინარე სტატუსი — 2026-11-04:** tested and working on all 12 CPU architectures; the full 00–10 matrix is completed. Earlier environment-specific counts below are historical.
+
 `reloc_v4.h`-ის დიზაინი — `couple`-ს აქვს მხოლოდ **ერთი** `section` ველი
 (`target`), `source` **იმპლიციტურია** — ყოველთვის `image_base` (მთელი
 node-ის, monolithic-ად ჩატვირთული resident-სექციების საერთო საწყისი).
@@ -29,16 +31,18 @@ ueec_reloc(format,design=3) -> couple16(section:5,format:11,count)
 ## გაშვება
 
 ```
-./gen_pe 10 > node_x86_64.asm     # arch-index: 0-10 (იხ. Makefile)
+./gen_pe 10 > node_x86_64.asm     # arch-index: 0-11 (იხ. Makefile)
 nasm -f bin node_x86_64.asm -o node_x86_64.ueec
 ./loader_pe node_x86_64.ueec
 
 make run-x86_64
-make all              # ყველა architecture (QEMU-ს ქვეშ)
+make all              # 12 architecture (QEMU-ს ქვეშ)
+make check-layout     # 12/12 PE_STYLE-ის სტრუქტურული შემოწმება (nasm-ის გარეშეც)
+make verify-s390x-bytes  # სურვილისამებრ: s390x ასემბლერის კოდის ბაიტური შედარება
 make -k all           # თუ /opt/riscv32 არ გაქვთ
 ```
 
-**10/10 architecture დამოწმებული** (PowerPC32/64, SPARC32/64 big-endian
+**12 არქიტექტურა დატესტილია და მუშაობს** (12/12 შესრულება Ubuntu/QEMU მატრიცაში) (PowerPC32/64, SPARC32/64 big-endian
 ჩათვლით).
 
 ## ნაპოვნი და გასწორებული ბაგი
@@ -49,3 +53,19 @@ make -k all           # თუ /opt/riscv32 არ გაქვთ
 (`PowerPC32/64`, `SPARC32/64`) `nodes=1` (`0x0001` LE) არასწორად
 იკითხებოდა, როგორც `256`. გასწორდა `file_endian`-პარამეტრის ყველგან
 დამატებით.
+
+## IBM Z / S390X
+
+S390X არის მე-12 არქიტექტურა (`machine=11`, Big-Endian კოდი, `ABS64`).
+რელოკაციაა CODE-ში `0x20` ოფსეტზე, `PE_STYLE` `design=3`;
+DATA და CODE ერთად იტვირთება monolithic რეჟიმში, ამიტომ `image_base`
+DATA-ს საწყისი მისამართია.
+
+```sh
+make s390x
+make check-layout
+make all
+```
+
+`scattered` რეჟიმი აქ **არ არის მხარდაჭერილი** — PE_STYLE-ის implicit
+`image_base` მოდელი ერთიან მონოლითურ ჩატვირთვას მოითხოვს.

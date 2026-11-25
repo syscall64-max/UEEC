@@ -25,6 +25,7 @@ static arch_info archs[] = {
     {"sparc64",     8, 1, 40, 8},
     {"x86",         9, 0,  1, 4},
     {"x86_64",     10, 0,  2, 8},
+    {"s390x",      11, 1, 32, 8},
 };
 #define N_ARCH (int)(sizeof(archs)/sizeof(archs[0]))
 
@@ -39,14 +40,20 @@ static uint8_t *load_bin(const char *arch, long *out_size) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) { fprintf(stderr, "gamoyeneba: %s <arch-index 0-10>\n", argv[0]); return 1; }
+    if (argc < 2) { fprintf(stderr, "gamoyeneba: %s <arch-index 0-11>\n", argv[0]); return 1; }
     int ai = atoi(argv[1]);
     if (ai < 0 || ai >= N_ARCH) { fprintf(stderr, "arasworia arch-index\n"); return 1; }
     arch_info a = archs[ai];
 
     long code_size;
     uint8_t *code_buf = load_bin(a.arch, &code_size);
-    memset(code_buf + a.reloc_offset, 0, a.reloc_size); // addend=0
+    if (a.reloc_offset < 0 || a.reloc_size < 0 ||
+        (long)a.reloc_offset + a.reloc_size > code_size) {
+        fprintf(stderr, "invalid relocation range for %s\n", a.arch);
+        free(code_buf);
+        return 1;
+    }
+    memset(code_buf + a.reloc_offset, 0, (size_t)a.reloc_size); // addend=0
 
     const char *data_str = "Hello world!\n";
     int data_size = (int)strlen(data_str);

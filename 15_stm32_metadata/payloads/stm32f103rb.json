@@ -1,0 +1,18 @@
+{
+  "model": "stm32f103rb",
+  "model_id": 1,
+  "core_part": 3107,
+  "flash_base": 134217728,
+  "flash_bytes": 131072,
+  "ram_base": 536870912,
+  "ram_bytes": 20480,
+  "clock_hz": 8000000,
+  "required": 1,
+  "gpio_base": 1073809408,
+  "port": "A",
+  "pin": 5,
+  "half_period_ms": 100,
+  "priority": 100,
+  "code_bytes": 252,
+  "sha256": "2c1851375688201f7c888c719d6f3ac17828e58d2b938591c2635ed945d67c82"
+}

@@ -1,0 +1,43 @@
+[20:07:33.2932] [INFO] Loaded monitor commands from: /workspace/scratch/0b86d98e3c0f/stm32-work/renode-package/renode_1.17.0-portable/scripts/monitor.py
+Renode, version 1.17.0 (1.17.0+20260907gitf1dd1b4af)
+
+
+(monitor) i @/tmp/ueec-stm32-dk8bulbz/run.resc
+
+[20:07:33.4364] [INFO] Including script(s): /tmp/ueec-stm32-dk8bulbz/run.resc
+[20:07:33.4492] [INFO] System bus created.
+PROBE model=stm32f407vg cpuid=0x410fc240 Flash=1048576 RAM=131072 clock=16000000
+
+DEVICE_PROFILE model=stm32f407vg cpuid=0x410fc240 clock=16000000
+
+SELECTED model=stm32f407vg node=1 CODE=2 METADATA=4 priority=100 mode=automatic
+
+
+
+FLASH bytes=256 address=0x08000000 verified=yes metadata_written=no
+
+[20:07:34.8345] [INFO] UEEC_STM32: Machine started.
+UEEC_GPIO time=00:00:00.000000000 level=1
+
+UEEC_GPIO time=00:00:00.099993800 level=0
+
+UEEC_GPIO time=00:00:00.199987600 level=1
+
+UEEC_GPIO time=00:00:00.299981400 level=0
+
+UEEC_GPIO time=00:00:00.399975200 level=1
+
+UEEC_GPIO time=00:00:00.499969000 level=0
+
+UEEC_GPIO time=00:00:00.599962800 level=1
+
+UEEC_GPIO time=00:00:00.699956600 level=0
+
+Antmicro.Renode.Testing.LEDTester
+
+UEEC_EMULATION_PASS
+
+Renode is quitting
+
+[20:07:35.6006] [INFO] UEEC_STM32: Machine paused.
+[20:07:35.6204] [INFO] UEEC_STM32: Disposed.

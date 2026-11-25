@@ -1,0 +1,13 @@
+TLS server host=127.0.0.1 port=45559 source_nodes=29
+SERVE machine=4 system=2 source_node=10 technology=altivec nodes=1 source=5719B payload=524B status=PASS
+SERVE machine=4 system=2 source_node=10 technology=altivec nodes=1 source=5719B payload=524B status=PASS
+SERVE machine=4 system=2 source_node=11 technology=scalar nodes=1 source=5719B payload=268B status=PASS
+SERVE machine=4 system=2 source_node=11 technology=scalar nodes=1 source=5719B payload=268B status=PASS
+SERVE machine=4 system=2 source_node=10 technology=altivec nodes=1 source=5719B payload=524B status=PASS
+REJECT machine=4 system=2 status=technology-unavailable
+SERVE machine=4 system=2 source_node=11 technology=scalar nodes=1 source=5719B payload=268B status=PASS
+REJECT machine=4 system=2 status=technology-unavailable
+SERVE machine=4 system=2 source_node=10 technology=altivec nodes=1 source=5719B payload=524B status=PASS
+REJECT machine=4 system=1 status=no-compatible-node
+REJECT machine=4 system=2 status=no-compatible-node
+SERVE machine=4 system=2 source_node=10 technology=altivec nodes=1 source=5719B payload=524B status=PASS

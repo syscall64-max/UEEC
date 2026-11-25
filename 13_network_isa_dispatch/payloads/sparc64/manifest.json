@@ -1,0 +1,14 @@
+[
+  {
+    "technology": "scalar",
+    "size": 44,
+    "sha256": "19485213ff5d82c04606e385523721056596ddc64dac77b21759e8d8b08cb0a9",
+    "instruction": ""
+  },
+  {
+    "technology": "vis",
+    "size": 192,
+    "sha256": "0b62c684b5471b0015c08c1a982eab0198a6b462dce7232c28383ee20e299e0f",
+    "instruction": "\\bfpadd32\\b"
+  }
+]

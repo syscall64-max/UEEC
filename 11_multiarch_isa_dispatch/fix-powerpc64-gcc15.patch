@@ -1,0 +1,13 @@
+--- a/loader.c
++++ b/loader.c
+@@ -176,6 +176,10 @@
+     /* ELFv1 function pointers address descriptors, not machine instructions.
+        This leaf uses no TOC/global state; environment and TOC are zero. */
+     uintptr_t descriptor[3]={(uintptr_t)entry,0,0};
++    /* The call sequence reads this object through a function pointer. Those
++       ABI-level reads are invisible to C dead-store analysis (GCC 15 removes
++       the initializer without this explicit memory operand). */
++    __asm__ volatile ("" : : "m"(descriptor) : "memory");
+     void *descriptor_address=descriptor;
+     memcpy(&function,&descriptor_address,sizeof(function));
+ #else

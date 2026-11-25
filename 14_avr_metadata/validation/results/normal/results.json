@@ -1,0 +1,61 @@
+{
+  "checks": 76,
+  "simulator": "simavr",
+  "physical_hardware": false,
+  "models": [
+    {
+      "model": "attiny85",
+      "signature": "1e930b",
+      "gcc_arch": 25,
+      "edges": 8,
+      "half_period_ms": 100,
+      "cycles": [
+        18,
+        800023,
+        1600028,
+        2400033,
+        3200038,
+        4000043,
+        4800048,
+        5600053
+      ],
+      "code_sha256": "b33bd90e9f8c5c5e9136cf3d46c5b0e49695dfd2abdb3a6b7f8c32d9446c497d"
+    },
+    {
+      "model": "atmega328p",
+      "signature": "1e950f",
+      "gcc_arch": 5,
+      "edges": 8,
+      "half_period_ms": 100,
+      "cycles": [
+        20,
+        1600025,
+        3200030,
+        4800035,
+        6400040,
+        8000045,
+        9600050,
+        11200055
+      ],
+      "code_sha256": "1e78f6df93df3b3dd16ad7cc611906eeb7babd8b3a448f1b2762c29ebe894f9e"
+    },
+    {
+      "model": "atmega2560",
+      "signature": "1e9801",
+      "gcc_arch": 6,
+      "edges": 8,
+      "half_period_ms": 100,
+      "cycles": [
+        22,
+        1600027,
+        3200032,
+        4800037,
+        6400042,
+        8000047,
+        9600052,
+        11200057
+      ],
+      "code_sha256": "28935820d446a2a06d76d51715f0f4195f071ef79b745fe3a048f308a6064fe5"
+    }
+  ]
+}

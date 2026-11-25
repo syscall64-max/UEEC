@@ -1,0 +1,49 @@
+{
+  "model": "stm32f746ng",
+  "device_profile_hex": "535450310300000072c21f41000000080000100000000020000005000024f4003b000000000000000020024049010000",
+  "selected": {
+    "node": 2,
+    "code_bytes": 248,
+    "flash_base": 134217728,
+    "sp": 537198592,
+    "reset": 134217793,
+    "gpio_base": 1073881088,
+    "port": 73,
+    "pin": 1,
+    "half_period_ms": 100
+  },
+  "events": [
+    {
+      "time_ns": 0,
+      "level": 1
+    },
+    {
+      "time_ns": 99993800,
+      "level": 0
+    },
+    {
+      "time_ns": 199987600,
+      "level": 1
+    },
+    {
+      "time_ns": 299981400,
+      "level": 0
+    },
+    {
+      "time_ns": 399975200,
+      "level": 1
+    },
+    {
+      "time_ns": 499969000,
+      "level": 0
+    },
+    {
+      "time_ns": 599962800,
+      "level": 1
+    },
+    {
+      "time_ns": 699956600,
+      "level": 0
+    }
+  ]
+}

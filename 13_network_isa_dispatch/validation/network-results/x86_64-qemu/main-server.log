@@ -1,0 +1,14 @@
+TLS server host=127.0.0.1 port=45909 source_nodes=29
+SERVE machine=10 system=2 source_node=24 technology=avx2 nodes=1 source=5719B payload=169B status=PASS
+SERVE machine=10 system=2 source_node=24 technology=avx2 nodes=1 source=5719B payload=169B status=PASS
+SERVE machine=10 system=2 source_node=26 technology=scalar nodes=1 source=5719B payload=105B status=PASS
+SERVE machine=10 system=2 source_node=26 technology=scalar nodes=1 source=5719B payload=105B status=PASS
+SERVE machine=10 system=2 source_node=25 technology=sse2 nodes=1 source=5719B payload=166B status=PASS
+SERVE machine=10 system=2 source_node=24 technology=avx2 nodes=1 source=5719B payload=169B status=PASS
+REJECT machine=10 system=2 status=technology-unavailable
+SERVE machine=10 system=2 source_node=26 technology=scalar nodes=1 source=5719B payload=105B status=PASS
+REJECT machine=10 system=2 status=technology-unavailable
+SERVE machine=10 system=2 source_node=24 technology=avx2 nodes=1 source=5719B payload=169B status=PASS
+REJECT machine=10 system=1 status=no-compatible-node
+REJECT machine=10 system=2 status=no-compatible-node
+SERVE machine=10 system=2 source_node=24 technology=avx2 nodes=1 source=5719B payload=169B status=PASS

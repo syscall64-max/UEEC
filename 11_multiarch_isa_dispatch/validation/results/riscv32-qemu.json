@@ -1,0 +1,17 @@
+{
+  "architecture": "riscv32",
+  "backend": "QEMU",
+  "cpu": "rv32,v=true,vlen=128,elen=64",
+  "checks": 36,
+  "executed": [
+    "rvv",
+    "scalar"
+  ],
+  "negative_test_mode": "cpu-model+capability-mask",
+  "abi_preflight": {
+    "cpu": "rv32,v=false",
+    "returncode": 0,
+    "output": "UEEC ABI baseline probe PASS: libc-baseline; HWCAP=4397\n",
+    "status": "supported"
+  }
+}

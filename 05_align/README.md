@@ -1,5 +1,7 @@
 # 05_align — გრანულაციის მართვა
 
+**Current status / მიმდინარე სტატუსი — 2026-11-04:** tested and working on all 12 CPU architectures; the full 00–10 matrix is completed. Earlier environment-specific counts below are historical.
+
 `align` ხელსაწყო კითხულობს UEEC ფაილს და თითოეული სექციის
 `section_size`-ს (padding-ითურთ) აფართოებს granularity-ის ჯერადამდე —
 `data_size` (რეალური შემცველობა) **უცვლელი** რჩება.
@@ -28,15 +30,33 @@ make all             # ყველა architecture, ორივე ფაი�
 make -k all          # თუ /opt/riscv32 არ გაქვთ
 ```
 
-**40/40 (10 architecture × 2 ფაილი × 2 load-mode) დამოწმებული.**
+**48/48 სცენარი (12 არქიტექტურა × 2 ფაილი × 2 load-mode) — Ubuntu/QEMU-ში წარმატებით დასრულდა.**
 
 ## რეალური ზომები (ამ ტესტიდან)
 
-- `test.ueec` (`03_reloc`-ის ორიგინალი, padding-ის გარეშე): `1028` ბაიტი
-- `test_default.ueec` (`4096`-granularity): `98304` ბაიტი (`24` სექცია × `4096`)
-- `test_g1.ueec` (`--granularity 1`): `1028` ბაიტი — **ბაიტობრივად იდენტური**
+- `test.ueec` (`03_reloc`-ის ორიგინალი, padding-ის გარეშე): `1116` ბაიტი
+- `test_default.ueec` (`4096`-granularity): `106496` ბაიტი (`26` სექცია × `4096`)
+- `test_g1.ueec` (`--granularity 1`): `1116` ბაიტი — **ბაიტობრივად იდენტური**
   ორიგინალთან (ვინაიდან ორიგინალშიც `section_size == data_size` იყო ყველგან)
 
 ## ცნობილი შეზღუდვები
 
 `riscv32` საჭიროებს `/opt/riscv32` toolchain-ს (`riscv32-unknown-linux-gnu-gcc`).
+
+
+## S390X (IBM Z) — ახალი მეთორმეტე არქიტექტურა
+
+UEEC node ID `11`, Big-Endian CODE და ABS64 რელოკაცია. `03_reloc.asm`
+განახლებულია უკვე შემოწმებული `03_reloc_12arch_s390x` ეტაპიდან.
+ამ ეტაპის `align` კი მხოლოდ little-endian UEEC wire metadata-ს ამუშავებს;
+S390X-ზე cross-compiled არის loader, ხოლო align უტილიტა x86-64 ჰოსტზე სრულდება.
+
+```sh
+make clean
+make test-layout test-compact
+make s390x     # QEMU: default/granularity=1 × monolithic/scattered
+make all       # 12 architecture × 2 layouts × 2 load modes
+```
+
+`make all`-ის ყველა 48 შესრულება მომხმარებლის Ubuntu-ზე დადასტურებულია.
+ტესტები არ ამტკიცებენ ზუსტ z17 ISA ინსტრუქციების მხარდაჭერას.

@@ -429,6 +429,8 @@ static int host_machine(void)
     return UEEC_MACHINE_SPARC64;
 #elif defined(__sparc__)
     return UEEC_MACHINE_SPARC32;
+#elif defined(__s390x__)
+    return UEEC_MACHINE_S390X;
 #elif defined(__i386__)
     return UEEC_MACHINE_X86;
 #elif defined(__x86_64__)

@@ -1,0 +1,11 @@
+{
+  "architecture": "powerpc64",
+  "profile_backend": "QEMU",
+  "transport": "native OpenSSL TLS",
+  "checks": 21,
+  "executed": [
+    "altivec",
+    "scalar"
+  ],
+  "usable": "0xcf"
+}

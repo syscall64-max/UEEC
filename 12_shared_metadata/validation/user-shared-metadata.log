@@ -1,0 +1,40 @@
+# Project-author supplied terminal transcript; not a new cross-architecture run.
+# Host-specific paths redacted; original stage name retained.
+author@host:PROJECT/13_shared_metadata$ make test-all
+python3 tools/build.py loader --arch all
+arm32: loader build PASS
+arm64: loader build PASS
+TEMP/assembler.s: Assembler messages:
+TEMP/assembler.s:1103: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+TEMP/assembler.s:1105: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+TEMP/assembler.s:3006: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+loongarch64: loader build PASS
+powerpc32: loader build PASS
+powerpc64: loader build PASS
+riscv32: loader build PASS
+riscv64: loader build PASS
+sparc32: loader build PASS
+sparc64: loader build PASS
+x86: loader build PASS
+x86_64: loader build PASS
+s390x: loader build PASS
+python3 generate.py
+PROJECT/13_shared_metadata/build/sum.ueec: 12 architectures, 29 nodes, 29 CODE + 1 METADATA, layout=shared, 5719 bytes
+python3 tools/test_all.py
+arm32: 57 dispatch/format checks PASS; CODE executed=neon,scalar; backend=QEMU; negative=cpu-model+capability-mask
+arm64: 58 dispatch/format checks PASS; CODE executed=neon,scalar,sve; backend=QEMU; negative=cpu-model+capability-mask
+loongarch64: 58 dispatch/format checks PASS; CODE executed=lasx,lsx,scalar; backend=QEMU; negative=cpu-model+capability-mask
+powerpc32: 57 dispatch/format checks PASS; CODE executed=altivec,scalar; backend=QEMU; negative=cpu-model+capability-mask
+powerpc64: 54 dispatch/format checks PASS; CODE executed=altivec,scalar; backend=QEMU; negative=capability-mask
+riscv32: 57 dispatch/format checks PASS; CODE executed=rvv,scalar; backend=QEMU; negative=cpu-model+capability-mask
+riscv64: CPU-model check unavailable: independent libc probe fails on rv64,v=false (exit=-4); negative dispatch checked with --limit-isa scalar
+riscv64: 54 dispatch/format checks PASS; CODE executed=rvv,scalar; backend=QEMU; negative=capability-mask
+sparc32: 54 dispatch/format checks PASS; CODE executed=scalar,vis; backend=QEMU; negative=capability-mask
+sparc64: 54 dispatch/format checks PASS; CODE executed=scalar,vis; backend=QEMU; negative=capability-mask
+x86: 58 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=QEMU; negative=cpu-model+capability-mask
+x86_64: 59 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=QEMU; negative=cpu-model+capability-mask
+s390x: CPU-model check unavailable: independent libc probe fails on max,vx=off (exit=-8); negative dispatch checked with --limit-isa scalar
+s390x: 54 dispatch/format checks PASS; CODE executed=scalar,vx; backend=QEMU; negative=capability-mask
+x86_64: 56 dispatch/format checks PASS; CODE executed=avx2,scalar,sse2; backend=native; negative=capability-mask
+UEEC ISA dispatch: 12 architecture suites + native suite PASS (no skipped targets)
+author@host:PROJECT/13_shared_metadata$

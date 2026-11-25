@@ -10,8 +10,7 @@ one wire-format, and the format can grow new section types and new encodings
 without breaking existing readers.
 
 This repository holds the format specification, the reference toolchain, and
-the multi-architecture validation harness. It does not yet include a kernel
-loader or virtual-machine layer — see [Roadmap](#roadmap) below.
+the multi-architecture validation harness. It includes an experimental virtual machine, embedded simulation, network delivery and native compilation. A production kernel loader is not implemented.
 
 > **Status:** early, actively developed. The format is versioned `0.x` while
 > its extensibility mechanism (see [`FORMAT_SPECIFICATION.md`](FORMAT_SPECIFICATION.md))
@@ -34,22 +33,35 @@ rationale and comparison with prior art.
 ## What's in this repository
 
 The project is developed as a sequence of self-contained stages, each in
-its own directory with its own `Makefile` and `README.md`:
+its own directory with stage-specific build or Python test instructions:
 
 | Path | Contents |
 | --- | --- |
 | `FORMAT_SPECIFICATION.md` | The versioned container format spec: header, endianness, node/section model, currently defined `design` variants |
 | `docs/UEEC_DESIGN.md` | Design rationale, novelty, and how UEEC compares to ELF/PE/Mach-O and prior art |
 | `00_shell_code/` | Earliest prototype — minimal shell-code-style payload |
-| `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 11 architectures |
-| `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 11 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
+| `01_ueec_info/` | Reference reader (`ueec-info`): parses the `_GM` header, nodes, sections and name table; validated on 12 architectures |
+| `02_ueec_load/` | Linux loader for a `_GM`-header UEEC file: builds one file with 12 architecture-specific CODE nodes, and a loader that selects and runs the node matching its own host, in `monolithic`, `scattered` or `hybrid` layout |
 | `03_reloc/` | First RELOCATION section (`FLAT` design) integrated into the core format; also demonstrates 11 nodes sharing one physical DATA section, each with its own architecture-correct relocation into it |
-| `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 11 architectures |
+| `04_convert/` | **Universal RELOC converter** — decode → intermediate → encode between `FLAT`, `BLOCK_4096`, `BLOCK_N`; round-trip validated on 12 architectures |
 | `05_align/` | Section-granularity/alignment tooling |
 | `06_extract/` | Extracts a single node out of a multi-node UEEC file into a standalone one-node file |
 | `07_pe/` | The PE-style 4th RELOC design (`reloc_v4.h`) — kept separate; see `FORMAT_SPECIFICATION.md` §6.1 for why it's out of scope for the universal converter |
 | `08_export/` | The three EXPORT designs (`COMPACT_GROUP`, `SIMPLE_FLAT`, `ORDINAL`) — parsers, generators, loaders |
-| `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 11 architectures, including an executed machine-code function call through the loader |
+| `09_convert_export/` | **Universal EXPORT converter** — decode → intermediate → encode between `COMPACT_GROUP` and `SIMPLE_FLAT`; round-trip validated on 12 architectures, including an executed machine-code function call through the loader |
+
+| `10_ueec_tls_c/` | TLS selective node delivery, compact and granulated reconstruction |
+| `11_multiarch_isa_dispatch/` | Architecture and ISA capability dispatch |
+| `12_shared_metadata/` | Shared architecture metadata and node selection |
+| `13_network_isa_dispatch/` | Network delivery with ISA-aware selection |
+| `14_avr_metadata/` | AVR metadata selection, virtual Flash and GPIO simulation |
+| `15_stm32_metadata/` | STM32 metadata and embedded simulation experiments |
+| `16_ueec_vm/` | Experimental 16-bit virtual machine and shared sections |
+| `17_ueec_bench/` | Loader benchmark harness and correctness tests |
+| `18_ueec_native/` | Experimental VM-to-native load-time compilation across 12 Linux targets |
+| `19_ueec_client_compile/` | Client-side compilation and offline execution |
+| `20_ueec_server_compile/` | Server-side compilation and compact/granulated native delivery |
+| `21_ueec2elf/` | Experimental UEEC-to-ELF conversion |
 
 ## Building
 
@@ -78,33 +90,45 @@ required.
 
 Correctness is demonstrated end-to-end: working loaders execute real UEEC
 binaries — including an actual machine-code function call — under QEMU on
-11 CPU architectures (x86, x86-64, ARM32, ARM64, RISC-V32/64, PowerPC32/64,
-SPARC32/64, LoongArch64), with byte-identical round-trip checks
+12 CPU architectures (x86, x86-64, ARM32, ARM64, RISC-V32/64, PowerPC32/64,
+SPARC32/64, LoongArch64, s390x), with byte-identical round-trip checks
 (`encode(decode(x)) == x`).
 
-A single container holding all 11 architectures at once is also validated:
-`02_ueec_load/` builds one physical file with 11 architecture-specific CODE
+A single container holding all 12 architectures at once is also validated:
+`02_ueec_load/` builds one physical file with 12 architecture-specific CODE
 nodes sharing one HEADER, and a loader — cross-compiled once per target —
 that opens that same file and correctly selects and runs only the node
 matching its own host, in each of three loading layouts (`monolithic`,
 `scattered`, `hybrid`).
 
 File-level section sharing is validated the same way: `03_reloc/` builds a
-container where all 11 architecture nodes reference one shared DATA
+container where all 12 architecture nodes reference one shared DATA
 section instead of each carrying its own copy, with a real, per-architecture
 relocation patching that shared section's address into each node's CODE.
 (This is a structural check of the generated file, not yet a full run of
 `03_reloc`'s own test suite; see `docs/UEEC_DESIGN.md` for the exact scope
 and current limits.)
 
+## Current validation and research scope
+
+The integrated PR #11 passed three GitHub Actions workflows at commit
+`c5f070bdfd33b0bdb24cddd6683db69d2ab8b714` on 2026-11-25: nine native jobs, ten packaged cross-architecture
+jobs, one source-built RV32 GCC/glibc job and thirteen extended jobs (33/33).
+RV32 also passed the LLVM-based stages 18–21.
+See [verification matrix](docs/TEST_MATRIX.md) for exact scope and evidence.
+
+The research goal is to investigate whether interchangeable section designs,
+shared sections and deployment-specific representations offer useful
+size or execution-time trade-offs. No universal performance advantage is
+claimed. Historical benchmark samples are in [results](results/README.md).
+
 ## Roadmap
 
-This repository covers the first stage of a longer-term plan: format
-specification, reference toolchain hardening, and three new section types
-(typed import/export, debug information, architecture metadata). A Linux
-kernel-level loader, a microcontroller loader ecosystem, and a
-virtual-processor language/VM are planned as later, separately-scoped
-stages — see `docs/UEEC_DESIGN.md` for a short summary.
+Production hardening, broader instruction and ABI coverage, physical MCU
+validation, kernel integration and additional accelerator architectures remain
+future work. Current VM translation and ELF conversion are experimental,
+not general-purpose executable translation. See the stage READMEs and
+[project status](PROJECT_STATUS.md).
 
 ## License
 

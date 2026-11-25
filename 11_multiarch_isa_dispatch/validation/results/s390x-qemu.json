@@ -1,0 +1,17 @@
+{
+  "architecture": "s390x",
+  "backend": "QEMU",
+  "cpu": "max",
+  "checks": 33,
+  "executed": [
+    "scalar",
+    "vx"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": {
+    "cpu": "max,vx=off",
+    "returncode": -8,
+    "output": "qemu-s390x: warning: 'vxeh' requires 'vx'.\nqemu: uncaught target signal 8 (Floating point exception) - core dumped\n",
+    "status": "unavailable-libc-cpu-baseline"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "architecture": "powerpc64",
+  "backend": "QEMU",
+  "cpu": "power8",
+  "checks": 33,
+  "executed": [
+    "altivec",
+    "scalar"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": null
+}

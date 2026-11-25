@@ -1,0 +1,2 @@
+TLS server host=127.0.0.1 port=38177 source_nodes=29
+SERVE machine=4 system=2 source_node=18 technology=altivec nodes=1 source=5839B payload=524B status=PASS

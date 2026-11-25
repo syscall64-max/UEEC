@@ -1,0 +1,26 @@
+$timescale 1ns $end
+$scope module ueec_avr $end
+$var wire 1 ! LED $end
+$upscope $end
+$enddefinitions $end
+$dumpvars
+x!
+$end
+#1375
+0!
+#2250
+1!
+#100002875
+0!
+#200003500
+1!
+#300004125
+0!
+#400004750
+1!
+#500005375
+0!
+#600006000
+1!
+#700006625
+0!

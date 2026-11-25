@@ -1,0 +1,17 @@
+{
+  "architecture": "riscv64",
+  "backend": "QEMU",
+  "cpu": "max,vlen=128,elen=64",
+  "checks": 33,
+  "executed": [
+    "rvv",
+    "scalar"
+  ],
+  "negative_test_mode": "capability-mask",
+  "abi_preflight": {
+    "cpu": "rv64,v=false",
+    "returncode": -4,
+    "output": "",
+    "status": "unavailable-libc-cpu-baseline"
+  }
+}

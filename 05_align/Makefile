@@ -41,12 +41,24 @@ $(eval $(call ARCH_TEST,sparc32,sparc64-linux-gnu-gcc -m32,qemu-sparc32plus))
 $(eval $(call ARCH_TEST,sparc64,sparc64-linux-gnu-gcc,qemu-sparc64))
 $(eval $(call ARCH_TEST,longarm64,loongarch64-linux-gnu-gcc-14,qemu-loongarch64))
 $(eval $(call ARCH_TEST,x86,i686-linux-gnu-gcc,qemu-i386))
+$(eval $(call ARCH_TEST,s390x,s390x-linux-gnu-gcc,qemu-s390x))
 
 x86_64: run-default run-g1
 
-all: arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32
+.PHONY: test-layout
+test-layout: default
+	@python3 -c "import struct; b=open('test.ueec','rb').read(); assert b[:3]==b'_GM' and struct.unpack_from('<H',b,4)[0]==12; assert len(b)==1116; print('UEEC align: 12 nodes, 26 sections, 1116 bytes PASS')"
+
+.PHONY: test-compact
+test-compact: default
+	./align test.ueec test_g1.ueec --granularity 1
+	cmp test.ueec test_g1.ueec
+	@echo "UEEC align: granularity=1 byte-identical PASS"
+
+all: test-layout test-compact arm32 arm64 riscv64 powerpc32 powerpc64 sparc32 sparc64 longarm64 x86 x86_64 riscv32 s390x
+	@echo "UEEC align: 12 architectures x 2 files x 2 modes = 48 runs PASS"
 
 clean:
 	rm -f test.ueec test_default.ueec test_g1.ueec align loader \
 	      loader_arm32 loader_arm64 loader_riscv64 loader_riscv32 \
-	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86
+	      loader_powerpc32 loader_powerpc64 loader_sparc32 loader_sparc64 loader_longarm64 loader_x86 loader_s390x
