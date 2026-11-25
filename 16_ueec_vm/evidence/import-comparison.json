@@ -1,0 +1,21 @@
+{
+  "main_commit": "623fd685adad674d42ccf9e41b6903197c838a05",
+  "comparison_date": "2026-11-16",
+  "sources": [
+    {
+      "remote_path": "\u10d3\u10dd\u10d9\u10e3\u10db\u10d4\u10dc\u10e2\u10d4\u10d1\u10d8/ueec.h",
+      "git_blob_sha": "0c50e0c47ff397511616fba0fe34699c26be799d",
+      "matches_local_input": true
+    },
+    {
+      "remote_path": "02_ueec_load/ueec_load.c",
+      "git_blob_sha": "2e315be5c6c32a76b33c0d7b383f9a749b1cf5be",
+      "matches_local_input": true
+    },
+    {
+      "remote_path": "01_ueec_info/ueec_info.c",
+      "git_blob_sha": "a7eb72bfc8a1236d48997117aa439b29791145d0",
+      "matches_local_input": true
+    }
+  ]
+}
