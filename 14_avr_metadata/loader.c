@@ -220,6 +220,14 @@ static void avr_usage(const char *app)
 static void destroy_avr(avr_t *avr)
 {
     avr_terminate(avr);
+    /* avr_iomem_getirq allocates nine IRQs per IO address.
+     * These arrays are separate from the IO module IRQ arrays. */
+    for (size_t i=0;i<sizeof(avr->io)/sizeof(avr->io[0]);++i) {
+        if (avr->io[i].irq) {
+            avr_free_irq(avr->io[i].irq,9);
+            avr->io[i].irq=NULL;
+        }
+    }
     for (int i=0;i<avr->irq_pool.count;++i) {
         avr_irq_t *irq=avr->irq_pool.irq[i];
         if (irq && !(irq->flags & IRQ_FLAG_ALLOC))
