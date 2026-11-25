@@ -2,14 +2,10 @@ name: UEEC cross-architecture tests
 
 on:
   pull_request:
-    paths:
-      - ".github/workflows/cross-architecture.yml"
-      - "scripts/build-riscv32-toolchain.sh"
-      - "docs/TEST_MATRIX.md"
   workflow_dispatch:
     inputs:
       run_packaged:
-        description: "Run packaged cross-toolchains (9 architectures)"
+        description: "Run packaged cross-toolchains (10 architectures)"
         type: boolean
         required: true
         default: true
@@ -92,6 +88,13 @@ jobs:
             qemu: qemu-sparc64
             make_arch: sparc64
             core_arch: sparc64
+          - arch: s390x
+            libc_package: libc6-dev-s390x-cross
+            compiler_package: gcc-s390x-linux-gnu
+            compiler: s390x-linux-gnu-gcc
+            qemu: qemu-s390x
+            make_arch: s390x
+            core_arch: s390x
           - arch: x86
             libc_package: libc6-dev-i386-cross
             compiler_package: gcc-i686-linux-gnu
@@ -112,7 +115,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends nasm qemu-user "$CC_PACKAGE" "$LIBC_PACKAGE"
+          sudo apt-get install -y --no-install-recommends nasm qemu-user libssl-dev openssl "$CC_PACKAGE" "$LIBC_PACKAGE"
           if [[ "$ARCH" == "sparc32" ]]; then
             sudo apt-get install -y --no-install-recommends gcc-sparc64-linux-gnu libc6-dev-sparc-sparc64-cross
           fi
@@ -132,11 +135,30 @@ jobs:
           MAKE_ARCH: ${{ matrix.make_arch }}
         run: |
           set -euo pipefail
+          make -C 00_shell_code "test_$MAKE_ARCH"
           make -C 01_ueec_info "test-$CORE_ARCH"
           make -C 02_ueec_load "test-$CORE_ARCH"
           for stage in 03_reloc 04_convert 05_align 06_extract 07_pe 08_export 09_convert_export; do
             make -C "$stage" "$MAKE_ARCH"
           done
+          for stage in 11_multiarch_isa_dispatch 12_shared_metadata 13_network_isa_dispatch; do
+            make -C "$stage" loader generate ARCH="$CORE_ARCH"
+            (cd "$stage" && python3 test_dispatch.py --arch "$CORE_ARCH" --qemu)
+          done
+          make -C 13_network_isa_dispatch network
+          (cd 13_network_isa_dispatch && python3 test_network.py --arch "$CORE_ARCH" --qemu)
+          cd 10_ueec_tls_c
+          make all cert
+          ./build/ueec-net server --source build/multi.ueec --cert cert.pem --key key.pem --port 9443 > build/server-ci.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true; cat build/server-ci.log' EXIT
+          for i in {1..50}; do
+            if grep -q 'server listening' build/server-ci.log; then break; fi
+            kill -0 "$pid"
+            sleep 0.2
+          done
+          grep -q 'server listening' build/server-ci.log
+          make "test-$CORE_ARCH"
 
   riscv32-from-source:
     name: RV32 Linux toolchain from source
@@ -162,7 +184,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf automake autotools-dev bc bison build-essential cmake curl flex gawk git gperf \
             expect libexpat1-dev libglib2.0-dev libgmp-dev libmpc-dev libmpfr-dev libncurses-dev libtool libzstd-dev \
-            meson ninja-build patchutils python3 python3-tomli qemu-user nasm texinfo \
+            meson ninja-build patchutils python3 python3-tomli qemu-user nasm texinfo libssl-dev openssl \
             zlib1g-dev
           df -h /
           sudo install -d -o "$(id -un)" -g "$(id -gn)" /opt/riscv32
@@ -180,8 +202,28 @@ jobs:
       - name: Run all existing RV32 tests
         run: |
           set -euo pipefail
+          make -C 00_shell_code test_riscv32
           make -C 01_ueec_info test-riscv32
           make -C 02_ueec_load test-riscv32
           for stage in 03_reloc 04_convert 05_align 06_extract 07_pe 08_export 09_convert_export; do
             make -C "$stage" riscv32
           done
+          CORE_ARCH=riscv32
+          for stage in 11_multiarch_isa_dispatch 12_shared_metadata 13_network_isa_dispatch; do
+            make -C "$stage" loader generate ARCH="$CORE_ARCH"
+            (cd "$stage" && python3 test_dispatch.py --arch "$CORE_ARCH" --qemu)
+          done
+          make -C 13_network_isa_dispatch network
+          (cd 13_network_isa_dispatch && python3 test_network.py --arch "$CORE_ARCH" --qemu)
+          cd 10_ueec_tls_c
+          make all cert
+          ./build/ueec-net server --source build/multi.ueec --cert cert.pem --key key.pem --port 9443 > build/server-ci.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true; cat build/server-ci.log' EXIT
+          for i in {1..50}; do
+            if grep -q 'server listening' build/server-ci.log; then break; fi
+            kill -0 "$pid"
+            sleep 0.2
+          done
+          grep -q 'server listening' build/server-ci.log
+          make "test-$CORE_ARCH"
