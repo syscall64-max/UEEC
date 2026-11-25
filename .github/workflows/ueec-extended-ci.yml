@@ -64,7 +64,7 @@ jobs:
   native-compilation:
     name: 12-target stage ${{ matrix.stage }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -79,12 +79,27 @@ jobs:
           sudo apt-get install -y --no-install-recommends build-essential python3 clang-19 lld-19 binutils-sparc64-linux-gnu qemu-user
           clang-19 --version
           ld.lld-19 --version
+          # Ubuntu 24.04 ships QEMU 8.2, whose ARM cacheflush syscall
+          # can return an incorrect value. Build the fixed upstream release.
+          sudo apt-get install -y --no-install-recommends curl xz-utils ninja-build meson libglib2.0-dev libpixman-1-dev python3-venv
+          curl --fail --location --retry 3 https://download.qemu.org/qemu-10.0.3.tar.xz -o "$RUNNER_TEMP/qemu-10.0.3.tar.xz"
+          tar -xJf "$RUNNER_TEMP/qemu-10.0.3.tar.xz" -C "$RUNNER_TEMP"
+          mkdir -p "$RUNNER_TEMP/qemu-build"
+          cd "$RUNNER_TEMP/qemu-build"
+          "$RUNNER_TEMP/qemu-10.0.3/configure" --target-list=arm-linux-user --disable-system --disable-tools --disable-docs --disable-guest-agent --disable-werror
+          ninja -j2 qemu-arm
+          mkdir -p "$RUNNER_TEMP/ueec-qemu-bin"
+          install -m755 qemu-arm "$RUNNER_TEMP/ueec-qemu-bin/qemu-arm"
+          echo "$RUNNER_TEMP/ueec-qemu-bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/ueec-qemu-bin/qemu-arm" --version
           qemu-loongarch64 --version
       - name: Run all targets without architecture filtering
         env:
           STAGE: ${{ matrix.stage }}
         run: |
           set -euo pipefail
+          command -v qemu-arm
+          qemu-arm --version | grep -F "version 10.0.3"
           case "$STAGE" in
             18) python3 18_ueec_native/run_matrix.py --clang clang-19 --lld ld.lld-19 ;;
             19) for status in 42 173; do python3 19_ueec_client_compile/run_demo.py --status "$status"; done ;;
