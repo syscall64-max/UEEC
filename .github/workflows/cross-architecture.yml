@@ -162,7 +162,7 @@ jobs:
 
   riscv32-from-source:
     name: RV32 Linux toolchain from source
-    if: (github.event_name == 'pull_request' && github.head_ref == 'ci/validate-riscv32-source-20261013') || (github.event_name == 'workflow_dispatch' && inputs.build_riscv32)
+    if: (github.event_name == 'pull_request' && (github.head_ref == 'ci/validate-riscv32-source-20261013' || github.head_ref == 'feature/ueec-stages-00-21-20261125-180107')) || (github.event_name == 'workflow_dispatch' && inputs.build_riscv32)
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     steps:
