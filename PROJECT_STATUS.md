@@ -10,16 +10,17 @@ security are not established.
 
 ## Verified CI evidence
 
-At `1e3e87bf2a114643ef3b142165d43c29409a5d3b`, all three workflows completed successfully:
-[native](https://github.com/syscall64-max/UEEC/actions/runs/45638223898),
-[cross](https://github.com/syscall64-max/UEEC/actions/runs/45638223822),
-[extended](https://github.com/syscall64-max/UEEC/actions/runs/45638223827).
-The separate RV32 GCC/glibc source-build job was skipped. See
+At `c5f070bdfd33b0bdb24cddd6683db69d2ab8b714`, all three workflows completed successfully:
+[native](https://github.com/syscall64-max/UEEC/actions/runs/45641085862),
+[cross](https://github.com/syscall64-max/UEEC/actions/runs/45641085879),
+[extended](https://github.com/syscall64-max/UEEC/actions/runs/45641085864).
+The RV32 GCC/glibc source-build job passed, including ELF32 verification and configured legacy tests. All 33 jobs passed. See
 [TEST_MATRIX](docs/TEST_MATRIX.md).
 
 ARM32 stages 18–21 use QEMU 10.0.3 explicitly via --qemu-dir; the cacheflush
-success check remains enabled. AVR cleanup releases the caller-owned simavr
-core and remaining embedded IRQ resources; sanitizer checks remain enabled.
+success check remains enabled. AVR cleanup releases the caller-owned simavr core, embedded IRQ resources,
+and nine-element iomem IRQ arrays. Sanitizer checks remain enabled; the
+AVR job also passed a repeat run at commit 46c0833.
 Physical hardware testing is not implied by emulation.
 
 ## Consolidation of PRs 5–10
@@ -38,7 +39,6 @@ and consolidation are accepted.
 
 ## Outstanding gates
 
-- Run the source-built RV32 GCC/glibc workflow and record actual outcome.
 - Review remaining documentation differences and native semantic edge cases.
 - Keep PR #11 in draft until review; main is not changed by this handoff.
 - Audit bounds, overflow, mapping permissions, relocations and untrusted input.

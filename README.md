@@ -112,9 +112,9 @@ and current limits.)
 ## Current validation and research scope
 
 The integrated PR #11 passed three GitHub Actions workflows at commit
-`1e3e87bf2a114643ef3b142165d43c29409a5d3b` on 2026-11-25: nine native jobs, ten packaged cross-architecture
-jobs and thirteen extended jobs. The separate source-built RV32 GCC/glibc
-job was skipped; RV32 is exercised in the LLVM-based stages 18–21.
+`c5f070bdfd33b0bdb24cddd6683db69d2ab8b714` on 2026-11-25: nine native jobs, ten packaged cross-architecture
+jobs, one source-built RV32 GCC/glibc job and thirteen extended jobs (33/33).
+RV32 also passed the LLVM-based stages 18–21.
 See [verification matrix](docs/TEST_MATRIX.md) for exact scope and evidence.
 
 The research goal is to investigate whether interchangeable section designs,
