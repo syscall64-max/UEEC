@@ -1,74 +1,45 @@
 # UEEC — Verification matrix
 
-Updated: 2026-10-13. Distinguish **configured**, **executed**, and **passed** tests.
+Snapshot: 2026-11-25. Configured, executed and passed are distinct.
 
-## Current evidence
+Evidence at commit `1e3e87bf2a114643ef3b142165d43c29409a5d3b` (PR #11):
 
-- Native x86-64: **9/9 stage jobs PASS** in GitHub Actions run
-  [38430051185](https://github.com/syscall64-max/UEEC/actions/runs/38430051185),
-  2026-10-13, PR #2, commit `5ebb8a08dc44d469c906a7c765782569c672e7c2`.
-- Multi-architecture runs documented in stage READMEs were performed previously,
-  including by the project author. Original logs, environment, and toolchain
-  versions were not imported into this CI record.
-- Cross-architecture workflow `.github/workflows/cross-architecture.yml`
-  merged to main in PR #3. The nine packaged QEMU targets have **all passed** at commit
-  `bc33f78f5257f9ffaada62202472fb6eefddd342` in
-  [run 38432454430](https://github.com/syscall64-max/UEEC/actions/runs/38432454430).
+| Workflow | Coverage | Outcome |
+| --- | --- | --- |
+| [Native CI](https://github.com/syscall64-max/UEEC/actions/runs/45638223898) | x86-64, stages 01–09 | PASS |
+| [Cross architecture](https://github.com/syscall64-max/UEEC/actions/runs/45638223822) | Ten packaged GCC/QEMU targets, stages 00–13 as configured | PASS |
+| [Extended CI](https://github.com/syscall64-max/UEEC/actions/runs/45638223827) | Host 00, 10–17; 12-target 18–21 | PASS |
+| RV32 source-build job | Source-built Linux GCC/glibc plus legacy stage tests | SKIP |
 
-| Architecture | Test runner | Toolchain provisioning | CI status |
-| --- | --- | --- | --- |
-| x86-64 | Native | gcc (Ubuntu 24.04) | PASS (9 stage jobs, run 38430051185) |
-| x86 | qemu-i386 | Ubuntu gcc-i686-linux-gnu | PASS: run 38432454430 |
-| ARM32 | qemu-arm | Ubuntu gcc-arm-linux-gnueabihf | PASS: run 38432454430 |
-| ARM64 | qemu-aarch64 | Ubuntu gcc-aarch64-linux-gnu | PASS: run 38432454430 |
-| LoongArch64 | qemu-loongarch64 | Ubuntu gcc-14-loongarch64-linux-gnu | PASS: run 38432454430 |
-| PowerPC32 | qemu-ppc | Ubuntu gcc-powerpc-linux-gnu | PASS: run 38432454430 |
-| PowerPC64 | qemu-ppc64 | Ubuntu gcc-powerpc64-linux-gnu | PASS: run 38432454430 |
-| RISC-V32 | qemu-riscv32 | Source-built GCC/glibc (`scripts/build-riscv32-toolchain.sh`) | Source build: validating on dedicated PR, not yet PASS |
-| RISC-V64 | qemu-riscv64 | Ubuntu gcc-riscv64-linux-gnu | PASS: run 38432454430 |
-| SPARC32 | qemu-sparc32plus | Ubuntu SPARC64 GCC + 32-bit multilib | PASS: run 38432454430 |
-| SPARC64 | qemu-sparc64 | Ubuntu gcc-sparc64-linux-gnu | PASS: run 38432454430 |
+## Linux target matrix
 
-## Workflow behavior
+| Target | Legacy packaged/native CI | LLVM native stages 18–21 |
+| --- | --- | --- |
+| x86-64 | PASS native | PASS native |
+| x86 | PASS QEMU | PASS QEMU |
+| ARM32 | PASS QEMU | PASS QEMU 10.0.3 |
+| AArch64 | PASS QEMU | PASS QEMU |
+| LoongArch64 | PASS QEMU | PASS QEMU |
+| PowerPC32 | PASS QEMU | PASS QEMU |
+| PowerPC64 | PASS QEMU | PASS QEMU |
+| RISC-V32 | Source-build SKIP | PASS QEMU |
+| RISC-V64 | PASS QEMU | PASS QEMU |
+| SPARC32 | PASS QEMU | PASS QEMU |
+| SPARC64 | PASS QEMU | PASS QEMU |
+| s390x | PASS QEMU | PASS QEMU |
 
-- `native-ci.yml`: PR, push to main, manual; checks all nine implemented
-  stages on native x86-64, plus explicit byte-identical conversion assertions.
-- `cross-architecture.yml`: PRs that change the cross workflow, RV32 source
-  build script, or this file trigger the **nine packaged** targets. The jobs
-  test stages 01–09 against each architecture via QEMU.
-- `workflow_dispatch` lets maintainers re-run packaged targets and optionally
-  enable the expensive **RISC-V32 build from pinned upstream source**. Its
-  default is off. The build installs at `/opt/riscv32`, matching existing
-  Makefiles, and verifies a statically linked ELF32 RISC-V smoke program.
-  Toolchain builds require significant disk/time; failure or resource
-  exhaustion must be reported, not marked as a skipped success.
-- Running machine-code test fixtures is inherent to these existing tests;
-  do not use untrusted code or elevated secrets in cross-architecture runners.
+The table reports configured suites, not every combination of stage and target.
+AVR/STM32 experiments are separate from the 12 Linux targets. Physical devices
+are not certified by these jobs. Benchmark CI checks correctness, not speed
+thresholds. Sanitizers are enabled where specified by the workflows.
 
-## Result record (per job)
+## RV32 source-build
 
-Date, commit SHA, stage, architecture, runner OS, compiler version, QEMU
-version, exact command, PASS/FAIL/SKIP, log URL. Missing a toolchain is a
-blocker or SKIP; a configured job is not a PASS.
+The cross workflow supports manual dispatch with build_riscv32=true and
+run_packaged=false. It builds pinned upstream toolchain sources, verifies
+ELF32 output and executes the configured legacy suite. This expensive job
+is not a default PR gate. Do not report it as passed until the actual build
+and tests succeed. Manual dispatch availability depends on the default-branch
+workflow and maintainer permissions.
 
-## Next gates
-
-1. Observe and record all packaged cross-job results from the PR.
-2. Fix workflow or environment issues without changing reference source
-   behavior to hide failures.
-3. Merge only after review of CI evidence.
-4. From the default branch, manually dispatch the source-built RISC-V32
-   job; evaluate disk, build time, compile+link+QEMU execution results.
-5. Consider caching the verified toolchain by source SHA and compiler
-   version without trusting mutable or foreign binary downloads.
-
-## RV32 source-build validation — trial branch
-
-The dedicated branch `ci/validate-riscv32-source-20261013` temporarily
-enables the RV32 source-build job for its pull request only. This allows
-GitHub-hosted CI to run the real upstream build without manually dispatching
-it or running the costly build for unrelated PRs. It downloads only the
-pinned GCC, binutils, and glibc submodules and reclaims unused hosted-runner
-disk space. Other PRs retain their existing packaged cross-architecture test
-coverage. **Do not record RV32 as PASS until this job's Linux GCC build,
-ELF32 smoke test, and nine UEEC stage tests all succeed.**
+Historical author evidence: [12 architecture validation](VALIDATION_12_ARCH_20261104.md).
