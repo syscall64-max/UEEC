@@ -1,0 +1,94 @@
+name: UEEC extended experimental CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  host:
+    name: Host stage ${{ matrix.stage }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: ['00', '10', '11', '12', '13', '14', '15', '16', '17']
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install dependencies
+        env:
+          STAGE: ${{ matrix.stage }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential nasm python3 pkg-config libssl-dev openssl
+          case "$STAGE" in
+            14) sudo apt-get install -y gcc-avr binutils-avr avr-libc simavr libsimavr-dev libelf-dev ;;
+            15) sudo apt-get install -y gcc-arm-none-eabi binutils-arm-none-eabi ;;
+          esac
+      - name: Test stage
+        env:
+          STAGE: ${{ matrix.stage }}
+          ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+          UBSAN_OPTIONS: halt_on_error=1
+        run: |
+          set -euo pipefail
+          case "$STAGE" in
+            00) make -C 00_shell_code test_x86_64 ;;
+            10)
+              cd 10_ueec_tls_c
+              make all cert test-unit
+              ./build/ueec-net server --source build/multi.ueec --cert cert.pem --key key.pem --port 9443 > build/server-ci.log 2>&1 &
+              pid=$!
+              trap 'kill "$pid" 2>/dev/null || true; cat build/server-ci.log' EXIT
+              for i in {1..50}; do
+                if grep -q 'server listening' build/server-ci.log; then break; fi
+                kill -0 "$pid"
+                sleep 0.2
+              done
+              grep -q 'server listening' build/server-ci.log
+              make test-transfer-all test-native
+              ;;
+            11) make -C 11_multiarch_isa_dispatch test ;;
+            12) make -C 12_shared_metadata test test-sanitize ;;
+            13) make -C 13_network_isa_dispatch test test-transfer-all test-sanitize test-network-sanitize ;;
+            14) make -C 14_avr_metadata test-all test-sanitize ;;
+            15) make -C 15_stm32_metadata test-all test-sanitize ;;
+            16) make -C 16_ueec_vm run test sanitize ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 ;;
+            17) make -C 17_ueec_bench test sanitize ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 ;;
+            *) exit 2 ;;
+          esac
+  native-compilation:
+    name: 12-target stage ${{ matrix.stage }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: ['18', '19', '20', '21']
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install and identify tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential python3 clang-19 lld-19 binutils-sparc64-linux-gnu qemu-user
+          clang-19 --version
+          ld.lld-19 --version
+          qemu-loongarch64 --version
+      - name: Run all targets without architecture filtering
+        env:
+          STAGE: ${{ matrix.stage }}
+        run: |
+          set -euo pipefail
+          case "$STAGE" in
+            18) python3 18_ueec_native/run_matrix.py --clang clang-19 --lld ld.lld-19 ;;
+            19) for status in 42 173; do python3 19_ueec_client_compile/run_demo.py --status "$status"; done ;;
+            20) for status in 42 173; do python3 20_ueec_server_compile/run_stage20.py --status "$status"; done ;;
+            21) for status in 42 173; do python3 21_ueec2elf/run_stage21.py --status "$status"; done ;;
+            *) exit 2 ;;
+          esac
