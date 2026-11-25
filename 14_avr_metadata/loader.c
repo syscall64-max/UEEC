@@ -213,6 +213,22 @@ static void avr_usage(const char *app)
            "Default virtual device: atmega328p. No physical device is programmed.\n",app);
 }
 
+/* simavr 1.6 terminates IO and memory but leaves the caller-owned core
+ * and embedded interrupt IRQs allocated. Release these after termination.
+ * Allocated IRQ arrays belong to the IO modules and must not be freed
+ * one element at a time. */
+static void destroy_avr(avr_t *avr)
+{
+    avr_terminate(avr);
+    for (int i=0;i<avr->irq_pool.count;++i) {
+        avr_irq_t *irq=avr->irq_pool.irq[i];
+        if (irq && !(irq->flags & IRQ_FLAG_ALLOC))
+            avr_free_irq(irq,1);
+    }
+    free(avr->irq_pool.irq);
+    free(avr);
+}
+
 int main(int argc,char **argv)
 {
     const char *mcu="atmega328p",*path=NULL,*vcd_path=NULL,*extract=NULL;
@@ -245,12 +261,12 @@ int main(int argc,char **argv)
     if (!avr || avr_init(avr)) {fprintf(stderr,"error: simavr cannot initialize device\n");return 1;}
     avr->frequency=frequency ? (uint32_t)frequency : profile->clock_hz;
     avr->log=LOG_ERROR;
-    if (memcmp(avr->signature,profile->signature,3)) {fprintf(stderr,"error: simulator signature/profile mismatch\n");avr_terminate(avr);return 1;}
+    if (memcmp(avr->signature,profile->signature,3)) {fprintf(stderr,"error: simulator signature/profile mismatch\n");destroy_avr(avr);return 1;}
     printf("DEVICE model=%s simulator_core=%s signature=%02x%02x%02x core=avr%u clock=%" PRIu32 " Flash=%" PRIu32 " SRAM=%u EEPROM=%" PRIu32 " PC_bytes=%u\n",
         mcu,avr->mmcu,avr->signature[0],avr->signature[1],avr->signature[2],profile->gcc_arch,avr->frequency,
         avr->flashend+1U,(unsigned)(avr->ramend-avr->ioend),avr->e2end+1U,(unsigned)avr->address_size);
     if (groups) {printf("ISA available: ");print_isa(profile->capabilities);putchar('\n');}
-    if (!path) {avr_terminate(avr);return groups ? 0 : 2;}
+    if (!path) {destroy_avr(avr);return groups ? 0 : 2;}
     uint8_t *blob=NULL;size_t size=0;avr_candidate *candidates=NULL;FILE *vcd=NULL;int rc=1;
     if (read_blob(path,&blob,&size)) {perror("read UEEC");goto done;}
     file_view file={blob,size};ueec_view view;
@@ -303,5 +319,5 @@ int main(int argc,char **argv)
                     watch.edges,edge_count,watch.bad_timing,avr->state,(uint64_t)avr->cycle);
 done:
     if (vcd && fclose(vcd)) rc=1;
-    free(candidates);free(blob);avr_terminate(avr);return rc;
+    free(candidates);free(blob);destroy_avr(avr);return rc;
 }
