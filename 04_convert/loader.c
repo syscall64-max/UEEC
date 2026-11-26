@@ -51,7 +51,7 @@ static uint64_t rd64(const uint8_t *p, unsigned file_endian) {
     return (file_endian == UEEC_HOST_ENDIAN) ? v : __builtin_bswap64(v);
 }
 
-static void apply_reloc(void **local_base, int target, int source, int patch_offset, int type) {
+static inline __attribute__((always_inline)) void apply_reloc(void **local_base, int target, int source, size_t patch_offset, int type, int trace) {
     void *target_addr = (uint8_t *)local_base[target] + patch_offset;
     unsigned long source_base = (unsigned long)local_base[source];
     if (type == 1) { // ABS64
@@ -63,15 +63,72 @@ static void apply_reloc(void **local_base, int target, int source, int patch_off
         uint32_t patched = (uint32_t)(source_base + addend);
         memcpy(target_addr, &patched, 4);
     }
-    printf("  RELOC: local[%d]+0x%x = local[%d] + addend (type=%s)\n",
+    if (trace) printf("  RELOC: local[%d]+0x%zx = local[%d] + addend (type=%s)\n",
            target, patch_offset, source, type ? "ABS64" : "ABS32");
+}
+
+/* Select width and file byte order once per relocation section. */
+#define BLOCK_PROCESS(W, T, SHIFT, MASK, E) \
+static int process_blocks##W##_##E(const uint8_t *p, size_t len, \
+    unsigned blocks, void **base, int target, int source, size_t target_size, int trace) { \
+    for (unsigned b = 0; b < blocks; ++b) { \
+        if (len < 2*sizeof(T)) return -1; \
+        uint64_t index = rd##W(p, E), count = rd##W(p+sizeof(T), E); \
+        p += 2*sizeof(T); len -= 2*sizeof(T); \
+        if (count > len/sizeof(T) || index > target_size) return -1; \
+        for (uint64_t e = 0; e < count; ++e) { \
+            T v = rd##W(p, E); p += sizeof(T); len -= sizeof(T); \
+            uint64_t delta = v & (MASK); unsigned type = v >> (SHIFT); \
+            size_t bytes = type == 1 ? 8 : 4; \
+            if (type > 1 || delta > target_size-index || bytes > target_size-index-delta) return -1; \
+            apply_reloc(base, target, source, (size_t)(index+delta), type, trace); \
+        } \
+    } \
+    return 0; \
+}
+BLOCK_PROCESS(16, uint16_t, 12, UINT16_C(0xFFF), 0)
+BLOCK_PROCESS(16, uint16_t, 12, UINT16_C(0xFFF), 1)
+BLOCK_PROCESS(32, uint32_t, 28, UINT32_C(0xFFFFFFF), 0)
+BLOCK_PROCESS(32, uint32_t, 28, UINT32_C(0xFFFFFFF), 1)
+BLOCK_PROCESS(64, uint64_t, 60, UINT64_C(0xFFFFFFFFFFFFFFF), 0)
+BLOCK_PROCESS(64, uint64_t, 60, UINT64_C(0xFFFFFFFFFFFFFFF), 1)
+#undef BLOCK_PROCESS
+
+static int process_reloc_section(const uint8_t *rp, size_t len, unsigned endian,
+                                 void **base, const size_t *sizes, int n, int trace) {
+    if (len < 8) return -1;
+    unsigned format = rd16(rp, endian), design = rd16(rp+2, endian);
+    unsigned couple = rd16(rp+4, endian), count = rd16(rp+6, endian);
+    int target = couple & 31, source = (couple >> 5) & 31;
+    if (target >= n || source >= n) return -1;
+    rp += 8; len -= 8;
+    if (design == 0) {
+        if (format != 0 || count > len/2) return -1;
+        for (unsigned e = 0; e < count; ++e) {
+            uint16_t v = rd16(rp+2*e, endian);
+            size_t offset = v & 0xFFF; unsigned type = v >> 12;
+            size_t bytes = type == 1 ? 8 : 4;
+            if (type > 1 || offset > sizes[target] || bytes > sizes[target]-offset) return -1;
+            apply_reloc(base, target, source, offset, type, trace);
+        }
+        return 0;
+    }
+    if (design != 1 && design != 2) return -1;
+    switch (format) {
+        case 0: return endian == 0 ? process_blocks16_0(rp,len,count,base,target,source,sizes[target],trace) : process_blocks16_1(rp,len,count,base,target,source,sizes[target],trace);
+        case 1: return endian == 0 ? process_blocks32_0(rp,len,count,base,target,source,sizes[target],trace) : process_blocks32_1(rp,len,count,base,target,source,sizes[target],trace);
+        case 2: return endian == 0 ? process_blocks64_0(rp,len,count,base,target,source,sizes[target],trace) : process_blocks64_1(rp,len,count,base,target,source,sizes[target],trace);
+        default: return -1;
+    }
 }
 
 int main(int argc, char *argv[]) {
     const char *path = NULL;
     const char *load_mode = "monolithic";
+    int trace_reloc = 1;
     for (int i = 1; i < argc; i++) {
         if (!strncmp(argv[i], "--L=", 4)) load_mode = argv[i] + 4;
+        else if (!strcmp(argv[i], "--quiet-reloc")) trace_reloc = 0;
         else path = argv[i];
     }
     if (!path) { fprintf(stderr, "usage: %s [--L=monolithic|scattered] <file.ueec>\n", argv[0]); return 1; }
@@ -179,44 +236,14 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "unknown --L mode: %s\n", load_mode); return 1;
     }
 
-    // ---------------- RELOC aplikacia (FLAT/BLOCK_4096/BLOCK_N) ----------------
-    for (int r = 0; r < n_reloc; r++) {
-        uint8_t *rp = buf + sec_off[reloc_g[r]];
-        size_t p = 0;
-        uint16_t format = rd16(rp + p, file_endian); p += 2;
-        uint16_t design = rd16(rp + p, file_endian); p += 2;
-
-        uint16_t couple = rd16(rp + p, file_endian); p += 2;
-        int target = couple & 0x1F;
-        int source = (couple >> 5) & 0x1F;
-        uint16_t couple_count = rd16(rp + p, file_endian); p += 2;
-
-        if (design == 0) { // SECTION_FLAT
-            for (int e = 0; e < couple_count; e++) {
-                uint16_t v = rd16(rp + p, file_endian); p += 2;
-                int patch_offset = v & 0xFFF;
-                int type = (v >> 12) & 0xF;
-                apply_reloc(local_base, target, source, patch_offset, type);
-            }
-        } else if (design == 1 || design == 2) { // BLOCK_4096 / BLOCK_N
-            // index = base (ara "page nomeri") -- patch_offset = index + delta
-            int w = (format == 0) ? 2 : (format == 1) ? 4 : 8;
-            for (int b = 0; b < couple_count; b++) {
-                long index, blk_count;
-                if (w == 2) { index = rd16(rp+p,file_endian); p+=2; blk_count = rd16(rp+p,file_endian); p+=2; }
-                else if (w == 4) { index = rd32(rp+p,file_endian); p+=4; blk_count = rd32(rp+p,file_endian); p+=4; }
-                else { index = (long)rd64(rp+p,file_endian); p+=8; blk_count = (long)rd64(rp+p,file_endian); p+=8; }
-
-                for (long e = 0; e < blk_count; e++) {
-                    long delta; int type;
-                    if (w == 2) { uint16_t v = rd16(rp+p,file_endian); p+=2; delta = v & 0xFFF; type = (v>>12)&0xF; }
-                    else if (w == 4) { uint32_t v = rd32(rp+p,file_endian); p+=4; delta = v & 0xFFFFFFFL; type = (v>>28)&0xF; }
-                    else { uint64_t v = rd64(rp+p,file_endian); p+=8; delta = (long)(v & 0xFFFFFFFFFFFFFFFULL); type = (int)((v>>60)&0xF); }
-                    apply_reloc(local_base, target, source, (int)(index + delta), type);
-                }
-            }
-        } else {
-            fprintf(stderr, "unsupported reloc design: %u\n", design); return 1;
+    size_t resident_sizes[8];
+    for (int i = 0; i < n_resident; ++i) resident_sizes[i] = (size_t)sec_size[resident_g[i]];
+    for (int r = 0; r < n_reloc; ++r) {
+        int g = reloc_g[r];
+        if (process_reloc_section(buf + sec_off[g], (size_t)sec_size[g], file_endian,
+                                  local_base, resident_sizes, n_resident, trace_reloc) != 0) {
+            fprintf(stderr, "invalid or unsupported relocation section %d\n", g);
+            return 1;
         }
     }
 

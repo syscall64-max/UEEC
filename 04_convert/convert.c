@@ -68,6 +68,14 @@ static reloc_entry *decode_reloc(const uint8_t *rp, int *out_count) {
 
 // ---------------- encode: brtyeli sia -> archeuli design ----------------
 static uint8_t *encode_flat(reloc_entry *entries, int count, long *out_size) {
+    /* Existing FLAT format uses a 12-bit offset. Never truncate. */
+    for (int e = 0; e < count; e++) {
+        if (entries[e].offset < 0 || entries[e].offset > 0xFFF) {
+            fprintf(stderr, "FLAT offset not representable; use a block design\n");
+            *out_size = 0;
+            return NULL;
+        }
+    }
     long sz = 4 + 4 + (long)count * 2;
     uint8_t *nb = malloc(sz);
     size_t wp = 0;
@@ -85,6 +93,7 @@ static uint8_t *encode_flat(reloc_entry *entries, int count, long *out_size) {
 }
 
 static uint8_t *encode_block(reloc_entry *entries, int count, long page_size, int design, long *out_size) {
+    if (page_size <= 0 || count <= 0) { *out_size = 0; return NULL; }
     long *base_of = malloc(sizeof(long) * count);
     for (int e = 0; e < count; e++) base_of[e] = (entries[e].offset / page_size) * page_size;
 
@@ -104,6 +113,11 @@ static uint8_t *encode_block(reloc_entry *entries, int count, long page_size, in
     int format = 0;
     if (max_delta > 0xFFF) format = 1;
     if (max_delta > 0xFFFFFFFL) format = 2;
+    /* Block bases must fit the same width as the block entries. */
+    for (int u = 0; u < n_pages; u++) {
+        if ((uint64_t)uniq[u] > UINT32_MAX) format = 2;
+        else if ((uint64_t)uniq[u] > UINT16_MAX && format < 1) format = 1;
+    }
     int idx_bytes = (format == 0) ? 2 : (format == 1) ? 4 : 8;
 
     long sz = 4 + 4;
@@ -133,7 +147,7 @@ static uint8_t *encode_block(reloc_entry *entries, int count, long page_size, in
             long delta = entries[e].offset - uniq[u];
             if (idx_bytes==2){uint16_t v=(uint16_t)((delta&0xFFF)|((entries[e].type&0xF)<<12));memcpy(nb+wp,&v,2);wp+=2;}
             else if (idx_bytes==4){uint32_t v=(uint32_t)((delta&0xFFFFFFFL)|((long)(entries[e].type&0xF)<<28));memcpy(nb+wp,&v,4);wp+=4;}
-            else {uint64_t v=(uint64_t)((delta&0xFFFFFFFFFFFFFFFLL)|((int64_t)(entries[e].type&0xF)<<60));memcpy(nb+wp,&v,8);wp+=8;}
+            else {uint64_t v=(uint64_t)((delta&0xFFFFFFFFFFFFFFFLL)|((uint64_t)(entries[e].type&0xF)<<60));memcpy(nb+wp,&v,8);wp+=8;}
         }
     }
     free(base_of); free(uniq);
@@ -218,6 +232,7 @@ int main(int argc, char *argv[]) {
         if (out_design == 0) nb = encode_flat(entries, count, &sz);
         else nb = encode_block(entries, count, page_size, out_design, &sz);
 
+        if (!nb) { free(entries); return 1; }
         new_reloc_content[n_reloc_sections] = nb;
         new_reloc_size[n_reloc_sections] = sz;
         n_reloc_sections++;
