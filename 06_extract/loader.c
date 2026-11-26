@@ -51,7 +51,7 @@ static uint64_t rd64(const uint8_t *p, unsigned file_endian) {
     return (file_endian == UEEC_HOST_ENDIAN) ? v : __builtin_bswap64(v);
 }
 
-static void apply_reloc(void **local_base, int target, int source, size_t patch_offset, int type, int trace) {
+static inline __attribute__((always_inline)) void apply_reloc(void **local_base, int target, int source, size_t patch_offset, int type, int trace) {
     void *target_addr = (uint8_t *)local_base[target] + patch_offset;
     unsigned long source_base = (unsigned long)local_base[source];
     if (type == 1) { // ABS64
