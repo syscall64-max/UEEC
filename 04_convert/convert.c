@@ -40,12 +40,7 @@ static reloc_entry *decode_reloc(const uint8_t *rp, int *out_count) {
             n++;
         }
     } else if (design == 1 || design == 2) { // BLOCK_4096 an BLOCK_N
-        /* Choose the common width for block bases as well as deltas. */
-    for (int u = 0; u < n_pages; u++) {
-        if ((uint64_t)uniq[u] > UINT32_MAX) format = 2;
-        else if ((uint64_t)uniq[u] > UINT16_MAX && format < 1) format = 1;
-    }
-    int idx_bytes = (format == 0) ? 2 : (format == 1) ? 4 : 8;
+        int idx_bytes = (format == 0) ? 2 : (format == 1) ? 4 : 8;
         for (int b = 0; b < couple_count; b++) {
             long index, blk_count;
             if (idx_bytes == 2) { index = rd16(rp+p); p+=2; blk_count = rd16(rp+p); p+=2; }
@@ -118,6 +113,11 @@ static uint8_t *encode_block(reloc_entry *entries, int count, long page_size, in
     int format = 0;
     if (max_delta > 0xFFF) format = 1;
     if (max_delta > 0xFFFFFFFL) format = 2;
+    /* Block bases must fit the same width as the block entries. */
+    for (int u = 0; u < n_pages; u++) {
+        if ((uint64_t)uniq[u] > UINT32_MAX) format = 2;
+        else if ((uint64_t)uniq[u] > UINT16_MAX && format < 1) format = 1;
+    }
     int idx_bytes = (format == 0) ? 2 : (format == 1) ? 4 : 8;
 
     long sz = 4 + 4;
