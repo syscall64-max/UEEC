@@ -1,0 +1,86 @@
+make x86_64 CFLAGS='-Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer -fno-pie -no-pie'
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10-3/10_import_mixed'
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer -fno-pie -no-pie -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+python3 test_import.py build/x86_64 --runner=''
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10-3/10_import_mixed'

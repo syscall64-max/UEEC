@@ -1,0 +1,17 @@
+mode,cache,access,n,median_subprocess_ns,median_rss_kib,median_minor_faults,median_major_faults
+direct,cold,full,101,35922904,68460,450,16
+direct,cold,lazy,101,6322277,2900,182,16
+direct,warm,full,101,3681966,68464,513,0
+direct,warm,lazy,101,2804393,2904,183,0
+elf_dynamic,cold,full,101,52343897,72204,1012,7
+elf_dynamic,cold,lazy,101,12120680,6792,612,6
+elf_dynamic,warm,full,101,8100892,72204,915,0
+elf_dynamic,warm,lazy,101,7166248,6780,547,0
+elf_static,cold,full,101,33902850,67112,327,5
+elf_static,cold,lazy,101,4273704,1592,59,5
+elf_static,warm,full,101,3038332,67128,398,0
+elf_static,warm,lazy,101,2258049,1680,60,0
+monolithic,cold,full,101,70052593,137584,34289,10
+monolithic,cold,lazy,101,69974704,137584,34289,10
+monolithic,warm,full,101,63699389,137612,34290,0
+monolithic,warm,lazy,101,63557008,137612,34290,0

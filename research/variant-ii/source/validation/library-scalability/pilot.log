@@ -1,0 +1,99 @@
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 144154.5 137750.25 150558.75 120.5 144275.0 693143.5 0.8305086243245466 5 0 80657 1 128 128
+hybrid 2 133488.0 129081.5 137894.5 115.5 133603.5 737405.0 0.8938013260517923 2 0 85351 1 128 128
+monolithic 2 118836.0 118500.5 119171.5 110.0 118946.0 657149.0 1.0 1 0 85351 1 128 128
+fixed 2 130093.0 129923.0 130263.0 110.0 130203.0 738337.0 0.9134623540822795 1 0 85393 1 128 128
+prelinked 2 110028.0 109474.5 110581.5 140.5 110168.5 651706.0 1.0802230530874621 1 0 85393 0 0 0
+direct 2 76979.5 70036.75 83922.25 1572.0 78551.5 652888.0 1.5972780455841906 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/1
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 123002.5 118791.25 127213.75 100.5 123103.0 966269.5 1.3107979094311508 6 0 80657 1 128 128
+hybrid 2 143668.5 142454.25 144882.75 100.0 143768.5 787986.0 1.1121125549005457 2 0 85419 1 128 128
+monolithic 2 159877.5 155511.25 164243.75 175.0 160052.5 644495.0 1.0 1 0 85419 1 128 128
+fixed 2 139723.0 137362.0 142084.0 110.0 139833.0 715537.5 1.147669074218462 1 0 85471 1 128 128
+prelinked 2 149757.5 138423.25 161091.75 120.0 149877.5 720189.0 1.1016434965981319 1 0 85471 0 0 0
+direct 2 120208.5 117429.25 122987.75 1582.0 121790.5 684876.0 1.3294851821928888 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/2
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 135651.5 135080.75 136222.25 140.0 135791.5 759192.5 1.1170304320590043 8 0 80657 1 128 128
+hybrid 2 162126.0 156059.5 168192.5 220.5 162346.5 763056.0 0.9418348046428422 2 0 85555 1 128 128
+monolithic 2 151475.0 149031.5 153918.5 130.0 151605.0 725171.5 1.0 1 0 85555 1 128 128
+fixed 2 241228.0 225730.0 256726.0 115.5 241343.5 842904.0 0.6411211447277916 1 0 85627 1 128 128
+prelinked 2 126222.5 124958.25 127486.75 150.0 126372.5 824691.5 1.2013210408080435 1 0 85627 0 0 0
+direct 2 148205.5 130116.25 166294.75 1547.0 149752.5 816406.0 1.0953837807064146 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/4
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 152757.5 144955.75 160559.25 125.0 152882.5 811781.5 1.4696452422917017 12 0 80657 1 128 128
+hybrid 2 171876.0 167489.5 176262.5 135.0 172011.0 657189.0 1.2961169837840854 2 0 85827 1 128 128
+monolithic 2 222225.0 221892.0 222558.0 115.5 222340.5 774415.5 1.0 1 0 85827 1 128 128
+fixed 2 187789.0 179541.5 196036.5 115.0 187904.0 796588.5 1.1922634168818194 1 0 85939 1 128 128
+prelinked 2 210062.0 207623.5 212500.5 160.5 210222.5 722227.0 1.0585461468920594 1 0 85939 0 0 0
+direct 2 99858.0 96458.0 103258.0 1472.5 101330.5 655992.0 2.2353214570532596 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/8
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 298213.0 270486.5 325939.5 170.0 298383.0 875132.0 0.9482799434405613 20 0 80657 1 128 128
+hybrid 2 307907.0 294412.0 321402.0 205.5 308112.5 944777.0 0.8908124114481282 2 0 86371 1 128 128
+monolithic 2 271438.5 267209.75 275667.25 210.0 271648.5 904241.0 1.0 1 0 86371 1 128 128
+fixed 2 302509.5 299354.75 305664.25 145.5 302655.0 1007681.5 0.8970963119294715 1 0 86563 1 128 128
+prelinked 2 232120.0 227851.0 236389.0 130.5 232250.5 889083.0 1.1696309396833966 1 0 86563 0 0 0
+direct 2 300366.5 222235.25 378497.75 1687.5 302054.0 982348.5 1.2591188708166916 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/16
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 411366.5 387253.25 435479.75 150.0 411516.5 964236.5 1.3972478169061526 36 0 80657 1 128 128
+hybrid 2 627242.0 599075.0 655409.0 140.0 627382.0 1380423.0 0.8910510927192299 2 0 87459 1 128 128
+monolithic 2 559812.0 529662.5 589961.5 155.5 559967.5 1104934.0 1.0 1 0 87459 1 128 128
+fixed 2 509056.5 507208.75 510904.25 140.5 509197.0 1094577.5 1.0989030485462052 1 0 87811 1 128 128
+prelinked 2 457925.0 432259.5 483590.5 151.0 458076.0 1040201.0 1.223105241113912 1 0 87811 0 0 0
+direct 2 192516.0 192205.5 192826.5 1512.5 194028.5 785663.0 2.908913201341038 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/32
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 874299.5 806718.75 941880.25 175.5 874475.0 1564104.0 1.4050624616269407 68 0 80657 1 128 128
+hybrid 2 1572406.5 1336290.75 1808522.25 256.0 1572662.5 2354399.5 0.9244541397056472 2 0 89635 1 128 128
+monolithic 2 1241029.0 1105375.0 1376683.0 205.0 1241234.0 1944487.0 1.0 1 0 89635 1 128 128
+fixed 2 1149704.0 1068345.5 1231062.5 155.0 1149859.0 1775492.5 1.135578017704801 1 0 90307 1 128 128
+prelinked 2 741807.5 689246.75 794368.25 160.0 741967.5 1381614.5 1.6543736326229652 1 0 90307 0 0 0
+direct 2 494559.5 489649.75 499469.25 1592.5 496152.0 1744351.0 2.5212484870987533 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-library-pilot/64
+PASS 84 measured executions; /tmp/ueec-library-pilot

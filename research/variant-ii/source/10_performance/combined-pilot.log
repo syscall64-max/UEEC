@@ -1,0 +1,14 @@
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -O2 -static -Werror -DUEEC_TEST_HOOKS loader.c -o build/x86_64/loader_test
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+scattered 2 49216763.0 46854741.5 51578784.5 446.0 49217209.0 52697309.5 0.9627212637411626 69 0 68749009 100000 10000 10000
+hybrid 2 92670188.0 70074587.5 115265788.5 320.5 92670508.5 96238103.5 0.6673846454458051 2 0 69503519 100000 10000 10000
+monolithic 2 46898074.5 46651062.25 47145086.75 515.5 46898590.0 50575843.0 1.0 1 0 69503519 100000 10000 10000
+fixed 2 46584518.5 46203266.75 46965770.25 245.0 46584763.5 49895736.5 1.0071743278852834 1 0 69504191 100000 10000 10000
+prelinked 2 46242237.0 45022771.0 47461703.0 260.0 46242497.0 49659142.5 1.0175767882364048 1 0 69504191 0 0 0
+direct 2 386179.0 373067.0 399291.0 2188.5 388367.5 1628853.0 122.09115163577766 1 1 0 0 0 0
+PASS 12 measured executions; results: /tmp/ueec-combined-pilot2

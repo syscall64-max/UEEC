@@ -1,0 +1,9 @@
+make: Entering directory '/mnt/data/UEEC-Variant-II-stage02/02_ueec_load'
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie'
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage02/02_ueec_load'
+gcc -std=c11 -O1 -g -Wall -Wextra -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie  ueec_load.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86_64/tool build/fixtures --runner=''
+[PASS] load: 101 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage02/02_ueec_load'
+make: Leaving directory '/mnt/data/UEEC-Variant-II-stage02/02_ueec_load'

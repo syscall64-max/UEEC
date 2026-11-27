@@ -1,0 +1,37 @@
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0

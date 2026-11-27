@@ -1,0 +1,1100 @@
+{
+  "tools": {
+    "perf": {
+      "status": "completed",
+      "completed": 60,
+      "expected": 60
+    },
+    "strace": {
+      "status": "completed",
+      "completed": 60,
+      "expected": 60
+    }
+  },
+  "records": [
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-0-warm-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-0-warm-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-0-warm-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-0-cold-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-0-cold-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-0-cold-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-0-cold-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-0-warm-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-0-warm-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-0-warm-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-0-cold-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 0,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-0-cold-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-1-warm-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-1-cold-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-1-cold-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-1-warm-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-1-warm-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-1-cold-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-1-warm-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-1-warm-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-1-cold-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-1-warm-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-1-cold-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 1,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-1-cold-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-2-cold-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-2-warm-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-2-cold-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-2-cold-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-2-warm-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-2-warm-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-2-warm-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-2-cold-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-2-cold-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-2-warm-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-2-warm-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 2,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-2-cold-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-3-warm-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-3-cold-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-3-cold-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-3-cold-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-3-warm-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-3-warm-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-3-warm-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-3-cold-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-3-cold-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-3-warm-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-3-warm-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 3,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-3-cold-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-4-cold-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-4-warm-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-4-warm-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-4-warm-scattered.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-4-cold-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-4-cold-direct.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-4-warm-hybrid.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-4-cold-prelinked.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "perf-4-cold-fixed.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "perf-4-warm-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "perf-4-cold-monolithic.txt"
+    },
+    {
+      "tool": "perf",
+      "round": 4,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "perf-4-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-0-cold-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-0-warm-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-0-cold-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-0-warm-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-0-cold-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-0-warm-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-0-cold-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-0-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-0-warm-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-0-cold-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-0-warm-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 0,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-0-cold-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-1-warm-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-1-warm-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-1-cold-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-1-cold-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-1-warm-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-1-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-1-cold-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-1-warm-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-1-warm-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-1-cold-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-1-cold-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 1,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-1-cold-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-2-warm-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-2-cold-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-2-cold-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-2-warm-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-2-warm-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-2-cold-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-2-cold-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-2-cold-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-2-cold-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-2-warm-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-2-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 2,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-2-warm-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-3-cold-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-3-warm-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-3-warm-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-3-cold-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-3-cold-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-3-cold-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-3-warm-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-3-cold-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-3-cold-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-3-warm-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-3-warm-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 3,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-3-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "prelinked",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-4-warm-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "hybrid",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-4-cold-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "scattered",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-4-cold-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "fixed",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-4-warm-fixed.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "hybrid",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-4-warm-hybrid.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "monolithic",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-4-warm-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "scattered",
+      "resident_pages": 17052,
+      "file_pages": 17052,
+      "file": "strace-4-warm-scattered.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "monolithic",
+      "resident_pages": 0,
+      "file_pages": 17052,
+      "file": "strace-4-cold-monolithic.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "warm",
+      "mode": "direct",
+      "resident_pages": 17053,
+      "file_pages": 17053,
+      "file": "strace-4-warm-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "direct",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-4-cold-direct.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "prelinked",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-4-cold-prelinked.txt"
+    },
+    {
+      "tool": "strace",
+      "round": 4,
+      "cache": "cold",
+      "mode": "fixed",
+      "resident_pages": 0,
+      "file_pages": 17053,
+      "file": "strace-4-cold-fixed.txt"
+    }
+  ],
+  "affinity": [
+    5
+  ],
+  "scope": "whole process; separate perf and strace executions"
+}

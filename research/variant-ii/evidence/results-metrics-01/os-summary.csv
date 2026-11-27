@@ -1,0 +1,13 @@
+cache,mode,n,median_minor_faults,median_major_faults,median_peak_rss_kib,median_voluntary_cs,median_involuntary_cs
+cold,scattered,101,34081,0,136844,5,2
+cold,hybrid,101,34290,0,137612,5,2
+cold,monolithic,101,34290,0,137612,5,2
+cold,fixed,101,34292,0,137612,5,2
+cold,prelinked,101,34195,0,137228,5,3
+cold,direct,101,183,6,2904,10,1
+warm,scattered,101,34081,0,136844,1,3
+warm,hybrid,101,34290,0,137612,1,3
+warm,monolithic,101,34290,0,137612,1,3
+warm,fixed,101,34292,0,137612,1,3
+warm,prelinked,101,34195,0,137228,1,2
+warm,direct,101,178,0,2968,1,1

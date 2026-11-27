@@ -1,0 +1,34 @@
+=== 00_shell_code: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage03/00_shell_code'
+python3 ../tools/emit_db.py ../test_resources/asm/x86_64.asm build/x86_64/code.bin
+cmp build/x86_64/code.bin ../test_resources/bin/x86_64.bin
+gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/x86_64/loader
+gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/x86_64/check_header
+./build/x86_64/check_header
+./build/x86_64/loader build/x86_64/code.bin
+[PASS] x86_64
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage03/00_shell_code'
+[PASS] 00_shell_code
+=== 01_ueec_info: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage03/01_ueec_info'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/x86_64/tool build/fixtures --runner=''
+[PASS] info: 17 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage03/01_ueec_info'
+[PASS] 01_ueec_info
+=== 02_ueec_load: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage03/02_ueec_load'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86_64/tool build/fixtures --runner=''
+[PASS] load: 101 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage03/02_ueec_load'
+[PASS] 02_ueec_load
+=== 03_reloc: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage03/03_reloc'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+python3 ../tools/test_legacy_stages.py 3 x86_64 build/x86_64 --runner=''
+[PASS] stage 03 x86_64: 2 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage03/03_reloc'
+[PASS] 03_reloc

@@ -1,0 +1,7 @@
+# Stage 10.6 — Unified Loading
+
+`make` runs 309 regression checks and 432 new checks per target. `make x86_64` tests native, `make sanitize` uses native ASan/UBSan. All 12 targets expected: 8892 checks. Native tests passed 741/741, including a separate sanitizer run of 741/741.
+
+`loader --load-mode monolithic|hybrid|scattered FILE.ueec` (default scattered). Monolithic allocates one anonymous region per container, with page-rounded physical sections including header and metadata. Hybrid allocates header separately and all other sections together. Scattered retains previous resident-section allocations. Code RX, data RW, other sections R; no RWX. Internal nodes reuse the container arena in mono/hybrid. External dependencies have separate container arenas. File bytes are copied, not directly file-mapped; runtime layout may differ from disk offsets. Mapping counts are explicit loader allocations, not all process syscalls or VMAs. No shared physical section indexes, relocation processing, recursive library imports, fixed-address preparation or general entry ABI in this stage. No cross-architecture tests run by author here. No performance claims.
+
+New checks: 216 combined executions (12 layouts x 6 granules x 3 modes), 108 external/mixed executions, 108 malformed/truncated or missing-library rejections. Verify result 40, four bound symbols, mapping count and unchanged combined file. Previous stages unchanged.

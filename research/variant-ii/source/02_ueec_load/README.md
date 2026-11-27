@@ -1,0 +1,5 @@
+# 02 — UEEC Loader / Variant II
+
+The existing loader is adapted to the 10-byte global header and 4-byte node header. The format is decoded once from the global header; obsolete per-node format checks are removed. The runtime header also stores the global format at offset 4 and counts at 6 and 8. Existing allocation modes are retained; S390x host selection is supported. Tests use only trusted exit(0) code from the shared resources.
+
+`make all` tests all twelve targets; `make x86_64` tests one; `make sanitize` runs the native sanitizer configuration. Per architecture, 12 valid fixtures (three section widths, two metadata byte orders, with/without a shared constant section) are tested in four allocation modes, with and without execution: 96 successful cases plus five rejection cases = 101. The harness checks runtime section count, actual allocation mode, process exit status and rejection diagnostics. This is not proof of exhaustive correctness or safety for arbitrary executables. The optional NASM example is not assembled by these tests. Cross execution remains pending.

@@ -1,0 +1,27 @@
+ARCHS := x86 x86_64 arm32 aarch64 riscv32 riscv64 ppc32 ppc64 sparc32 sparc64 loongarch64 s390x
+CC_x86 ?= i686-linux-gnu-gcc
+CC_x86_64 ?= gcc
+CC_arm32 ?= arm-linux-gnueabihf-gcc
+CC_aarch64 ?= aarch64-linux-gnu-gcc
+CC_riscv32 ?= /opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc
+CC_riscv64 ?= riscv64-linux-gnu-gcc
+CC_ppc32 ?= powerpc-linux-gnu-gcc
+CC_ppc64 ?= powerpc64-linux-gnu-gcc
+CC_sparc32 ?= sparc64-linux-gnu-gcc
+CC_sparc64 ?= sparc64-linux-gnu-gcc
+CC_loongarch64 ?= loongarch64-linux-gnu-gcc-15
+CC_s390x ?= s390x-linux-gnu-gcc
+FLAGS_riscv32 := -march=rv32gc -mabi=ilp32d
+FLAGS_sparc32 := -m32
+RUN_x86 ?= qemu-i386
+RUN_x86_64 ?=
+RUN_arm32 ?= qemu-arm
+RUN_aarch64 ?= qemu-aarch64
+RUN_riscv32 ?= qemu-riscv32
+RUN_riscv64 ?= qemu-riscv64
+RUN_ppc32 ?= qemu-ppc
+RUN_ppc64 ?= qemu-ppc64
+RUN_sparc32 ?= qemu-sparc32plus
+RUN_sparc64 ?= qemu-sparc64
+RUN_loongarch64 ?= qemu-loongarch64
+RUN_s390x ?= qemu-s390x

@@ -1,0 +1,2346 @@
+ubuntu@linux:~/Downloads/UEEC-Variant-II-granulation/UEEC-Variant-II-stage10-5$ cd 10_granulation
+make
+mkdir -p build/x86
+i686-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86/loader
+i686-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86/payload.o
+python3 extract_code.py build/x86 'i686-linux-gnu-gcc'
+python3 fixtures.py build/x86 x86
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86/convert_export
+python3 test_import.py build/x86 --runner='qemu-i386'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/x86 --runner='qemu-i386'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/x86 --runner='qemu-i386'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+python3 test_import.py build/x86_64 --runner=''
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/x86_64 --runner=''
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/x86_64 --runner=''
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/arm32
+arm-linux-gnueabihf-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/arm32/loader
+arm-linux-gnueabihf-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto -marm -c payload.c -o build/arm32/payload.o
+python3 extract_code.py build/arm32 'arm-linux-gnueabihf-gcc'
+python3 fixtures.py build/arm32 arm32
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/arm32/convert_export
+python3 test_import.py build/arm32 --runner='qemu-arm'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/arm32 --runner='qemu-arm'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/arm32 --runner='qemu-arm'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/aarch64
+aarch64-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/aarch64/loader
+aarch64-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/aarch64/payload.o
+python3 extract_code.py build/aarch64 'aarch64-linux-gnu-gcc'
+python3 fixtures.py build/aarch64 aarch64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/aarch64/convert_export
+python3 test_import.py build/aarch64 --runner='qemu-aarch64'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/aarch64 --runner='qemu-aarch64'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/aarch64 --runner='qemu-aarch64'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/riscv32
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -Wall -Wextra -O2 -static -Werror loader.c -o build/riscv32/loader
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto -mno-relax -c payload.c -o build/riscv32/payload.o
+python3 extract_code.py build/riscv32 '/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc'
+python3 fixtures.py build/riscv32 riscv32
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/riscv32/convert_export
+python3 test_import.py build/riscv32 --runner='qemu-riscv32'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/riscv32 --runner='qemu-riscv32'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/riscv32 --runner='qemu-riscv32'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/riscv64
+riscv64-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/riscv64/loader
+riscv64-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto -mno-relax -c payload.c -o build/riscv64/payload.o
+python3 extract_code.py build/riscv64 'riscv64-linux-gnu-gcc'
+python3 fixtures.py build/riscv64 riscv64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/riscv64/convert_export
+python3 test_import.py build/riscv64 --runner='qemu-riscv64'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/riscv64 --runner='qemu-riscv64'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/riscv64 --runner='qemu-riscv64'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/ppc32
+powerpc-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/ppc32/loader
+powerpc-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/ppc32/payload.o
+python3 extract_code.py build/ppc32 'powerpc-linux-gnu-gcc'
+python3 fixtures.py build/ppc32 ppc32
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/ppc32/convert_export
+python3 test_import.py build/ppc32 --runner='qemu-ppc'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/ppc32 --runner='qemu-ppc'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/ppc32 --runner='qemu-ppc'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/ppc64
+powerpc64-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/ppc64/loader
+powerpc64-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/ppc64/payload.o
+python3 extract_code.py build/ppc64 'powerpc64-linux-gnu-gcc'
+python3 fixtures.py build/ppc64 ppc64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/ppc64/convert_export
+python3 test_import.py build/ppc64 --runner='qemu-ppc64'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/ppc64 --runner='qemu-ppc64'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/ppc64 --runner='qemu-ppc64'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/sparc32
+sparc64-linux-gnu-gcc -m32 -Wall -Wextra -O2 -static -Werror loader.c -o build/sparc32/loader
+sparc64-linux-gnu-gcc -m32 -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/sparc32/payload.o
+python3 extract_code.py build/sparc32 'sparc64-linux-gnu-gcc'
+python3 fixtures.py build/sparc32 sparc32
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/sparc32/convert_export
+python3 test_import.py build/sparc32 --runner='qemu-sparc32plus'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/sparc32 --runner='qemu-sparc32plus'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/sparc32 --runner='qemu-sparc32plus'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/sparc64
+sparc64-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/sparc64/loader
+sparc64-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/sparc64/payload.o
+python3 extract_code.py build/sparc64 'sparc64-linux-gnu-gcc'
+python3 fixtures.py build/sparc64 sparc64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/sparc64/convert_export
+python3 test_import.py build/sparc64 --runner='qemu-sparc64'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/sparc64 --runner='qemu-sparc64'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/sparc64 --runner='qemu-sparc64'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/loongarch64
+loongarch64-linux-gnu-gcc-15  -Wall -Wextra -O2 -static -Werror loader.c -o build/loongarch64/loader
+loongarch64-linux-gnu-gcc-15  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto -mno-relax -c payload.c -o build/loongarch64/payload.o
+python3 extract_code.py build/loongarch64 'loongarch64-linux-gnu-gcc-15'
+python3 fixtures.py build/loongarch64 loongarch64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/loongarch64/convert_export
+python3 test_import.py build/loongarch64 --runner='qemu-loongarch64'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/loongarch64 --runner='qemu-loongarch64'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/loongarch64 --runner='qemu-loongarch64'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+mkdir -p build/s390x
+s390x-linux-gnu-gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/s390x/loader
+s390x-linux-gnu-gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/s390x/payload.o
+python3 extract_code.py build/s390x 's390x-linux-gnu-gcc'
+python3 fixtures.py build/s390x s390x
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/s390x/convert_export
+python3 test_import.py build/s390x --runner='qemu-s390x'
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-le: internal combined, result=40
+[PASS] f16-le: internal swapped, result=40
+[PASS] f16-le: missing internal node rejected
+[PASS] f16-le: mixed-libmath, result=40
+[PASS] f16-le: mixed-libmath-swapped, result=40
+[PASS] f16-le: missing mixed external libmath rejected
+[PASS] f16-le: mixed-libdata, result=40
+[PASS] f16-le: mixed-libdata-swapped, result=40
+[PASS] f16-le: missing mixed external libdata rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f16-be: internal combined, result=40
+[PASS] f16-be: internal swapped, result=40
+[PASS] f16-be: missing internal node rejected
+[PASS] f16-be: mixed-libmath, result=40
+[PASS] f16-be: mixed-libmath-swapped, result=40
+[PASS] f16-be: missing mixed external libmath rejected
+[PASS] f16-be: mixed-libdata, result=40
+[PASS] f16-be: mixed-libdata-swapped, result=40
+[PASS] f16-be: missing mixed external libdata rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-le: internal combined, result=40
+[PASS] f32-le: internal swapped, result=40
+[PASS] f32-le: missing internal node rejected
+[PASS] f32-le: mixed-libmath, result=40
+[PASS] f32-le: mixed-libmath-swapped, result=40
+[PASS] f32-le: missing mixed external libmath rejected
+[PASS] f32-le: mixed-libdata, result=40
+[PASS] f32-le: mixed-libdata-swapped, result=40
+[PASS] f32-le: missing mixed external libdata rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f32-be: internal combined, result=40
+[PASS] f32-be: internal swapped, result=40
+[PASS] f32-be: missing internal node rejected
+[PASS] f32-be: mixed-libmath, result=40
+[PASS] f32-be: mixed-libmath-swapped, result=40
+[PASS] f32-be: missing mixed external libmath rejected
+[PASS] f32-be: mixed-libdata, result=40
+[PASS] f32-be: mixed-libdata-swapped, result=40
+[PASS] f32-be: missing mixed external libdata rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-le: internal combined, result=40
+[PASS] f64-le: internal swapped, result=40
+[PASS] f64-le: missing internal node rejected
+[PASS] f64-le: mixed-libmath, result=40
+[PASS] f64-le: mixed-libmath-swapped, result=40
+[PASS] f64-le: missing mixed external libmath rejected
+[PASS] f64-le: mixed-libdata, result=40
+[PASS] f64-le: mixed-libdata-swapped, result=40
+[PASS] f64-le: missing mixed external libdata rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] f64-be: internal combined, result=40
+[PASS] f64-be: internal swapped, result=40
+[PASS] f64-be: missing internal node rejected
+[PASS] f64-be: mixed-libmath, result=40
+[PASS] f64-be: mixed-libmath-swapped, result=40
+[PASS] f64-be: missing mixed external libmath rejected
+[PASS] f64-be: mixed-libdata, result=40
+[PASS] f64-be: mixed-libdata-swapped, result=40
+[PASS] f64-be: missing mixed external libdata rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 49; negative: 54; host conversions: 2; passed: 105; failed: 0; skipped: 0
+python3 test_merge.py build/s390x --runner='qemu-s390x'
+[PASS] f16-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f16-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f32-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-le swapped=True merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=False merged=(1, 2): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(2,): result=40; unchanged source/code/export
+[PASS] f64-be swapped=True merged=(1, 2): result=40; unchanged source/code/export
+Merge: positive=36; negative=36; passed=72; failed=0; skipped=0
+python3 test_granulation.py build/s390x --runner='qemu-s390x'
+[PASS] 16-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 16-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 32-be swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-le swapped=True granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=False granule=16384: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=1: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=512: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=4096: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=8192: result=40; byte-identical roundtrip
+[PASS] 64-be swapped=True granule=16384: result=40; byte-identical roundtrip
+Granulation: positive=72; negative=60; passed=132; failed=0; skipped=0
+Passed: 12
+Failed: 0
+Skipped: 0
+ubuntu@linux:~/Downloads/UEEC-Variant-II-granulation/UEEC-Variant-II-stage10-5/10_granulation$ 

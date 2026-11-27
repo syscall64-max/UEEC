@@ -1,0 +1,116 @@
+=== 00_shell_code: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/00_shell_code'
+python3 ../tools/emit_db.py ../test_resources/asm/x86_64.asm build/x86_64/code.bin
+cmp build/x86_64/code.bin ../test_resources/bin/x86_64.bin
+gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/x86_64/loader
+gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/x86_64/check_header
+./build/x86_64/check_header
+./build/x86_64/loader build/x86_64/code.bin
+[PASS] x86_64
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/00_shell_code'
+[PASS] 00_shell_code
+=== 01_ueec_info: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/01_ueec_info'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/x86_64/tool build/fixtures --runner=''
+[PASS] info: 17 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/01_ueec_info'
+[PASS] 01_ueec_info
+=== 02_ueec_load: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/02_ueec_load'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86_64/tool build/fixtures --runner=''
+[PASS] load: 101 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/02_ueec_load'
+[PASS] 02_ueec_load
+=== 03_reloc: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/03_reloc'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 3 x86_64 build/x86_64 --runner=''
+[PASS] stage 03 x86_64: 2 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/03_reloc'
+[PASS] 03_reloc
+=== 04_convert: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/04_convert'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 4 x86_64 build/x86_64 --runner=''
+[PASS] stage 04 x86_64: 18 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/04_convert'
+[PASS] 04_convert
+=== 05_align: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/05_align'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 5 x86_64 build/x86_64 --runner=''
+[PASS] stage 05 x86_64: 24 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/05_align'
+[PASS] 05_align
+=== 06_extract: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/06_extract'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+gcc -Wall -Wextra -O2 ../05_align/align.c -o build/x86_64/align
+python3 ../tools/test_legacy_stages.py 6 x86_64 build/x86_64 --runner=''
+[PASS] stage 06 x86_64: 20 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/06_extract'
+[PASS] 06_extract
+=== 07_pe: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/07_pe'
+true
+true
+python3 ../tools/test_legacy_stages.py 7 x86_64 build/x86_64 --runner=''
+[PASS] stage 07 x86_64: 6 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/07_pe'
+[PASS] 07_pe
+=== 08_export: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/08_export'
+true
+true
+python3 ../tools/test_legacy_stages.py 8 x86_64 build/x86_64 --runner=''
+[PASS] stage 08 x86_64: 2 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/08_export'
+[PASS] 08_export
+=== 09_convert_export: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/09_convert_export'
+true
+true
+python3 ../tools/test_legacy_stages.py 9 x86_64 build/x86_64 --runner=''
+[PASS] stage 09 x86_64: 40 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/09_convert_export'
+[PASS] 09_convert_export
+=== 10_import: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage10/10_import'
+mkdir -p build/x86_64
+gcc  -Wall -Wextra -O2 -static -Werror loader.c -o build/x86_64/loader
+gcc  -Wall -Wextra -Werror -O2 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-instrument-functions -fno-lto  -c payload.c -o build/x86_64/payload.o
+python3 extract_code.py build/x86_64 'gcc'
+python3 fixtures.py build/x86_64 x86_64
+gcc -Wall -Wextra -O2 ../09_convert_export/convert_export.c -o build/x86_64/convert_export
+python3 test_import.py build/x86_64 --runner=''
+[PASS] f16-le: functions + data, result=40
+[PASS] f16-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-le: 6 invalid inputs rejected
+[PASS] f16-be: functions + data, result=40
+[PASS] f16-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f16-be: 6 invalid inputs rejected
+[PASS] f32-le: functions + data, result=40
+[PASS] f32-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-le: 6 invalid inputs rejected
+[PASS] f32-be: functions + data, result=40
+[PASS] f32-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f32-be: 6 invalid inputs rejected
+[PASS] f64-le: functions + data, result=40
+[PASS] f64-le: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-le: 6 invalid inputs rejected
+[PASS] f64-be: functions + data, result=40
+[PASS] f64-be: swapped EXPORT designs and mixed widths, unchanged program, result=40
+[PASS] f64-be: 6 invalid inputs rejected
+[PASS] existing stage 09 converter: libmath.ueec -> flat
+[PASS] existing stage 09 converter: libdata.ueec -> compact
+[PASS] converted libraries, unchanged program, result=40
+Positive: 13; negative: 36; host conversions: 2; passed: 51; failed: 0; skipped: 0
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage10/10_import'
+[PASS] 10_import

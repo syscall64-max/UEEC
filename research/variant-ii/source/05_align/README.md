@@ -1,0 +1,3 @@
+# Stage 05 — Granulation / degranulation
+
+Use `make all` or `make <architecture>`; `make sanitize` runs native ASan/UBSan without leak detection. The host align tool accepts Variant II little-endian SH16 on little-endian hosts. Fixtures share the Stage 03 generator and common BIN resources. Granularities 1, 16, 512, 4096, 8192: verify rounded sizes, zero padding, unchanged section payloads and node references, byte-identical degranulation, and monolithic/scattered execution. Invalid arguments 0, -1, 65536 and abc must fail. Malformed file validation is not exhaustive. Native tests passed; cross tests pending.

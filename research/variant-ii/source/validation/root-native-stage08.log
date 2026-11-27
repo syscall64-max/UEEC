@@ -1,0 +1,75 @@
+=== 00_shell_code: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/00_shell_code'
+python3 ../tools/emit_db.py ../test_resources/asm/x86_64.asm build/x86_64/code.bin
+cmp build/x86_64/code.bin ../test_resources/bin/x86_64.bin
+gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/x86_64/loader
+gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/x86_64/check_header
+./build/x86_64/check_header
+./build/x86_64/loader build/x86_64/code.bin
+[PASS] x86_64
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/00_shell_code'
+[PASS] 00_shell_code
+=== 01_ueec_info: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/01_ueec_info'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/x86_64/tool build/fixtures --runner=''
+[PASS] info: 17 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/01_ueec_info'
+[PASS] 01_ueec_info
+=== 02_ueec_load: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/02_ueec_load'
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86_64/tool build/fixtures --runner=''
+[PASS] load: 101 cases
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/02_ueec_load'
+[PASS] 02_ueec_load
+=== 03_reloc: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/03_reloc'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 3 x86_64 build/x86_64 --runner=''
+[PASS] stage 03 x86_64: 2 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/03_reloc'
+[PASS] 03_reloc
+=== 04_convert: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/04_convert'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 4 x86_64 build/x86_64 --runner=''
+[PASS] stage 04 x86_64: 18 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/04_convert'
+[PASS] 04_convert
+=== 05_align: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/05_align'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+true
+python3 ../tools/test_legacy_stages.py 5 x86_64 build/x86_64 --runner=''
+[PASS] stage 05 x86_64: 24 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/05_align'
+[PASS] 05_align
+=== 06_extract: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/06_extract'
+gcc -Wall -Wextra -O2 ../03_reloc/gen.c -o build/x86_64/gen_reloc
+gcc -Wall -Wextra -O2 ../05_align/align.c -o build/x86_64/align
+python3 ../tools/test_legacy_stages.py 6 x86_64 build/x86_64 --runner=''
+[PASS] stage 06 x86_64: 20 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/06_extract'
+[PASS] 06_extract
+=== 07_pe: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/07_pe'
+true
+true
+python3 ../tools/test_legacy_stages.py 7 x86_64 build/x86_64 --runner=''
+[PASS] stage 07 x86_64: 6 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/07_pe'
+[PASS] 07_pe
+=== 08_export: x86_64 ===
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage08/08_export'
+true
+true
+python3 ../tools/test_legacy_stages.py 8 x86_64 build/x86_64 --runner=''
+[PASS] stage 08 x86_64: 2 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage08/08_export'
+[PASS] 08_export

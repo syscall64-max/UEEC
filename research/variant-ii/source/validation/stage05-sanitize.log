@@ -1,0 +1,8 @@
+make: Entering directory '/mnt/data/UEEC-Variant-II-stage05/05_align'
+ASAN_OPTIONS=detect_leaks=0 make x86_64 CFLAGS='-Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' HOSTCFLAGS='-Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie'
+make[1]: Entering directory '/mnt/data/UEEC-Variant-II-stage05/05_align'
+gcc -Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie ../03_reloc/gen.c -o build/x86_64/gen_reloc
+python3 ../tools/test_legacy_stages.py 5 x86_64 build/x86_64 --runner=''
+[PASS] stage 05 x86_64: 24 subprocess checks + structural assertions
+make[1]: Leaving directory '/mnt/data/UEEC-Variant-II-stage05/05_align'
+make: Leaving directory '/mnt/data/UEEC-Variant-II-stage05/05_align'

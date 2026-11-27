@@ -1,0 +1,6 @@
+make: Entering directory '/mnt/data/UEEC-Variant-II-stage07/07_pe'
+true
+true
+python3 ../tools/test_legacy_stages.py 7 x86_64 build/x86_64 --runner=''
+[PASS] stage 07 x86_64: 6 subprocess checks + structural assertions
+make: Leaving directory '/mnt/data/UEEC-Variant-II-stage07/07_pe'

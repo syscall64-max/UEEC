@@ -1,0 +1,209 @@
+ubuntu@linux:~/Documents/UEEC/v1/stage02$ make
+=== 00_shell_code: all ===
+make[1]: Entering directory '/home/ubuntu/Documents/UEEC/v1/stage02/00_shell_code'
+python3 ../tools/emit_db.py ../test_resources/asm/x86.asm build/x86/code.bin
+cmp build/x86/code.bin ../test_resources/bin/x86.bin
+i686-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/x86/loader
+i686-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/x86/check_header
+qemu-i386 ./build/x86/check_header
+qemu-i386 ./build/x86/loader build/x86/code.bin
+[PASS] x86
+python3 ../tools/emit_db.py ../test_resources/asm/x86_64.asm build/x86_64/code.bin
+cmp build/x86_64/code.bin ../test_resources/bin/x86_64.bin
+gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/x86_64/loader
+gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/x86_64/check_header
+./build/x86_64/check_header
+./build/x86_64/loader build/x86_64/code.bin
+[PASS] x86_64
+python3 ../tools/emit_db.py ../test_resources/asm/arm32.asm build/arm32/code.bin
+cmp build/arm32/code.bin ../test_resources/bin/arm32.bin
+arm-linux-gnueabihf-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/arm32/loader
+arm-linux-gnueabihf-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/arm32/check_header
+qemu-arm ./build/arm32/check_header
+qemu-arm ./build/arm32/loader build/arm32/code.bin
+[PASS] arm32
+python3 ../tools/emit_db.py ../test_resources/asm/aarch64.asm build/aarch64/code.bin
+cmp build/aarch64/code.bin ../test_resources/bin/aarch64.bin
+aarch64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/aarch64/loader
+aarch64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/aarch64/check_header
+qemu-aarch64 ./build/aarch64/check_header
+qemu-aarch64 ./build/aarch64/loader build/aarch64/code.bin
+[PASS] aarch64
+python3 ../tools/emit_db.py ../test_resources/asm/riscv32.asm build/riscv32/code.bin
+cmp build/riscv32/code.bin ../test_resources/bin/riscv32.bin
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static -march=rv32gc -mabi=ilp32d loader.c -o build/riscv32/loader
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static -march=rv32gc -mabi=ilp32d -I../hdrs ../tools/check_header.c -o build/riscv32/check_header
+qemu-riscv32 ./build/riscv32/check_header
+qemu-riscv32 ./build/riscv32/loader build/riscv32/code.bin
+[PASS] riscv32
+python3 ../tools/emit_db.py ../test_resources/asm/riscv64.asm build/riscv64/code.bin
+cmp build/riscv64/code.bin ../test_resources/bin/riscv64.bin
+riscv64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/riscv64/loader
+riscv64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/riscv64/check_header
+qemu-riscv64 ./build/riscv64/check_header
+qemu-riscv64 ./build/riscv64/loader build/riscv64/code.bin
+[PASS] riscv64
+python3 ../tools/emit_db.py ../test_resources/asm/ppc32.asm build/ppc32/code.bin
+cmp build/ppc32/code.bin ../test_resources/bin/ppc32.bin
+powerpc-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/ppc32/loader
+powerpc-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/ppc32/check_header
+qemu-ppc ./build/ppc32/check_header
+qemu-ppc ./build/ppc32/loader build/ppc32/code.bin
+[PASS] ppc32
+python3 ../tools/emit_db.py ../test_resources/asm/ppc64.asm build/ppc64/code.bin
+cmp build/ppc64/code.bin ../test_resources/bin/ppc64.bin
+powerpc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/ppc64/loader
+powerpc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/ppc64/check_header
+qemu-ppc64 ./build/ppc64/check_header
+qemu-ppc64 ./build/ppc64/loader build/ppc64/code.bin
+[PASS] ppc64
+python3 ../tools/emit_db.py ../test_resources/asm/sparc32.asm build/sparc32/code.bin
+cmp build/sparc32/code.bin ../test_resources/bin/sparc32.bin
+sparc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static -m32 loader.c -o build/sparc32/loader
+sparc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static -m32 -I../hdrs ../tools/check_header.c -o build/sparc32/check_header
+qemu-sparc32plus ./build/sparc32/check_header
+qemu-sparc32plus ./build/sparc32/loader build/sparc32/code.bin
+[PASS] sparc32
+python3 ../tools/emit_db.py ../test_resources/asm/sparc64.asm build/sparc64/code.bin
+cmp build/sparc64/code.bin ../test_resources/bin/sparc64.bin
+sparc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/sparc64/loader
+sparc64-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/sparc64/check_header
+qemu-sparc64 ./build/sparc64/check_header
+qemu-sparc64 ./build/sparc64/loader build/sparc64/code.bin
+[PASS] sparc64
+python3 ../tools/emit_db.py ../test_resources/asm/loongarch64.asm build/loongarch64/code.bin
+cmp build/loongarch64/code.bin ../test_resources/bin/loongarch64.bin
+loongarch64-linux-gnu-gcc-14 -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/loongarch64/loader
+loongarch64-linux-gnu-gcc-14 -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/loongarch64/check_header
+qemu-loongarch64 ./build/loongarch64/check_header
+qemu-loongarch64 ./build/loongarch64/loader build/loongarch64/code.bin
+[PASS] loongarch64
+python3 ../tools/emit_db.py ../test_resources/asm/s390x.asm build/s390x/code.bin
+cmp build/s390x/code.bin ../test_resources/bin/s390x.bin
+s390x-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  loader.c -o build/s390x/loader
+s390x-linux-gnu-gcc -std=gnu11 -Wall -Wextra -O2 -static  -I../hdrs ../tools/check_header.c -o build/s390x/check_header
+qemu-s390x ./build/s390x/check_header
+qemu-s390x ./build/s390x/loader build/s390x/code.bin
+[PASS] s390x
+Passed: 12
+Failed: 0
+Skipped: 0
+make[1]: Leaving directory '/home/ubuntu/Documents/UEEC/v1/stage02/00_shell_code'
+[PASS] 00_shell_code
+=== 01_ueec_info: all ===
+make[1]: Entering directory '/home/ubuntu/Documents/UEEC/v1/stage02/01_ueec_info'
+i686-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/x86/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/x86/tool build/fixtures --runner='qemu-i386'
+[PASS] info: 17 cases
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/x86_64/tool build/fixtures --runner=''
+[PASS] info: 17 cases
+arm-linux-gnueabihf-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/arm32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/arm32/tool build/fixtures --runner='qemu-arm'
+[PASS] info: 17 cases
+aarch64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/aarch64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/aarch64/tool build/fixtures --runner='qemu-aarch64'
+[PASS] info: 17 cases
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow -march=rv32gc -mabi=ilp32d ueec_info.c -o build/riscv32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/riscv32/tool build/fixtures --runner='qemu-riscv32'
+[PASS] info: 17 cases
+riscv64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/riscv64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/riscv64/tool build/fixtures --runner='qemu-riscv64'
+[PASS] info: 17 cases
+powerpc-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/ppc32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/ppc32/tool build/fixtures --runner='qemu-ppc'
+[PASS] info: 17 cases
+powerpc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/ppc64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/ppc64/tool build/fixtures --runner='qemu-ppc64'
+[PASS] info: 17 cases
+sparc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow -m32 ueec_info.c -o build/sparc32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/sparc32/tool build/fixtures --runner='qemu-sparc32plus'
+[PASS] info: 17 cases
+sparc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/sparc64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/sparc64/tool build/fixtures --runner='qemu-sparc64'
+[PASS] info: 17 cases
+loongarch64-linux-gnu-gcc-14 -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/loongarch64/tool
+/tmp/cckTK0cs.s: Assembler messages:
+/tmp/cckTK0cs.s:456: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+/tmp/cckTK0cs.s:458: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/loongarch64/tool build/fixtures --runner='qemu-loongarch64'
+[PASS] info: 17 cases
+s390x-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_info.c -o build/s390x/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py info ./build/s390x/tool build/fixtures --runner='qemu-s390x'
+[PASS] info: 17 cases
+Passed: 12
+Failed: 0
+Skipped: 0
+make[1]: Leaving directory '/home/ubuntu/Documents/UEEC/v1/stage02/01_ueec_info'
+[PASS] 01_ueec_info
+=== 02_ueec_load: all ===
+make[1]: Entering directory '/home/ubuntu/Documents/UEEC/v1/stage02/02_ueec_load'
+i686-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/x86/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86/tool build/fixtures --runner='qemu-i386'
+[PASS] load: 101 cases
+gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/x86_64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/x86_64/tool build/fixtures --runner=''
+[PASS] load: 101 cases
+arm-linux-gnueabihf-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/arm32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/arm32/tool build/fixtures --runner='qemu-arm'
+[PASS] load: 101 cases
+aarch64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/aarch64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/aarch64/tool build/fixtures --runner='qemu-aarch64'
+[PASS] load: 101 cases
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow -march=rv32gc -mabi=ilp32d ueec_load.c -o build/riscv32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/riscv32/tool build/fixtures --runner='qemu-riscv32'
+[PASS] load: 101 cases
+riscv64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/riscv64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/riscv64/tool build/fixtures --runner='qemu-riscv64'
+[PASS] load: 101 cases
+powerpc-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/ppc32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/ppc32/tool build/fixtures --runner='qemu-ppc'
+[PASS] load: 101 cases
+powerpc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/ppc64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/ppc64/tool build/fixtures --runner='qemu-ppc64'
+[PASS] load: 101 cases
+sparc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow -m32 ueec_load.c -o build/sparc32/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/sparc32/tool build/fixtures --runner='qemu-sparc32plus'
+[PASS] load: 101 cases
+sparc64-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/sparc64/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/sparc64/tool build/fixtures --runner='qemu-sparc64'
+[PASS] load: 101 cases
+loongarch64-linux-gnu-gcc-14 -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/loongarch64/tool
+/tmp/ccSU73DN.s: Assembler messages:
+/tmp/ccSU73DN.s:881: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+/tmp/ccSU73DN.s:883: Warning: Right shift of negative numbers may be changed from arithmetic right shift to logical right shift!
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/loongarch64/tool build/fixtures --runner='qemu-loongarch64'
+[PASS] load: 101 cases
+s390x-linux-gnu-gcc -std=c11 -O2 -static -Wall -Wextra -Wpedantic -Wconversion -Wshadow  ueec_load.c -o build/s390x/tool
+python3 ../tools/gen_exit.py build/fixtures
+python3 ../tools/test_exit.py load ./build/s390x/tool build/fixtures --runner='qemu-s390x'
+[PASS] load: 101 cases
+Passed: 12
+Failed: 0
+Skipped: 0
+make[1]: Leaving directory '/home/ubuntu/Documents/UEEC/v1/stage02/02_ueec_load'
+[PASS] 02_ueec_load
+ubuntu@linux:~/Documents/UEEC/v1/stage02$ 
