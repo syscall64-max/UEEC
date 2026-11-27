@@ -48,3 +48,7 @@ and consolidation are accepted.
 ## Historical handoff
 
 The October 2026 baseline notes remain in Git history and the stage evidence.
+
+## Variant II research snapshot — 2026-11-27
+
+A separate [Variant II research directory](variant-II/README.md) preserves the tested snapshots for ISA dispatch, relocation, import/export and AVR metadata (stages 11–14). The researcher reported 284,112 main matrix executions and 23,676 x86-64 sanitizer executions, totaling 307,788 successful executions including repeated regression/sanitizer tests. Eleven targets used QEMU user mode; x86-64 ran natively. These are reported local research results, not new GitHub CI evidence. The legacy stage directories and reference specification remain unchanged. Standalone stage 11.1 source is unavailable in this snapshot; AVR physical execution and several experimental-format/ABI limitations remain open. Stage 15 of Variant II is not started. See the snapshot README and extracted console logs for scope and limitations.

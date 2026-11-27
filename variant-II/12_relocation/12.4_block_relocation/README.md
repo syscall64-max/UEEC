@@ -1,0 +1,7 @@
+# UEEC Variant II 12.4 — Block relocation
+
+Run `make test` and `make sanitize` from 12_relocation. Requires the same 12 toolchains and QEMU runners as 12.3. `make test` builds real payloads, prepares 126 shared files, and writes build/integration-report.json in this directory.
+
+Supports FLAT16, BLOCK_4096 and BLOCK_N with 16/32/64-bit block index/count/info fields. Couple headers remain Couple16. As in original 04_convert, block index is an absolute section-relative base, not a page number. BLOCK_N fixture grouping uses 24-byte blocks (N is not stored in the original format). Block fixtures add 8 ABS relocations at offsets 4096–4152, checked by loader; original branch and eight ABS entries remain. FLAT fixtures retain nine entries. The branch is still within one CODE section and uses experimental type 2. Only INIT_DATA is an absolute relocation target, with unsigned addends. The native payload uses the first relocated pointer; loader checks remaining pointers. The overlap checker uses an interval list (quadratic in record count). No conversion utility or generalized equivalence comparison of all memory bytes is included; expected output is checked independently for each design.
+
+Per architecture: 504 positive cases, 84 rejection cases, 1512 load cycles, 3024 native calls. Local x86-64 regular and ASan/UBSan tests passed using placeholder nonselected payloads; the ZIP excludes all build files. Other architecture execution remains to be tested.

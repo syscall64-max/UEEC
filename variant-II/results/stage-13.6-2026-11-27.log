@@ -1,0 +1,120 @@
+# Extracted compile commands and PASS lines from user-supplied Ubuntu console transcript.
+# Local working-directory prompts omitted.
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/x86/resolve
+python3 test.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 resolution cases, 252 rejections
+python3 calls.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 72 shared dependency cases, 72 graph rejections, protection check
+gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/x86_64/resolve
+python3 test.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 resolution cases, 252 rejections
+python3 calls.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 72 shared dependency cases, 72 graph rejections, protection check
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/arm32/resolve
+python3 test.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 resolution cases, 252 rejections
+python3 calls.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 72 shared dependency cases, 72 graph rejections, protection check
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/aarch64/resolve
+python3 test.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 resolution cases, 252 rejections
+python3 calls.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 72 shared dependency cases, 72 graph rejections, protection check
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/riscv32/resolve
+python3 test.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 resolution cases, 252 rejections
+python3 calls.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 72 shared dependency cases, 72 graph rejections, protection check
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/riscv64/resolve
+python3 test.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 resolution cases, 252 rejections
+python3 calls.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 72 shared dependency cases, 72 graph rejections, protection check
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/ppc32/resolve
+python3 test.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 resolution cases, 252 rejections
+python3 calls.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 72 shared dependency cases, 72 graph rejections, protection check
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/ppc64/resolve
+python3 test.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 resolution cases, 252 rejections
+python3 calls.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 72 shared dependency cases, 72 graph rejections, protection check
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/sparc32/resolve
+python3 test.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 resolution cases, 252 rejections
+python3 calls.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 72 shared dependency cases, 72 graph rejections, protection check
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/sparc64/resolve
+python3 test.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 resolution cases, 252 rejections
+python3 calls.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 72 shared dependency cases, 72 graph rejections, protection check
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/loongarch64/resolve
+python3 test.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 resolution cases, 252 rejections
+python3 calls.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 72 shared dependency cases, 72 graph rejections, protection check
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/s390x/resolve
+python3 test.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 resolution cases, 252 rejections
+python3 calls.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 72 shared dependency cases, 72 graph rejections, protection check
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' LDFLAGS=''
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie resolve.c  -o build/x86_64/resolve
+python3 test.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 resolution cases, 252 rejections
+python3 calls.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 72 shared dependency cases, 72 graph rejections, protection check
