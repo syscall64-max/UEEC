@@ -1,0 +1,237 @@
+# Extracted compile commands and PASS lines from user-supplied Ubuntu console transcript.
+# Local working-directory prompts omitted.
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/x86/metadata
+python3 test.py x86 build/x86/metadata 'qemu-i386'
+[PASS] x86: 168 valid metadata payloads, 106 malformed payloads rejected
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/x86/device
+python3 device_test.py x86 build/x86/device 'qemu-i386'
+[PASS] x86: 124 device matches, 656 device rejections
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/x86/memory
+python3 memory_test.py x86 build/x86/memory 'qemu-i386'
+[PASS] x86: 238 memory cases, 600 memory rejections
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/x86/select
+python3 select_test.py x86 build/x86/select 'qemu-i386'
+[PASS] x86: 180 AVR node selections, 396 rejections
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/x86/layout
+python3 layout_test.py x86 build/x86/layout 'qemu-i386'
+[PASS] x86: 150 layout cases, 390 layout rejections
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/x86/image
+python3 image_test.py x86 build/x86/image 'qemu-i386'
+[PASS] x86: 150 image cases, 120 image rejections
+gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/x86_64/metadata
+python3 test.py x86_64 build/x86_64/metadata ''
+[PASS] x86_64: 168 valid metadata payloads, 106 malformed payloads rejected
+gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/x86_64/device
+python3 device_test.py x86_64 build/x86_64/device ''
+[PASS] x86_64: 124 device matches, 656 device rejections
+gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/x86_64/memory
+python3 memory_test.py x86_64 build/x86_64/memory ''
+[PASS] x86_64: 238 memory cases, 600 memory rejections
+gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/x86_64/select
+python3 select_test.py x86_64 build/x86_64/select ''
+[PASS] x86_64: 180 AVR node selections, 396 rejections
+gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/x86_64/layout
+python3 layout_test.py x86_64 build/x86_64/layout ''
+[PASS] x86_64: 150 layout cases, 390 layout rejections
+gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/x86_64/image
+python3 image_test.py x86_64 build/x86_64/image ''
+[PASS] x86_64: 150 image cases, 120 image rejections
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/arm32/metadata
+python3 test.py arm32 build/arm32/metadata 'qemu-arm'
+[PASS] arm32: 168 valid metadata payloads, 106 malformed payloads rejected
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/arm32/device
+python3 device_test.py arm32 build/arm32/device 'qemu-arm'
+[PASS] arm32: 124 device matches, 656 device rejections
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/arm32/memory
+python3 memory_test.py arm32 build/arm32/memory 'qemu-arm'
+[PASS] arm32: 238 memory cases, 600 memory rejections
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/arm32/select
+python3 select_test.py arm32 build/arm32/select 'qemu-arm'
+[PASS] arm32: 180 AVR node selections, 396 rejections
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/arm32/layout
+python3 layout_test.py arm32 build/arm32/layout 'qemu-arm'
+[PASS] arm32: 150 layout cases, 390 layout rejections
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/arm32/image
+python3 image_test.py arm32 build/arm32/image 'qemu-arm'
+[PASS] arm32: 150 image cases, 120 image rejections
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/aarch64/metadata
+python3 test.py aarch64 build/aarch64/metadata 'qemu-aarch64'
+[PASS] aarch64: 168 valid metadata payloads, 106 malformed payloads rejected
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/aarch64/device
+python3 device_test.py aarch64 build/aarch64/device 'qemu-aarch64'
+[PASS] aarch64: 124 device matches, 656 device rejections
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/aarch64/memory
+python3 memory_test.py aarch64 build/aarch64/memory 'qemu-aarch64'
+[PASS] aarch64: 238 memory cases, 600 memory rejections
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/aarch64/select
+python3 select_test.py aarch64 build/aarch64/select 'qemu-aarch64'
+[PASS] aarch64: 180 AVR node selections, 396 rejections
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/aarch64/layout
+python3 layout_test.py aarch64 build/aarch64/layout 'qemu-aarch64'
+[PASS] aarch64: 150 layout cases, 390 layout rejections
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/aarch64/image
+python3 image_test.py aarch64 build/aarch64/image 'qemu-aarch64'
+[PASS] aarch64: 150 image cases, 120 image rejections
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/riscv32/metadata
+python3 test.py riscv32 build/riscv32/metadata 'qemu-riscv32'
+[PASS] riscv32: 168 valid metadata payloads, 106 malformed payloads rejected
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/riscv32/device
+python3 device_test.py riscv32 build/riscv32/device 'qemu-riscv32'
+[PASS] riscv32: 124 device matches, 656 device rejections
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/riscv32/memory
+python3 memory_test.py riscv32 build/riscv32/memory 'qemu-riscv32'
+[PASS] riscv32: 238 memory cases, 600 memory rejections
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/riscv32/select
+python3 select_test.py riscv32 build/riscv32/select 'qemu-riscv32'
+[PASS] riscv32: 180 AVR node selections, 396 rejections
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/riscv32/layout
+python3 layout_test.py riscv32 build/riscv32/layout 'qemu-riscv32'
+[PASS] riscv32: 150 layout cases, 390 layout rejections
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/riscv32/image
+python3 image_test.py riscv32 build/riscv32/image 'qemu-riscv32'
+[PASS] riscv32: 150 image cases, 120 image rejections
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/riscv64/metadata
+python3 test.py riscv64 build/riscv64/metadata 'qemu-riscv64'
+[PASS] riscv64: 168 valid metadata payloads, 106 malformed payloads rejected
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/riscv64/device
+python3 device_test.py riscv64 build/riscv64/device 'qemu-riscv64'
+[PASS] riscv64: 124 device matches, 656 device rejections
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/riscv64/memory
+python3 memory_test.py riscv64 build/riscv64/memory 'qemu-riscv64'
+[PASS] riscv64: 238 memory cases, 600 memory rejections
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/riscv64/select
+python3 select_test.py riscv64 build/riscv64/select 'qemu-riscv64'
+[PASS] riscv64: 180 AVR node selections, 396 rejections
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/riscv64/layout
+python3 layout_test.py riscv64 build/riscv64/layout 'qemu-riscv64'
+[PASS] riscv64: 150 layout cases, 390 layout rejections
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/riscv64/image
+python3 image_test.py riscv64 build/riscv64/image 'qemu-riscv64'
+[PASS] riscv64: 150 image cases, 120 image rejections
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/ppc32/metadata
+python3 test.py ppc32 build/ppc32/metadata 'qemu-ppc'
+[PASS] ppc32: 168 valid metadata payloads, 106 malformed payloads rejected
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/ppc32/device
+python3 device_test.py ppc32 build/ppc32/device 'qemu-ppc'
+[PASS] ppc32: 124 device matches, 656 device rejections
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/ppc32/memory
+python3 memory_test.py ppc32 build/ppc32/memory 'qemu-ppc'
+[PASS] ppc32: 238 memory cases, 600 memory rejections
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/ppc32/select
+python3 select_test.py ppc32 build/ppc32/select 'qemu-ppc'
+[PASS] ppc32: 180 AVR node selections, 396 rejections
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/ppc32/layout
+python3 layout_test.py ppc32 build/ppc32/layout 'qemu-ppc'
+[PASS] ppc32: 150 layout cases, 390 layout rejections
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/ppc32/image
+python3 image_test.py ppc32 build/ppc32/image 'qemu-ppc'
+[PASS] ppc32: 150 image cases, 120 image rejections
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/ppc64/metadata
+python3 test.py ppc64 build/ppc64/metadata 'qemu-ppc64'
+[PASS] ppc64: 168 valid metadata payloads, 106 malformed payloads rejected
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/ppc64/device
+python3 device_test.py ppc64 build/ppc64/device 'qemu-ppc64'
+[PASS] ppc64: 124 device matches, 656 device rejections
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/ppc64/memory
+python3 memory_test.py ppc64 build/ppc64/memory 'qemu-ppc64'
+[PASS] ppc64: 238 memory cases, 600 memory rejections
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/ppc64/select
+python3 select_test.py ppc64 build/ppc64/select 'qemu-ppc64'
+[PASS] ppc64: 180 AVR node selections, 396 rejections
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/ppc64/layout
+python3 layout_test.py ppc64 build/ppc64/layout 'qemu-ppc64'
+[PASS] ppc64: 150 layout cases, 390 layout rejections
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/ppc64/image
+python3 image_test.py ppc64 build/ppc64/image 'qemu-ppc64'
+[PASS] ppc64: 150 image cases, 120 image rejections
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/sparc32/metadata
+python3 test.py sparc32 build/sparc32/metadata 'qemu-sparc32plus'
+[PASS] sparc32: 168 valid metadata payloads, 106 malformed payloads rejected
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/sparc32/device
+python3 device_test.py sparc32 build/sparc32/device 'qemu-sparc32plus'
+[PASS] sparc32: 124 device matches, 656 device rejections
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/sparc32/memory
+python3 memory_test.py sparc32 build/sparc32/memory 'qemu-sparc32plus'
+[PASS] sparc32: 238 memory cases, 600 memory rejections
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/sparc32/select
+python3 select_test.py sparc32 build/sparc32/select 'qemu-sparc32plus'
+[PASS] sparc32: 180 AVR node selections, 396 rejections
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/sparc32/layout
+python3 layout_test.py sparc32 build/sparc32/layout 'qemu-sparc32plus'
+[PASS] sparc32: 150 layout cases, 390 layout rejections
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/sparc32/image
+python3 image_test.py sparc32 build/sparc32/image 'qemu-sparc32plus'
+[PASS] sparc32: 150 image cases, 120 image rejections
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/sparc64/metadata
+python3 test.py sparc64 build/sparc64/metadata 'qemu-sparc64'
+[PASS] sparc64: 168 valid metadata payloads, 106 malformed payloads rejected
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/sparc64/device
+python3 device_test.py sparc64 build/sparc64/device 'qemu-sparc64'
+[PASS] sparc64: 124 device matches, 656 device rejections
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/sparc64/memory
+python3 memory_test.py sparc64 build/sparc64/memory 'qemu-sparc64'
+[PASS] sparc64: 238 memory cases, 600 memory rejections
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/sparc64/select
+python3 select_test.py sparc64 build/sparc64/select 'qemu-sparc64'
+[PASS] sparc64: 180 AVR node selections, 396 rejections
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/sparc64/layout
+python3 layout_test.py sparc64 build/sparc64/layout 'qemu-sparc64'
+[PASS] sparc64: 150 layout cases, 390 layout rejections
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/sparc64/image
+python3 image_test.py sparc64 build/sparc64/image 'qemu-sparc64'
+[PASS] sparc64: 150 image cases, 120 image rejections
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/loongarch64/metadata
+python3 test.py loongarch64 build/loongarch64/metadata 'qemu-loongarch64'
+[PASS] loongarch64: 168 valid metadata payloads, 106 malformed payloads rejected
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/loongarch64/device
+python3 device_test.py loongarch64 build/loongarch64/device 'qemu-loongarch64'
+[PASS] loongarch64: 124 device matches, 656 device rejections
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/loongarch64/memory
+python3 memory_test.py loongarch64 build/loongarch64/memory 'qemu-loongarch64'
+[PASS] loongarch64: 238 memory cases, 600 memory rejections
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/loongarch64/select
+python3 select_test.py loongarch64 build/loongarch64/select 'qemu-loongarch64'
+[PASS] loongarch64: 180 AVR node selections, 396 rejections
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/loongarch64/layout
+python3 layout_test.py loongarch64 build/loongarch64/layout 'qemu-loongarch64'
+[PASS] loongarch64: 150 layout cases, 390 layout rejections
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/loongarch64/image
+python3 image_test.py loongarch64 build/loongarch64/image 'qemu-loongarch64'
+[PASS] loongarch64: 150 image cases, 120 image rejections
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror metadata.c -static -o build/s390x/metadata
+python3 test.py s390x build/s390x/metadata 'qemu-s390x'
+[PASS] s390x: 168 valid metadata payloads, 106 malformed payloads rejected
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror device.c -static -o build/s390x/device
+python3 device_test.py s390x build/s390x/device 'qemu-s390x'
+[PASS] s390x: 124 device matches, 656 device rejections
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror memory.c -static -o build/s390x/memory
+python3 memory_test.py s390x build/s390x/memory 'qemu-s390x'
+[PASS] s390x: 238 memory cases, 600 memory rejections
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror select.c -static -o build/s390x/select
+python3 select_test.py s390x build/s390x/select 'qemu-s390x'
+[PASS] s390x: 180 AVR node selections, 396 rejections
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror layout.c -static -o build/s390x/layout
+python3 layout_test.py s390x build/s390x/layout 'qemu-s390x'
+[PASS] s390x: 150 layout cases, 390 layout rejections
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror image.c -static -o build/s390x/image
+python3 image_test.py s390x build/s390x/image 'qemu-s390x'
+[PASS] s390x: 150 image cases, 120 image rejections
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' LDFLAGS=''
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie metadata.c  -o build/x86_64/metadata
+python3 test.py x86_64 build/x86_64/metadata ''
+[PASS] x86_64: 168 valid metadata payloads, 106 malformed payloads rejected
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie device.c  -o build/x86_64/device
+python3 device_test.py x86_64 build/x86_64/device ''
+[PASS] x86_64: 124 device matches, 656 device rejections
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie memory.c  -o build/x86_64/memory
+python3 memory_test.py x86_64 build/x86_64/memory ''
+[PASS] x86_64: 238 memory cases, 600 memory rejections
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie select.c  -o build/x86_64/select
+python3 select_test.py x86_64 build/x86_64/select ''
+[PASS] x86_64: 180 AVR node selections, 396 rejections
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie layout.c  -o build/x86_64/layout
+python3 layout_test.py x86_64 build/x86_64/layout ''
+[PASS] x86_64: 150 layout cases, 390 layout rejections
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie image.c  -o build/x86_64/image
+python3 image_test.py x86_64 build/x86_64/image ''
+[PASS] x86_64: 150 image cases, 120 image rejections
