@@ -1,0 +1,3 @@
+# Draft import contract (13.6)
+
+Source: ../../../variant-II/13_import_export/13.6_full_integration/resolve.c and test.py. Header u16 format,u16 design; format 0/1/2 selects w=2/4/8 bytes, design 0 only. Library count w; each library has u16 nonzero name length, name bytes (no NUL), entry count w. Each entry has u8 kind, section w, offset w; kind 0 followed by u16 symbol length and name bytes, kind 1 followed by ordinal w. Section index excludes HEADER. Slot must be pointer-aligned within INIT_DATA or UNINIT_DATA. Duplicate slots and relocation overlap rejected. Explicit registry limited to 128; dependency cycles rejected. Experimental, not a general ABI.

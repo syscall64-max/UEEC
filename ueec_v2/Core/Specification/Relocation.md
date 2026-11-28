@@ -1,0 +1,3 @@
+# Draft relocation contract (12.6)
+
+Source: ../../../variant-II/12_relocation/12.6_full_integration/convert.py and load.c. Four-byte header: u16 format, u16 design. Width w=2<<format; format 0/1/2. Design 0 FLAT only format 0; design 1 BLOCK_4096 and 2 BLOCK_N support all three widths. Couple word low 10 bits encode the section pair, upper 6 bits select count width independently (0/1/2). FLAT count is entries; block designs count blocks. Each block has absolute base and entry count, both w bytes. Entry low (8*w-4) bits offset, upper four type. BLOCK_4096 requires base aligned to 4096 and delta below 4096. Conversion rejects unrepresentable offsets. Exact architecture-specific relocation types and pair index semantics require further audit. Not a ratified format.

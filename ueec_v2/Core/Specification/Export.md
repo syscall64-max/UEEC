@@ -1,0 +1,3 @@
+# Export contract inventory (13.1/13.6)
+
+Source: ../../../variant-II/13_import_export/13.6_full_integration/resolve.c and test.py, plus ../Headers/ueec_export.h. u16 format,u16 design,u16 repeated format, count of width w=2<<format. Repeated format must match. Designs 0 COMPACT_GROUP (all group headers first, then each group's infos and names), 1 SIMPLE_FLAT (sorted records followed by name blob), 2 ORDINAL (sorted ordinal records). Section index excludes HEADER; low five bits, upper three reserved in byte-sized entries. Parser validates sort order and bounds. Header copied without modification; explicit endian serialization remains authoritative.
