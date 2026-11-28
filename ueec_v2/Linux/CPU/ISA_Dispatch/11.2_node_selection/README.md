@@ -1,0 +1,3 @@
+# UEEC Variant II — 11.2 Node Selection
+Run `make test`, `make sanitize`, or `make x86_64`. The toolchains match stage 11.1's reported commands. No missing toolchain is silently skipped.
+Selection policy: CPU machine ID, code endianness, Linux general OS, user-mode program; all fixtures share one logical name. No match returns 2, ambiguity 3, malformed fixed header/node table 4. Both metadata byte orders are tested independently of code endianness. The fixtures contain a shared metadata section, not executable code. This stage does not validate the full section layout, choose between logical names, or execute nodes. The original archive lacks stage 11.1 sources, so detection macros are reconstructed from its reported IDs; S390X=11 is added to the copied header.
