@@ -6,7 +6,8 @@ Research snapshot: `d41a9eab979403184e88499745b9e9acaa89b5fb` (second-generation
 
 - [Experiments](Experiments/): 26 unpacked experiment packages, retaining their original internal layout, source, fixtures, test runners and package results. Each package has its own instructions.
 - [Archives](Archives/): the same 26 original ZIP packages, byte-for-byte preserved. Use these if an exact original distribution is required.
-- [Documentation](Documentation/): 20 Georgian DOCX reports (D00–D13, DV01–DV05 including DV03.2).
+- [Documentation](Documentation/): 20 Georgian DOCX reports (D00–D13, DV01–DV05 including DV03.2), preserved at their original paths, and [20 English translations](Documentation/EN/).
+- [Manuscript](Manuscript/): Georgian and English versions of the Paper 01 draft (not peer-reviewed).
 - [Results](Results/): experiment registry, original V05 audit CSV, archive inventory, benchmark run registry, research-environment extract and selected terminal logs (local account/path redacted).
 - [Final benchmarks](Results/Final_Benchmarks/): the user-supplied `UEEC_Final_Results.tar.gz` (primary samples and summaries from the latest E12/V04 runs); readable copies of summary/memory CSV files. The large raw samples remain compressed in the original tarball.
 - `SHA256SUMS`: integrity manifest for this entire directory except the manifest itself. From this directory, run `sha256sum -c SHA256SUMS` before running experiments. Individual experiment manifests may describe the pre-run package and generated outputs can change during reruns.
