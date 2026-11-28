@@ -1,0 +1,8 @@
+# E04.2 — Producer-side automatic section width selection
+Linux x86-64, Python 3 and C compiler. Run `./run.sh`. Expected on a 4096-byte page host: 48 width checks, 108 loader checks (90 executions and 18 expected rejections), 156 total.
+
+This supplement preserves E04 and tests a producer-side selection algorithm, not a new compiler or runtime conversion. All section headers use one width. The isolated five-section cases encode and decode all five records, moving the maximum across all positions. The >=4 GiB cases are record-level only; no huge files or allocations. Invalid sizes are rejected.
+
+The generated executable fixtures retain the fixed E04 topology (HEADER, CODE, CONSTANT_DATA, RELOCATION), with two data-size variants and nine sizes. The small header allowance (100 bytes) is sufficient for all three widths of this topology. Two producer policies: logical size only; and compatibility with the experimental loader's page-rounded runtime sizes. The latter chooses a wider file representation when needed, without changing actual file section lengths. The existing loader is unchanged from E04; it rejects logical SH16 inputs whose rounded runtime section length does not fit. This is an implementation limitation, not a wire-format restriction. The compatibility policy is target-page-size-dependent and is not a normative requirement. No converter is invoked during loading. No official source or specification changes. No performance claims.
+
+CSV columns `expected_format`, `actual_format`, `format_id` use 0=SH16, 1=SH32, 2=SH64. Empty IDs denote expected rejection. `results.csv` gives widths in bits. `test.log` and `environment.txt` record the local run.

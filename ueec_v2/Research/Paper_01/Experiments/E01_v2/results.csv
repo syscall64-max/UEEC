@@ -1,0 +1,6 @@
+file,file_bytes,format,base_header,program_headers,section_headers,header_bytes,section_count,other_load_commands,dos_header,dos_extra,signature,optional_fixed,directories,optional_extra,header_padding,node_headers,node_mappings,name_table,node_count
+sample.elf,1176,ELF64,64,224,448,736,7,,,,,,,,,,,,
+sample.macho.o,616,Mach-O64 object,32,,240,472,3,200,,,,,,,,,,,
+sample32.exe,1024,PE32,20,,40,408,1,,64,56,4,96,128,0,104,,,,
+sample64.exe,1024,PE32+,20,,40,424,1,,64,56,4,112,128,0,88,,,,
+sum.ueec,5719,UEEC v1,8,,186,778,31,,,,,,,,0,174,348,62,29

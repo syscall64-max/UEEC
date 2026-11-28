@@ -1,0 +1,6 @@
+experiment,run_order,requested_repeats,reported_observations,primary_data_in_final_archive
+E12,1,100,145440,no
+E12,2,1000,1454400,no
+V04,1,20,32400,no
+E12,3,1000,1454400,yes
+V04,2,20,32400,yes

@@ -1,0 +1,422 @@
+research-host:~/Downloads/UEEC_Paper01_V01$ ./run.sh
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch'
+make -C 11.5_dispatch_integration test
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+python3 test.py prepare
+Prepared 18 common UEEC files
+mkdir -p build/x86
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/x86/load
+python3 test.py x86 build/x86/load 'qemu-i386'
+[PASS] x86: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/x86_64
+gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/x86_64/load
+python3 test.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/arm32
+arm-linux-gnueabihf-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/arm32/load
+python3 test.py arm32 build/arm32/load 'qemu-arm'
+[PASS] arm32: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/aarch64
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/aarch64/load
+python3 test.py aarch64 build/aarch64/load 'qemu-aarch64'
+[PASS] aarch64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/riscv32
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/riscv32/load
+python3 test.py riscv32 build/riscv32/load 'qemu-riscv32'
+[PASS] riscv32: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/riscv64
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/riscv64/load
+python3 test.py riscv64 build/riscv64/load 'qemu-riscv64'
+[PASS] riscv64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/ppc32
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/ppc32/load
+python3 test.py ppc32 build/ppc32/load 'qemu-ppc'
+[PASS] ppc32: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/ppc64
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/ppc64/load
+python3 test.py ppc64 build/ppc64/load 'qemu-ppc64'
+[PASS] ppc64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/sparc32
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/sparc32/load
+python3 test.py sparc32 build/sparc32/load 'qemu-sparc32plus'
+[PASS] sparc32: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/sparc64
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/sparc64/load
+python3 test.py sparc64 build/sparc64/load 'qemu-sparc64'
+[PASS] sparc64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/loongarch64
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/loongarch64/load
+python3 test.py loongarch64 build/loongarch64/load 'qemu-loongarch64'
+[PASS] loongarch64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+mkdir -p build/s390x
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/s390x/load
+python3 test.py s390x build/s390x/load 'qemu-s390x'
+[PASS] s390x: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+python3 report.py
+PASS 12 architectures: {'cases': 864, 'load_cycles': 2592, 'native_calls': 5184}
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch'
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch'
+make -C 11.5_dispatch_integration sanitize
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' LDFLAGS=''
+make[2]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+python3 test.py prepare
+Prepared 18 common UEEC files
+mkdir -p build/x86_64
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie load.c  -o build/x86_64/load
+python3 test.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 72 cases, 216 load cycles, 432 native calls, unchanged SHA-256
+make[2]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch/11.5_dispatch_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/ISA_Dispatch'
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Relocation'
+make -C 12.6_full_integration test
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+python3 test.py prepare
+Prepared 432 converted UEEC files; 36 unrepresentable conversions rejected
+python3 mixed.py prepare
+Prepared 72 mixed files and 6 overlap fixtures
+python3 final.py prepare
+mkdir -p build/x86
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/x86/load
+python3 test.py x86 build/x86/load 'qemu-i386'
+[PASS] x86: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py x86 build/x86/load 'qemu-i386'
+[PASS] x86: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py x86 build/x86/load 'qemu-i386'
+[PASS] x86: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/x86_64
+gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/x86_64/load
+python3 test.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/arm32
+arm-linux-gnueabihf-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/arm32/load
+python3 test.py arm32 build/arm32/load 'qemu-arm'
+[PASS] arm32: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py arm32 build/arm32/load 'qemu-arm'
+[PASS] arm32: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py arm32 build/arm32/load 'qemu-arm'
+[PASS] arm32: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/aarch64
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/aarch64/load
+python3 test.py aarch64 build/aarch64/load 'qemu-aarch64'
+[PASS] aarch64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py aarch64 build/aarch64/load 'qemu-aarch64'
+[PASS] aarch64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py aarch64 build/aarch64/load 'qemu-aarch64'
+[PASS] aarch64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/riscv32
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/riscv32/load
+python3 test.py riscv32 build/riscv32/load 'qemu-riscv32'
+[PASS] riscv32: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py riscv32 build/riscv32/load 'qemu-riscv32'
+[PASS] riscv32: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py riscv32 build/riscv32/load 'qemu-riscv32'
+[PASS] riscv32: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/riscv64
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/riscv64/load
+python3 test.py riscv64 build/riscv64/load 'qemu-riscv64'
+[PASS] riscv64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py riscv64 build/riscv64/load 'qemu-riscv64'
+[PASS] riscv64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py riscv64 build/riscv64/load 'qemu-riscv64'
+[PASS] riscv64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/ppc32
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/ppc32/load
+python3 test.py ppc32 build/ppc32/load 'qemu-ppc'
+[PASS] ppc32: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py ppc32 build/ppc32/load 'qemu-ppc'
+[PASS] ppc32: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py ppc32 build/ppc32/load 'qemu-ppc'
+[PASS] ppc32: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/ppc64
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/ppc64/load
+python3 test.py ppc64 build/ppc64/load 'qemu-ppc64'
+[PASS] ppc64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py ppc64 build/ppc64/load 'qemu-ppc64'
+[PASS] ppc64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py ppc64 build/ppc64/load 'qemu-ppc64'
+[PASS] ppc64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/sparc32
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/sparc32/load
+python3 test.py sparc32 build/sparc32/load 'qemu-sparc32plus'
+[PASS] sparc32: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py sparc32 build/sparc32/load 'qemu-sparc32plus'
+[PASS] sparc32: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py sparc32 build/sparc32/load 'qemu-sparc32plus'
+[PASS] sparc32: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/sparc64
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/sparc64/load
+python3 test.py sparc64 build/sparc64/load 'qemu-sparc64'
+[PASS] sparc64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py sparc64 build/sparc64/load 'qemu-sparc64'
+[PASS] sparc64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py sparc64 build/sparc64/load 'qemu-sparc64'
+[PASS] sparc64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/loongarch64
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/loongarch64/load
+python3 test.py loongarch64 build/loongarch64/load 'qemu-loongarch64'
+[PASS] loongarch64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py loongarch64 build/loongarch64/load 'qemu-loongarch64'
+[PASS] loongarch64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py loongarch64 build/loongarch64/load 'qemu-loongarch64'
+[PASS] loongarch64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+mkdir -p build/s390x
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror load.c -static -o build/s390x/load
+python3 test.py s390x build/s390x/load 'qemu-s390x'
+[PASS] s390x: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py s390x build/s390x/load 'qemu-s390x'
+[PASS] s390x: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py s390x build/s390x/load 'qemu-s390x'
+[PASS] s390x: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+python3 report.py
+PASS 12 architectures: {'cases': 20736, 'load_cycles': 62208, 'native_calls': 124416, 'rejections': 1008}
+PASS mixed: {'cases': 3456, 'load_cycles': 10368, 'native_calls': 20736, 'rejections': 72}
+PASS final: {'cases': 144, 'rejections': 144}
+python3 mixed.py benchmark
+Python decode benchmark: build/benchmark.json
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Relocation'
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Relocation'
+make -C 12.6_full_integration sanitize
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' LDFLAGS=''
+make[2]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+python3 test.py prepare
+Prepared 432 converted UEEC files; 36 unrepresentable conversions rejected
+python3 mixed.py prepare
+Prepared 72 mixed files and 6 overlap fixtures
+python3 final.py prepare
+mkdir -p build/x86_64
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie load.c  -o build/x86_64/load
+python3 test.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 1728 cases, 5184 load cycles, 10368 native calls, unchanged SHA-256, 84 rejections
+python3 mixed.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 288 mixed cases, 6 cross-section overlap rejections
+python3 final.py x86_64 build/x86_64/load ''
+[PASS] x86_64: 12 final integration cases, 12 rejections, 15 stress runs, protection checks
+make[2]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Relocation/12.6_full_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Relocation'
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export'
+make -C 13.6_full_integration test
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+mkdir -p build/x86
+i686-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/x86/resolve
+python3 test.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 resolution cases, 252 rejections
+python3 calls.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86 build/x86/resolve 'qemu-i386'
+[PASS] x86: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/x86_64
+gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/x86_64/resolve
+python3 test.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 resolution cases, 252 rejections
+python3 calls.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/arm32
+arm-linux-gnueabihf-gcc -marm -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/arm32/resolve
+python3 test.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 resolution cases, 252 rejections
+python3 calls.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py arm32 build/arm32/resolve 'qemu-arm'
+[PASS] arm32: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/aarch64
+aarch64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/aarch64/resolve
+python3 test.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 resolution cases, 252 rejections
+python3 calls.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py aarch64 build/aarch64/resolve 'qemu-aarch64'
+[PASS] aarch64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/riscv32
+/opt/riscv32/bin/riscv32-unknown-linux-gnu-gcc -march=rv32gc -mabi=ilp32d -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/riscv32/resolve
+python3 test.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 resolution cases, 252 rejections
+python3 calls.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py riscv32 build/riscv32/resolve 'qemu-riscv32'
+[PASS] riscv32: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/riscv64
+riscv64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/riscv64/resolve
+python3 test.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 resolution cases, 252 rejections
+python3 calls.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py riscv64 build/riscv64/resolve 'qemu-riscv64'
+[PASS] riscv64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/ppc32
+powerpc-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/ppc32/resolve
+python3 test.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 resolution cases, 252 rejections
+python3 calls.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py ppc32 build/ppc32/resolve 'qemu-ppc'
+[PASS] ppc32: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/ppc64
+powerpc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/ppc64/resolve
+python3 test.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 resolution cases, 252 rejections
+python3 calls.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py ppc64 build/ppc64/resolve 'qemu-ppc64'
+[PASS] ppc64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/sparc32
+sparc64-linux-gnu-gcc -m32 -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/sparc32/resolve
+python3 test.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 resolution cases, 252 rejections
+python3 calls.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py sparc32 build/sparc32/resolve 'qemu-sparc32plus'
+[PASS] sparc32: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/sparc64
+sparc64-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/sparc64/resolve
+python3 test.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 resolution cases, 252 rejections
+python3 calls.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py sparc64 build/sparc64/resolve 'qemu-sparc64'
+[PASS] sparc64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/loongarch64
+loongarch64-linux-gnu-gcc-15 -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/loongarch64/resolve
+python3 test.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 resolution cases, 252 rejections
+python3 calls.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py loongarch64 build/loongarch64/resolve 'qemu-loongarch64'
+[PASS] loongarch64: 72 shared dependency cases, 72 graph rejections, protection check
+mkdir -p build/s390x
+s390x-linux-gnu-gcc -std=c11 -O2 -Wall -Wextra -Werror resolve.c -static -o build/s390x/resolve
+python3 test.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 resolution cases, 252 rejections
+python3 calls.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py s390x build/s390x/resolve 'qemu-s390x'
+[PASS] s390x: 72 shared dependency cases, 72 graph rejections, protection check
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export'
+make: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export'
+make -C 13.6_full_integration sanitize
+make[1]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+make x86_64 CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie' LDFLAGS=''
+make[2]: Entering directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+mkdir -p build/payloads/x86
+mkdir -p build/payloads/x86_64
+mkdir -p build/payloads/arm32
+mkdir -p build/payloads/aarch64
+mkdir -p build/payloads/riscv32
+mkdir -p build/payloads/riscv64
+mkdir -p build/payloads/ppc32
+mkdir -p build/payloads/ppc64
+mkdir -p build/payloads/sparc32
+mkdir -p build/payloads/sparc64
+mkdir -p build/payloads/loongarch64
+mkdir -p build/payloads/s390x
+mkdir -p build/x86_64
+gcc -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -fno-pie -no-pie resolve.c  -o build/x86_64/resolve
+python3 test.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 resolution cases, 252 rejections
+python3 calls.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-call cases, 1296 external function invocations, 108 rejections
+python3 data.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 144 external-data cases, 432 native invocations, 108 rejections
+python3 graph.py x86_64 build/x86_64/resolve ''
+[PASS] x86_64: 72 shared dependency cases, 72 graph rejections, protection check
+make[2]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+make[1]: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export/13.6_full_integration'
+make: Leaving directory '~/Downloads/UEEC_Paper01_V01/source/Import_Export'
+SOURCE INTEGRITY: PASS
+research-host:~/Downloads/UEEC_Paper01_V01$ 

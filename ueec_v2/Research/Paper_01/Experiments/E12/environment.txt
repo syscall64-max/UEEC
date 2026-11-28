@@ -1,0 +1,9 @@
+Linux-6.18.57-x86_64-with-glibc2.41
+CPU=AMD EPYC 9V74 80-Core Processor
+page_size=4096
+affinity=[0, 1, 2, 3, 4]
+python=3.13.5
+compiler=cc (Debian 14.2.0-19) 14.2.0
+reps=100
+launch_reps=20
+symbol_reps=20

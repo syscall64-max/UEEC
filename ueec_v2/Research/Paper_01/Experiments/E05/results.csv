@@ -1,0 +1,13 @@
+width,container_endian,control,header_bytes,code_bytes,constant_bytes,relocation_bytes,file_size
+16,0,False,65,32,16,10,123
+16,1,False,65,32,16,10,123
+16,0,True,65,32,16,10,123
+16,1,True,65,32,16,10,123
+32,0,False,81,32,16,10,139
+32,1,False,81,32,16,10,139
+32,0,True,81,32,16,10,139
+32,1,True,81,32,16,10,139
+64,0,False,113,32,16,10,171
+64,1,False,113,32,16,10,171
+64,0,True,113,32,16,10,171
+64,1,True,113,32,16,10,171

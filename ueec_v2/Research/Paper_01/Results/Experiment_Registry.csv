@@ -1,0 +1,20 @@
+id,subject,reported_count,count_scope
+E01,Structure sizes,,"Structural measurements, not counted"
+E02,Structural comparison,448,Includes E02 subexperiments; E02.1 not counted as native Windows/macOS validation
+E03,Section sharing,9576,Execution checks
+E04,Width selection,642,"Field, conversion and loader checks"
+E04.2,Automatic width selection,156,Selection and loader checks
+E05,Endianness,72,Executions and expected rejections
+E06,Padding management,774,"Transformation, execution and width checks"
+E07,Relocation designs,2038,Mixed checks
+E08,Export designs,198108,Python reference checks and native calls
+E09,Import and resolution,99486,Python reference checks and native calls
+E10,Loading models,216,Executions and release checks
+E11,Runtime header,774,Combined validation and execution checks
+E12,Performance,234,Configurations; timing observations counted separately
+V01,Original-loader regression,42406,39144 normal + 3262 sanitizer case/rejection/stress counts
+V02,Memory protection,342,Individual checks
+V03,Padding comparison,512,Layout checks and executions
+V03.2,Selective padding,640,Layout checks and executions
+V04,C import/export performance,324,Configurations; timing observations counted separately
+V05,Final audit,,"Audit, no additional case count"

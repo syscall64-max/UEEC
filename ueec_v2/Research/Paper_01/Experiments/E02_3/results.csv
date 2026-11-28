@@ -1,0 +1,4 @@
+format,headers,code,constant_data,relocation,gap,file_size
+single,120,34,16,0,0,170
+split,176,34,16,0,3886,4112
+ueec,62,34,16,10,0,122

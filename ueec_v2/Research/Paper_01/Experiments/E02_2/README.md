@@ -1,0 +1,9 @@
+# UEEC Paper 01 — E02.2: compact ELF and single-node UEEC
+
+Scope: Linux x86-64, process exit status 0, identical nine-byte payload, no imports, exports, CRT or relocations. No Windows or macOS execution is attempted. The existing first-generation UEEC loader and header are copied unchanged from E02.1; this does not validate Variant II.
+
+Run `./run.sh` on x86-64 Linux (GNU binutils, C compiler, Python 3). The script regenerates all six fixtures, checks three ELF executions and nine UEEC executions, runs readelf, and writes results.csv. To save a log: `./run.sh | tee test.log` (use bash pipefail to preserve errors). `sha256sum -c SHA256SUMS` verifies the distributed snapshot before regeneration. Build output is not included.
+
+The compact ELF is serialized explicitly: ELF64 header 64 bytes, one program header 56 bytes, one RX PT_LOAD covering the file, congruent offset/address with 4096-byte alignment, no section header table, nine code bytes. No overlapping header fields or writable-executable segment. This is a compact construction, not a proven global minimum or certification against every ELF ABI. The linked and stripped files use default GNU ld layouts. Remaining bytes in the CSV include gaps and non-code section data, not necessarily pure padding. UEEC headers include node, mapping, section descriptors and name table. UEEC is loaded by a separate user-space loader whose size and overhead are not included; ELF uses the kernel loader. No performance or memory usage conclusion follows from these sizes.
+
+Results measured in the supplied environment: 129-byte compact ELF, 48/56/72-byte UEEC; all 12 execution checks passed. See test.log, environment.txt, and readelf inspections. The test is a single program and does not establish general file-size superiority. No repository changes.

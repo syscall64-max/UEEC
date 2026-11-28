@@ -1,0 +1,6 @@
+# E02.3 — CODE + CONSTANT_DATA
+Linux x86-64; requires Python 3, GNU binutils, C compiler. Run `./run.sh` after extracting. Verify distributed files first with `sha256sum -c SHA256SUMS`.
+
+The program sums 16 bytes and exits with 42; a one-byte change produces 43. Both ELF variants and UEEC use the same 34-byte instruction sequence except the 8-byte absolute address field (offset 2). ELF ET_EXEC fixes that address at generation; UEEC uses ABS64 relocation with a zero addend. UEEC uses one SH16 node, HEADER/CODE/CONSTANT_DATA/RELOCATION. The reference loader is unchanged from UEEC-main.zip, 03_reloc/loader.c and headers. It supports two modes and SH16 only; hybrid and SH32/64 are not tested here. This is a functional comparison, not an assertion of identical ABI or protection. ELF single has RX for code and data; split has RX and R, 4096-byte alignment and a file gap. Split is one conventional layout, not a minimum for separately mapped ELF segments. UEEC loader size and runtime costs are excluded. No performance claims. Generated fixtures only; reference loader is a research prototype, not for untrusted input.
+
+`results.csv` describes the base fixtures; control fixtures are equal size. `test.log` contains all eight execution checks. `environment.txt` records local tools. User-side repetition pending. No GitHub changes.

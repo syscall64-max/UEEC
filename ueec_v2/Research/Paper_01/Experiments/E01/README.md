@@ -1,0 +1,4 @@
+# E01 — Native structure size probe
+Run `CC=gcc ./run.sh` and `CC=clang ./run.sh` on Linux with compiler and libc development headers. The output is CSV. Compare with `diff`.
+
+The UEEC header is copied unchanged from the supplied UEEC-main.zip, path UEEC-main/05_align/ueec.h (first-generation implementation). The second-generation header at commit d41a9eab979403184e88499745b9e9acaa89b5fb, ueec_v2/Core/Headers/ueec.h, was inspected separately and declares the same six structure sizes; this probe does not compile that second-generation header. Replace ueec.h with the pinned second-generation header to independently reproduce that variant. No executable file size, loading speed, or ABI equivalence is established by this test. ELF program headers and UEEC node headers have different responsibilities. No PE or Mach-O measurement is included.

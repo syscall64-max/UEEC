@@ -1,0 +1,40 @@
+--- reference/single.original.c	2026-11-28 10:11:14.947874512 +0000
++++ reference/single.c	2026-11-28 10:11:14.948524094 +0000
+@@ -732,6 +732,29 @@
+     return 0;
+ }
+ 
++/* E11: independent readback of constructed runtime metadata. */
++static int e11_check(const file_view *f,const ueec_view *v,size_t node,const loaded_image *im){
++ const uint8_t *r=(const uint8_t *)im->section_address[0],*name; size_t nl;
++ node_name(f,v,node,&name,&nl);
++ size_t n=im->local_count,w=2U<<v->section_format,h=2+2*w, end=14+n*h, a=(end+7)&~(size_t)7;
++ if(sizeof(uintptr_t)!=8 || im->runtime_data_size!=a+8*n+3+nl || memcmp(r,f->data,3) || r[3]!=(uint8_t)((UEEC_HOST_ENDIAN<<7)|v->version) || read_u16(r+4,0)!=1 || read_u16(r+6,0)!=1 || read_u32(r+8,0)!=node_word(f,v,node) || read_u16(r+12,0)!=v->section_format) return -1;
++ for(size_t j=end;j<a;j++) if(r[j])return -1;
++ for(size_t i=0;i<n;i++){
++  const uint8_t *s=r+14+i*h; uint64_t ss=w==2?read_u16(s+2,0):w==4?read_u32(s+2,0):read_u64(s+2,0);
++  uint64_t ds=w==2?read_u16(s+2+w,0):w==4?read_u32(s+2+w,0):read_u64(s+2+w,0);
++  uintptr_t addr; memcpy(&addr,r+a+i*8,8);
++  if(read_u16(s,0)!=im->section[i].type || ss!=im->allocation_size[i] || ds!=(i?im->section[i].data_size:im->runtime_data_size) || addr!=im->section_address[i])return -1;
++  if(i==0 && addr!=(uintptr_t)r)return -1;
++  if(i && im->section[i].type==UEEC_SECTION_CONSTANT_DATA){
++   uint64_t off; if(section_file_offset(f,v,im->global_section[i],&off))return -1;
++   size_t last=(size_t)ds-1;
++   if(!ds || *((const uint8_t *)addr)!=f->data[off] || *((const uint8_t *)addr+last)!=f->data[off+last])return -1;
++  }
++ }
++ size_t tail=a+8*n; if(r[tail]!=nl || read_u16(r+tail+1,0)!=0 || memcmp(r+tail+3,name,nl))return -1;
++ printf("E11_OK %zu %zu %zu %zu %zu %zu %zu %zu\n",node,n,w*8,v->metadata_size,im->runtime_data_size,a,8*n,nl);
++ return 0;
++}
+ static int build_runtime_image(int fd, const file_view *file,
+                                const ueec_view *view, size_t node,
+                                load_mode requested, loaded_image *image)
+@@ -977,6 +1000,7 @@
+         return 1;
+     }
+ 
++    if(e11_check(&file,&view,selected,&image)) { release_image(&image); munmap(mapping,file.size); close(fd); return 1; }
+     node_name(&file, &view, selected, &name, &name_length);
+     printf("UEEC loader\n");
+     printf("  node:                %zu (%.*s)\n", selected, (int)name_length,

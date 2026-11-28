@@ -1,0 +1,62 @@
+--- reference/ueec_load.previous.c	2026-11-28 10:09:06.197164502 +0000
++++ reference/ueec_load.c	2026-11-28 10:09:21.737320123 +0000
+@@ -1,3 +1,4 @@
++#define _DEFAULT_SOURCE
+ #define _POSIX_C_SOURCE 200809L
+ 
+ #include "ueec.h"
+@@ -565,6 +566,32 @@
+     memset(image, 0, sizeof(*image));
+ }
+ 
++/* E10 observation only: no changes to allocation policy. */
++static int observe_image(const loaded_image *im) {
++    size_t total=0, logical=0, regions=0;
++    for(size_t i=0;i<im->region_count;i++) regions+=im->regions[i].size;
++    for(size_t i=0;i<im->local_count;i++) {
++        uintptr_t a=im->section_address[i]; size_t n=im->allocation_size[i];
++        size_t matches=0; total+=n; logical+=i?im->section[i].data_size:im->runtime_data_size;
++        for(size_t j=0;j<im->region_count;j++) {
++            uintptr_t b=(uintptr_t)im->regions[j].address;
++            if(a>=b && a-b<=im->regions[j].size && n<=im->regions[j].size-(a-b)) matches++;
++        }
++        if(matches!=1 || a%(size_t)sysconf(_SC_PAGESIZE)) return -1;
++        for(size_t j=0;j<i;j++) if(a<im->section_address[j]+im->allocation_size[j] && im->section_address[j]<a+n) return -1;
++        if(i && (im->actual_mode==LOAD_MONOLITHIC || (im->actual_mode==LOAD_HYBRID && i>1)) && a!=im->section_address[i-1]+im->allocation_size[i-1]) return -1;
++        FILE *f=fopen("/proc/self/maps","r"); if(!f) return -1;
++        char line[512], perm[5]; unsigned long lo,hi; int ok=0;
++        const char *want= i && im->section[i].type==UEEC_SECTION_CODE ? "r-x" : i && im->section[i].type!=UEEC_SECTION_CONSTANT_DATA ? "rw-" : "r--";
++        while(fgets(line,sizeof line,f)) if(sscanf(line,"%lx-%lx %4s",&lo,&hi,perm)==3 && a>=lo && a+n<=hi && !strncmp(perm,want,3)) {ok=1;break;}
++        fclose(f); if(!ok)return -1;
++        printf("E10_SECTION %zu %u %zu %zu %s\n",i,(unsigned)im->section[i].type,n,i?(size_t)im->section[i].data_size:im->runtime_data_size,want);
++    }
++    if(total!=regions)return -1;
++    printf("E10_IMAGE %zu %zu %zu %zu\n",im->local_count,im->region_count,total,logical);
++    return 0;
++}
++
+ static int allocate_monolithic(loaded_image *image)
+ {
+     size_t total = 0U;
+@@ -960,6 +987,7 @@
+     printf("  runtime HEADER bytes:%zu\n", image.runtime_data_size);
+     printf("  section_address[0]:  %p\n", (void *)image.section_address[0]);
+     printf("  entry:               %p\n", image.entry);
++    if(observe_image(&image)) { release_image(&image); munmap(mapping,file.size); close(fd); return 1; }
+     fflush(stdout);
+ 
+     (void)munmap(mapping, file.size);
+@@ -967,6 +995,13 @@
+     if (run != 0) {
+         call_raw_entry(image.entry);
+     }
++    mapped_region old[UEEC_MAX_NODE_SECTIONS]; size_t nr=image.region_count;
++    memcpy(old,image.regions,nr*sizeof *old);
+     release_image(&image);
++    for(size_t i=0;i<nr;i++) for(size_t j=0;j<old[i].size;j+=(size_t)sysconf(_SC_PAGESIZE)) {
++        unsigned char vec; errno=0;
++        if(mincore((char *)old[i].address+j,(size_t)sysconf(_SC_PAGESIZE),&vec)!=-1 || errno!=ENOMEM) return 1;
++    }
++    puts("E10_RELEASE_OK");
+     return 0;
+ }

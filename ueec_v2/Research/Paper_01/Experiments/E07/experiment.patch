@@ -1,0 +1,64 @@
+--- original/ueec_load.c	2026-11-28 09:59:32.237866439 +0000
++++ reference/ueec_load.c	2026-11-28 10:00:02.018588321 +0000
+@@ -804,21 +804,48 @@
+                                 (char *)image->section_address[i] +
+                                 (size_t)image->section[i].data_size);
+     }
+-    /* E05 fixture-specific FLAT ABS64 bridge; metadata endian independent of payload. */
+-    size_t count = image->local_count == 2 ? 0 : image->local_count-3;
+-    if (image->section[1].type != UEEC_SECTION_CODE || (node_word(file, view, node) & 1U) != UEEC_HOST_ENDIAN) { release_image(image); return -1; }
+-    if (count) {
+-        size_t ri=image->local_count-1;
+-        const uint8_t *r=(const uint8_t *)image->section_address[ri];
+-        if (image->section[ri].type!=UEEC_SECTION_RELOCATION || image->section[ri].data_size!=4+6*count || read_u16(r,view->endian)!=0 || read_u16(r+2,view->endian)!=0) { release_image(image); return -1; }
+-        for (size_t j=0;j<count;++j) {
+-            size_t off=4+15*j;
+-            if (image->section[j+2].type!=UEEC_SECTION_CONSTANT_DATA || image->section[j+2].data_size<1 || off+8>image->section[1].data_size || read_u16(r+4+6*j,view->endian)!=32*(j+1) || read_u16(r+6+6*j,view->endian)!=1 || read_u16(r+8+6*j,view->endian)!=(0x1000|off)) { release_image(image); return -1; }
+-            uint8_t *patch=(uint8_t *)image->section_address[1]+off;
+-            if (read_u64(patch,0)!=0) { release_image(image); return -1; }
+-            uint64_t value=(uint64_t)image->section_address[j+2]; memcpy(patch,&value,8);
++    /* E07: single CODE <- CONSTANT_DATA ABS64 pair. Seven encodings.
++       Counts use Couple16; sorted nonoverlapping patches only in this harness. */
++    if (image->local_count != 4 || image->section[1].type != UEEC_SECTION_CODE ||
++        image->section[2].type != UEEC_SECTION_CONSTANT_DATA ||
++        image->section[3].type != UEEC_SECTION_RELOCATION ||
++        (node_word(file, view, node)&1U)!=UEEC_HOST_ENDIAN) goto reloc_fail;
++    {
++        const uint8_t *r=(const uint8_t *)image->section_address[3];
++        size_t len=(size_t)image->section[3].data_size, pos=8;
++        unsigned e=view->endian;
++        if(len<8) goto reloc_fail;
++        unsigned fmt=read_u16(r,e), design=read_u16(r+2,e), pair=read_u16(r+4,e), groups=read_u16(r+6,e);
++        if(fmt>2 || design>2 || (design==0 && fmt!=0) || pair!=65 || !groups) goto reloc_fail;
++        unsigned w=2U<<fmt, shift=w*8-4;
++        uint64_t mask=(UINT64_C(1)<<shift)-1, prev_end=0;
++        for(unsigned g=0;g<(design?groups:1);++g){
++            uint64_t base=0, n=groups;
++            if(design){
++                if(len-pos<2*w) goto reloc_fail;
++                base=w==2?read_u16(r+pos,e):w==4?read_u32(r+pos,e):read_u64(r+pos,e); pos+=w;
++                n=w==2?read_u16(r+pos,e):w==4?read_u32(r+pos,e):read_u64(r+pos,e); pos+=w;
++                if(design==1 && base%4096) goto reloc_fail;
++            }
++            if(!n || n>(len-pos)/w) goto reloc_fail;
++            for(uint64_t k=0;k<n;++k){
++                uint64_t v=w==2?read_u16(r+pos,e):w==4?read_u32(r+pos,e):read_u64(r+pos,e); pos+=w;
++                uint64_t delta=v&mask;
++                if((v>>shift)!=1 || (design==1 && delta>=4096) || base>UINT64_MAX-delta) goto reloc_fail;
++                uint64_t off=base+delta, size=image->section[1].data_size;
++                if(off<prev_end || off>size || size-off<8) goto reloc_fail;
++                uint8_t *patch=(uint8_t *)image->section_address[1]+off;
++                uint64_t addend=read_u64(patch,0);
++                if(addend>=image->section[2].data_size || image->section_address[2]>UINT64_MAX-addend) goto reloc_fail;
++                uint64_t value=image->section_address[2]+addend; memcpy(patch,&value,8); prev_end=off+8;
++            }
+         }
++        if(pos!=len) goto reloc_fail;
+     }
++    goto reloc_done;
++reloc_fail:
++    fprintf(stderr,"E07 relocation rejected\n"); release_image(image); return -1;
++reloc_done:;
+     __builtin___clear_cache((char *)image->section_address[1],
+         (char *)image->section_address[1]+image->section[1].data_size);
+     for (size_t j=0; j<image->local_count; ++j) {

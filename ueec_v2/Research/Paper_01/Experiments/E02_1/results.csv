@@ -1,0 +1,6 @@
+file,total,code,structural_headers,padding_or_gaps,other_section_data,status
+exit_sh16.ueec,48,9,39,0,0,PASS Linux 3 modes
+exit_sh32.ueec,56,9,47,0,0,PASS Linux 3 modes
+exit_sh64.ueec,72,9,63,0,0,PASS Linux 3 modes
+exit.elf,4616,9,496,3933,178,PASS Linux
+exit.exe,1024,16,424,584,0,Windows execution pending

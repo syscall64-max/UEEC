@@ -1,0 +1,13 @@
+Page size: 4096
+Transformations: 192/192 PASS
+Native executions: 576/576 PASS
+Width boundary checks: 6/6 PASS
+Total: 774/774 PASS
+alignment=1 SH16 padding=0 file=134
+alignment=16 SH16 padding=26 file=160
+alignment=64 SH16 padding=186 file=320
+alignment=512 SH16 padding=1914 file=2048
+alignment=4096 SH16 padding=16250 file=16384
+alignment=65536 SH32 padding=261994 file=262144
+alignment=64 SH16 padding=186 file=320
+alignment=1 SH16 padding=0 file=134

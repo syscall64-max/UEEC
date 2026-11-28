@@ -1,0 +1,4 @@
+x86_64
+gcc (Debian 14.2.0-19) 14.2.0
+clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)
+ad57bb9b7d939d394e8111c80576417280031f5b945b3077dd3ed6d19bc28b71  ueec.h

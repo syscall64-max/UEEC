@@ -1,0 +1,68 @@
+--- original.c
++++ instrumented.c
+@@ -13,6 +13,9 @@
+ #include <sys/mman.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
++#include <time.h>
++static uint64_t phase[6];
++static uint64_t now_ns(void) { struct timespec t; if(clock_gettime(CLOCK_MONOTONIC_RAW,&t)) abort(); return (uint64_t)t.tv_sec*1000000000ULL+t.tv_nsec; }
+ 
+ typedef enum {
+     LOAD_AUTO,
+@@ -787,6 +790,7 @@
+         return -1;
+     }
+ 
++    uint64_t stamp=now_ns();
+     if (requested == LOAD_AUTO || requested == LOAD_MONOLITHIC) {
+         if (allocate_monolithic(image) == 0) {
+             image->actual_mode = LOAD_MONOLITHIC;
+@@ -810,12 +814,14 @@
+         image->actual_mode = LOAD_HYBRID;
+     }
+ 
++    phase[0]=now_ns()-stamp; stamp=now_ns();
+     if (build_runtime_header(file, view, node, image, address_offset,
+                              name_length) != 0) {
+         fprintf(stderr, "error: runtime HEADER does not fit section format\n");
+         release_image(image);
+         return -1;
+     }
++    phase[1]=now_ns()-stamp; stamp=now_ns();
+     for (i = 1U; i < image->local_count; ++i) {
+         uint64_t offset;
+         if (image->section[i].data_size > (uint64_t)SIZE_MAX ||
+@@ -831,6 +837,7 @@
+                                 (char *)image->section_address[i] +
+                                 (size_t)image->section[i].data_size);
+     }
++    phase[2]=now_ns()-stamp; stamp=now_ns();
+     /* E02.7 fixture-specific FLAT ABS64 bridge; not a general decoder. */
+     size_t count = image->local_count == 2 ? 0 : image->local_count-3;
+     if (image->section[1].type != UEEC_SECTION_CODE || view->endian != UEEC_ENDIAN_LITTLE) { release_image(image); return -1; }
+@@ -846,6 +853,7 @@
+             uint64_t value=(uint64_t)image->section_address[j+2]; memcpy(patch,&value,8);
+         }
+     }
++    phase[3]=now_ns()-stamp; stamp=now_ns();
+     __builtin___clear_cache((char *)image->section_address[1],
+         (char *)image->section_address[1]+image->section[1].data_size);
+     for (size_t j=0; j<image->local_count; ++j) {
+@@ -853,7 +861,7 @@
+         memcpy(&addr, (const uint8_t *)image->section_address[0]+address_offset+j*sizeof(addr), sizeof addr);
+         if (addr != image->section_address[j]) { release_image(image); return -1; }
+     }
+-    printf("MATRIX_RELOC_OK runtime_header_addresses=%zu regions=%zu\n", image->local_count, image->region_count);
++    phase[4]=now_ns()-stamp; stamp=now_ns();
+     for (i = 0U; i < image->local_count; ++i) {
+         int protection = PROT_READ;
+         if (i != 0U && image->section[i].type == UEEC_SECTION_CODE) {
+@@ -869,6 +877,7 @@
+             return -1;
+         }
+     }
++    phase[5]=now_ns()-stamp;
+     image->entry = (void *)image->section_address[code_index];
+     return 0;
+ }

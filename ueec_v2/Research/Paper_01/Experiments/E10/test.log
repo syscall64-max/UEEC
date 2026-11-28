@@ -1,0 +1,9 @@
+sections=2: 18 native + 18 release PASS; bytes=8192; regions=1/2/2
+sections=4: 18 native + 18 release PASS; bytes=16384; regions=1/4/2
+sections=8: 18 native + 18 release PASS; bytes=32768; regions=1/8/2
+sections=16: 18 native + 18 release PASS; bytes=65536; regions=1/16/2
+sections=24: 18 native + 18 release PASS; bytes=98304; regions=1/24/2
+sections=32: 18 native + 18 release PASS; bytes=131072; regions=1/32/2
+Native executions: 108 PASS
+Cleanup checks: 108 PASS
+Total: 216/216 PASS

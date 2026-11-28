@@ -1,0 +1,145 @@
+ueec_sections,case,format,mode,exit,expected,pass
+2,base,sh16,monolithic,42,42,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,base,sh16,scattered,42,42,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,base,sh16,hybrid,42,42,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,base,sh32,monolithic,42,42,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,base,sh32,scattered,42,42,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,base,sh32,hybrid,42,42,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,base,sh64,monolithic,42,42,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,base,sh64,scattered,42,42,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,base,sh64,hybrid,42,42,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,base,compact,kernel,42,42,True
+2,base,section_table,kernel,42,42,True
+2,base,split,kernel,42,42,True
+2,control,sh16,monolithic,43,43,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,control,sh16,scattered,43,43,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,control,sh16,hybrid,43,43,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,control,sh32,monolithic,43,43,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,control,sh32,scattered,43,43,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,control,sh32,hybrid,43,43,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,control,sh64,monolithic,43,43,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+2,control,sh64,scattered,43,43,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+2,control,sh64,hybrid,43,43,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+2,control,compact,kernel,43,43,True
+2,control,section_table,kernel,43,43,True
+2,control,split,kernel,43,43,True
+4,base,sh16,monolithic,1,1,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,base,sh16,scattered,1,1,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,base,sh16,hybrid,1,1,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,base,sh32,monolithic,1,1,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,base,sh32,scattered,1,1,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,base,sh32,hybrid,1,1,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,base,sh64,monolithic,1,1,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,base,sh64,scattered,1,1,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,base,sh64,hybrid,1,1,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,base,compact,kernel,1,1,True
+4,base,section_table,kernel,1,1,True
+4,base,split,kernel,1,1,True
+4,control,sh16,monolithic,2,2,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,control,sh16,scattered,2,2,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,control,sh16,hybrid,2,2,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,control,sh32,monolithic,2,2,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,control,sh32,scattered,2,2,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,control,sh32,hybrid,2,2,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,control,sh64,monolithic,2,2,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+4,control,sh64,scattered,2,2,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+4,control,sh64,hybrid,2,2,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+4,control,compact,kernel,2,2,True
+4,control,section_table,kernel,2,2,True
+4,control,split,kernel,2,2,True
+8,base,sh16,monolithic,15,15,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,base,sh16,scattered,15,15,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,base,sh16,hybrid,15,15,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,base,sh32,monolithic,15,15,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,base,sh32,scattered,15,15,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,base,sh32,hybrid,15,15,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,base,sh64,monolithic,15,15,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,base,sh64,scattered,15,15,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,base,sh64,hybrid,15,15,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,base,compact,kernel,15,15,True
+8,base,section_table,kernel,15,15,True
+8,base,split,kernel,15,15,True
+8,control,sh16,monolithic,16,16,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,control,sh16,scattered,16,16,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,control,sh16,hybrid,16,16,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,control,sh32,monolithic,16,16,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,control,sh32,scattered,16,16,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,control,sh32,hybrid,16,16,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,control,sh64,monolithic,16,16,"<re.Match object; span=(132, 163), match='actual mode:         monolithic'>"
+8,control,sh64,scattered,16,16,"<re.Match object; span=(131, 161), match='actual mode:         scattered'>"
+8,control,sh64,hybrid,16,16,"<re.Match object; span=(128, 155), match='actual mode:         hybrid'>"
+8,control,compact,kernel,16,16,True
+8,control,section_table,kernel,16,16,True
+8,control,split,kernel,16,16,True
+16,base,sh16,monolithic,91,91,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,base,sh16,scattered,91,91,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,base,sh16,hybrid,91,91,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,base,sh32,monolithic,91,91,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,base,sh32,scattered,91,91,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,base,sh32,hybrid,91,91,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,base,sh64,monolithic,91,91,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,base,sh64,scattered,91,91,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,base,sh64,hybrid,91,91,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,base,compact,kernel,91,91,True
+16,base,section_table,kernel,91,91,True
+16,base,split,kernel,91,91,True
+16,control,sh16,monolithic,92,92,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,control,sh16,scattered,92,92,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,control,sh16,hybrid,92,92,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,control,sh32,monolithic,92,92,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,control,sh32,scattered,92,92,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,control,sh32,hybrid,92,92,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,control,sh64,monolithic,92,92,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+16,control,sh64,scattered,92,92,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+16,control,sh64,hybrid,92,92,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+16,control,compact,kernel,92,92,True
+16,control,section_table,kernel,92,92,True
+16,control,split,kernel,92,92,True
+24,base,sh16,monolithic,231,231,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,base,sh16,scattered,231,231,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,base,sh16,hybrid,231,231,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,base,sh32,monolithic,231,231,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,base,sh32,scattered,231,231,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,base,sh32,hybrid,231,231,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,base,sh64,monolithic,231,231,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,base,sh64,scattered,231,231,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,base,sh64,hybrid,231,231,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,base,compact,kernel,231,231,True
+24,base,section_table,kernel,231,231,True
+24,base,split,kernel,231,231,True
+24,control,sh16,monolithic,232,232,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,control,sh16,scattered,232,232,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,control,sh16,hybrid,232,232,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,control,sh32,monolithic,232,232,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,control,sh32,scattered,232,232,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,control,sh32,hybrid,232,232,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,control,sh64,monolithic,232,232,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+24,control,sh64,scattered,232,232,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+24,control,sh64,hybrid,232,232,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+24,control,compact,kernel,232,232,True
+24,control,section_table,kernel,232,232,True
+24,control,split,kernel,232,232,True
+32,base,sh16,monolithic,179,179,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,base,sh16,scattered,179,179,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,base,sh16,hybrid,179,179,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,base,sh32,monolithic,179,179,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,base,sh32,scattered,179,179,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,base,sh32,hybrid,179,179,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,base,sh64,monolithic,179,179,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,base,sh64,scattered,179,179,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,base,sh64,hybrid,179,179,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,base,compact,kernel,179,179,True
+32,base,section_table,kernel,179,179,True
+32,base,split,kernel,179,179,True
+32,control,sh16,monolithic,180,180,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,control,sh16,scattered,180,180,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,control,sh16,hybrid,180,180,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,control,sh32,monolithic,180,180,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,control,sh32,scattered,180,180,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,control,sh32,hybrid,180,180,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,control,sh64,monolithic,180,180,"<re.Match object; span=(133, 164), match='actual mode:         monolithic'>"
+32,control,sh64,scattered,180,180,"<re.Match object; span=(133, 163), match='actual mode:         scattered'>"
+32,control,sh64,hybrid,180,180,"<re.Match object; span=(129, 156), match='actual mode:         hybrid'>"
+32,control,compact,kernel,180,180,True
+32,control,section_table,kernel,180,180,True
+32,control,split,kernel,180,180,True

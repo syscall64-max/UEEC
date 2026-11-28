@@ -1,0 +1,4 @@
+Linux 6.18.57 x86_64 GNU/Linux
+cc (Debian 14.2.0-19) 14.2.0
+GNU assembler (GNU Binutils for Debian) 2.44
+Python 3.13.5

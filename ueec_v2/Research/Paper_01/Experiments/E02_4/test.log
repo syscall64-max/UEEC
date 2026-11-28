@@ -1,0 +1,29 @@
+fixtures/base_single.elf kernel: exit=47 expected=47 PASS
+fixtures/base_split.elf kernel: exit=47 expected=47 PASS
+fixtures/base_sh16.ueec monolithic: exit=47 expected=47 PASS
+fixtures/base_sh16.ueec scattered: exit=47 expected=47 PASS
+fixtures/base_sh16.ueec hybrid: exit=47 expected=47 PASS
+fixtures/base_sh32.ueec monolithic: exit=47 expected=47 PASS
+fixtures/base_sh32.ueec scattered: exit=47 expected=47 PASS
+fixtures/base_sh32.ueec hybrid: exit=47 expected=47 PASS
+fixtures/base_sh64.ueec monolithic: exit=47 expected=47 PASS
+fixtures/base_sh64.ueec scattered: exit=47 expected=47 PASS
+fixtures/base_sh64.ueec hybrid: exit=47 expected=47 PASS
+fixtures/control_single.elf kernel: exit=48 expected=48 PASS
+fixtures/control_split.elf kernel: exit=48 expected=48 PASS
+fixtures/control_sh16.ueec monolithic: exit=48 expected=48 PASS
+fixtures/control_sh16.ueec scattered: exit=48 expected=48 PASS
+fixtures/control_sh16.ueec hybrid: exit=48 expected=48 PASS
+fixtures/control_sh32.ueec monolithic: exit=48 expected=48 PASS
+fixtures/control_sh32.ueec scattered: exit=48 expected=48 PASS
+fixtures/control_sh32.ueec hybrid: exit=48 expected=48 PASS
+fixtures/control_sh64.ueec monolithic: exit=48 expected=48 PASS
+fixtures/control_sh64.ueec scattered: exit=48 expected=48 PASS
+fixtures/control_sh64.ueec hybrid: exit=48 expected=48 PASS
+format,headers,code,init_data,relocation,gap,file_size
+single,120,58,16,0,0,194
+split,176,58,16,0,3862,4112
+sh16,62,58,16,10,0,146
+sh32,78,58,16,10,0,162
+sh64,110,58,16,10,0,194
+22/22 PASS

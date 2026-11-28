@@ -1,0 +1,13 @@
+structure,bytes
+ueec_hdr,8
+ueec_node_hdr,6
+ueec_node_info,6
+ueec_sh16,6
+ueec_sh32,10
+ueec_sh64,18
+Elf32_Ehdr,52
+Elf64_Ehdr,64
+Elf32_Shdr,40
+Elf64_Shdr,64
+Elf32_Phdr,32
+Elf64_Phdr,56

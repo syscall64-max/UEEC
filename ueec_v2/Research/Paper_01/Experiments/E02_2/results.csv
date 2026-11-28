@@ -1,0 +1,7 @@
+file,file_header,program_headers,section_headers,node_mapping_names,total_headers,code,remaining_bytes,file_size
+exit_compact.elf,64,56,0,0,120,9,0,129
+exit_linked.elf,64,112,320,0,496,9,4111,4616
+exit_stripped.elf,64,112,192,0,368,9,3943,4320
+exit_sh16.ueec,8,0,12,19,39,9,0,48
+exit_sh32.ueec,8,0,20,19,47,9,0,56
+exit_sh64.ueec,8,0,36,19,63,9,0,72

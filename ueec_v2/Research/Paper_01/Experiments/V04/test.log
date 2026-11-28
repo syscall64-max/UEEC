@@ -1,0 +1,13 @@
+load.c: OK
+resolve.c: OK
+ueec.h: OK
+symbols=1: 54 configurations PASS
+symbols=16: 54 configurations PASS
+symbols=64: 54 configurations PASS
+symbols=256: 54 configurations PASS
+symbols=1024: 54 configurations PASS
+symbols=4096: 54 configurations PASS
+Configurations: 324 PASS; timing observations: 1620
+load.c: OK
+resolve.c: OK
+ueec.h: OK

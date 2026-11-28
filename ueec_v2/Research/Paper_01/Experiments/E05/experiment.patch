@@ -1,0 +1,23 @@
+--- reference/ueec_load.previous.c	2026-11-28 09:54:18.878036383 +0000
++++ reference/ueec_load.c	2026-11-28 09:54:19.555424081 +0000
+@@ -804,16 +804,16 @@
+                                 (char *)image->section_address[i] +
+                                 (size_t)image->section[i].data_size);
+     }
+-    /* E02.7 fixture-specific FLAT ABS64 bridge; not a general decoder. */
++    /* E05 fixture-specific FLAT ABS64 bridge; metadata endian independent of payload. */
+     size_t count = image->local_count == 2 ? 0 : image->local_count-3;
+-    if (image->section[1].type != UEEC_SECTION_CODE || view->endian != UEEC_ENDIAN_LITTLE) { release_image(image); return -1; }
++    if (image->section[1].type != UEEC_SECTION_CODE || (node_word(file, view, node) & 1U) != UEEC_HOST_ENDIAN) { release_image(image); return -1; }
+     if (count) {
+         size_t ri=image->local_count-1;
+         const uint8_t *r=(const uint8_t *)image->section_address[ri];
+-        if (image->section[ri].type!=UEEC_SECTION_RELOCATION || image->section[ri].data_size!=4+6*count || read_u16(r,0)!=0 || read_u16(r+2,0)!=0) { release_image(image); return -1; }
++        if (image->section[ri].type!=UEEC_SECTION_RELOCATION || image->section[ri].data_size!=4+6*count || read_u16(r,view->endian)!=0 || read_u16(r+2,view->endian)!=0) { release_image(image); return -1; }
+         for (size_t j=0;j<count;++j) {
+             size_t off=4+15*j;
+-            if (image->section[j+2].type!=UEEC_SECTION_CONSTANT_DATA || image->section[j+2].data_size<1 || off+8>image->section[1].data_size || read_u16(r+4+6*j,0)!=32*(j+1) || read_u16(r+6+6*j,0)!=1 || read_u16(r+8+6*j,0)!=(0x1000|off)) { release_image(image); return -1; }
++            if (image->section[j+2].type!=UEEC_SECTION_CONSTANT_DATA || image->section[j+2].data_size<1 || off+8>image->section[1].data_size || read_u16(r+4+6*j,view->endian)!=32*(j+1) || read_u16(r+6+6*j,view->endian)!=1 || read_u16(r+8+6*j,view->endian)!=(0x1000|off)) { release_image(image); return -1; }
+             uint8_t *patch=(uint8_t *)image->section_address[1]+off;
+             if (read_u64(patch,0)!=0) { release_image(image); return -1; }
+             uint64_t value=(uint64_t)image->section_address[j+2]; memcpy(patch,&value,8);

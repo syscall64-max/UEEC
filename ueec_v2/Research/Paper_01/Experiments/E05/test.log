@@ -1,0 +1,6 @@
+Native executions: 36
+Expected rejections: 36
+72/72 PASS
+SH16: LE=123 B BE=123 B
+SH32: LE=139 B BE=139 B
+SH64: LE=171 B BE=171 B

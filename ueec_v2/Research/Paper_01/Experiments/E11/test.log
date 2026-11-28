@@ -1,0 +1,10 @@
+single sections=2: 18 PASS
+single sections=4: 18 PASS
+single sections=8: 18 PASS
+single sections=16: 18 PASS
+single sections=24: 18 PASS
+single sections=32: 18 PASS
+multi nodes=2: 18 PASS
+multi nodes=8: 72 PASS
+multi nodes=64: 576 PASS
+Runtime header + execution checks: 774/774 PASS

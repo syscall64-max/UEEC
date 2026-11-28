@@ -1,0 +1,2 @@
+Regular: [PASS] x86_64: 144 resolution cases, 252 rejections
+ASan/UBSan: [PASS] x86_64: 144 resolution cases, 252 rejections

@@ -1,0 +1,6 @@
+format,headers,code,init_data,relocation,gap,file_size
+single,120,58,16,0,0,194
+split,176,58,16,0,3862,4112
+sh16,62,58,16,10,0,146
+sh32,78,58,16,10,0,162
+sh64,110,58,16,10,0,194

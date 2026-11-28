@@ -1,0 +1,4 @@
+Width selection: 48/48 PASS
+Generated files: 36
+Loader checks: 108/108 PASS; executed=90 expected_rejections=18
+Total: 156 PASS

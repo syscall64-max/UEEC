@@ -1,0 +1,68 @@
+
+fixtures/exit.exe:     file format pei-x86-64
+
+Characteristics 0x23
+	relocations stripped
+	executable
+	large address aware
+
+Time/Date		Sat Nov 28 09:05:41 2026
+Magic			020b	(PE32+)
+MajorLinkerVersion	14
+MinorLinkerVersion	0
+SizeOfCode		0000000000000200
+SizeOfInitializedData	0000000000000000
+SizeOfUninitializedData	0000000000000000
+AddressOfEntryPoint	0000000000001000
+BaseOfCode		0000000000001000
+ImageBase		0000000140000000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00002000
+SizeOfHeaders		00000200
+CheckSum		00000000
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00008120
+					HIGH_ENTROPY_VA
+					NX_COMPAT
+					TERMINAL_SERVICE_AWARE
+SizeOfStackReserve	0000000000100000
+SizeOfStackCommit	0000000000001000
+SizeOfHeapReserve	0000000000100000
+SizeOfHeapCommit	0000000000001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 0000000000000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 0000000000000000 00000000 Import Directory [parts of .idata]
+Entry 2 0000000000000000 00000000 Resource Directory [.rsrc]
+Entry 3 0000000000000000 00000000 Exception Directory [.pdata]
+Entry 4 0000000000000000 00000000 Security Directory
+Entry 5 0000000000000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 0000000000000000 00000000 Debug Directory
+Entry 7 0000000000000000 00000000 Description Directory
+Entry 8 0000000000000000 00000000 Special Directory
+Entry 9 0000000000000000 00000000 Thread Storage Directory [.tls]
+Entry a 0000000000000000 00000000 Load Configuration Directory
+Entry b 0000000000000000 00000000 Bound Import Directory
+Entry c 0000000000000000 00000000 Import Address Table Directory
+Entry d 0000000000000000 00000000 Delay Import Directory
+Entry e 0000000000000000 00000000 CLR Runtime Header
+Entry f 0000000000000000 00000000 Reserved
+
+
+Disassembly of section .text:
+
+0000000140001000 <.text>:
+   140001000:	49 c7 c2 ff ff ff ff 	mov    $0xffffffffffffffff,%r10
+   140001007:	31 d2                	xor    %edx,%edx
+   140001009:	b8 2c 00 00 00       	mov    $0x2c,%eax
+   14000100e:	0f 05                	syscall

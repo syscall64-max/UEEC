@@ -1,0 +1,7 @@
+# UEEC Paper 01 — V01
+Unmodified second-generation loader regression validation. Source: supplied UEEC-research-ueec-v2-organization.zip, subtree ueec_v2/Linux/CPU. All 146 source files copied byte-for-byte. SOURCE_SHA256SUMS verifies them before and after execution. No loader or original test generator changes. The added run.sh orchestrates the existing tests.
+
+- `./run.sh full` (default): original final-stage test and sanitizer targets for ISA Dispatch 11.5, Relocation 12.6 and Import/Export 13.6. Requires the original 12 cross-toolchains and QEMU runners; see original Makefiles. Sanitizers are x86-64 only. Logs in results/. Stops on first failure. Full mode not verified locally because cross-toolchains are absent.
+- `./run.sh native`: x86-64 original 13.6 test.py, regular and ASan/UBSan builds. No cross-architecture executable placeholders are generated; this particular suite uses non-executed code bytes from the original generator. This mode does not test native imported function execution, which is covered by full mode's calls.py. Local result: 144 successful resolution cases and 252 expected rejections in each build. Repeated sanitizer cases are not unique cases.
+
+This is regression validation of original v2 fixtures, not a rerun of all E01–E12 fixtures with v2. No equivalence claim for modified experimental loaders. Do not add these regression counts to the paper's prior unique experiment counts without reconciliation.

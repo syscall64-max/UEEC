@@ -1,0 +1,196 @@
+research-host:~/Downloads/UEEC_Paper01_E02_6$ ./run.sh
+fixtures/16_base_single.elf kernel exit=57 expected=57 PASS
+fixtures/16_base_split.elf kernel exit=57 expected=57 PASS
+fixtures/16_base_sh16_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh16_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh16_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_base_sh32_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh32_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh32_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_base_sh64_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh64_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh64_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_base_sh16_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh16_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh16_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_base_sh32_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh32_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh32_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_base_sh64_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/16_base_sh64_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/16_base_sh64_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/16_control_single.elf kernel exit=58 expected=58 PASS
+fixtures/16_control_split.elf kernel exit=58 expected=58 PASS
+fixtures/16_control_sh16_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh16_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh16_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/16_control_sh32_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh32_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh32_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/16_control_sh64_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh64_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh64_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/16_control_sh16_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh16_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh16_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/16_control_sh32_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh32_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh32_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/16_control_sh64_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/16_control_sh64_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/16_control_sh64_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_base_single.elf kernel exit=57 expected=57 PASS
+fixtures/256_base_split.elf kernel exit=57 expected=57 PASS
+fixtures/256_base_sh16_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh16_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh16_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_base_sh32_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh32_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh32_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_base_sh64_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh64_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh64_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_base_sh16_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh16_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh16_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_base_sh32_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh32_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh32_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_base_sh64_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/256_base_sh64_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/256_base_sh64_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/256_control_single.elf kernel exit=58 expected=58 PASS
+fixtures/256_control_split.elf kernel exit=58 expected=58 PASS
+fixtures/256_control_sh16_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh16_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh16_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_control_sh32_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh32_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh32_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_control_sh64_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh64_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh64_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_control_sh16_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh16_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh16_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_control_sh32_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh32_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh32_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/256_control_sh64_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/256_control_sh64_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/256_control_sh64_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_base_single.elf kernel exit=57 expected=57 PASS
+fixtures/4096_base_split.elf kernel exit=57 expected=57 PASS
+fixtures/4096_base_sh16_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh16_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh16_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_base_sh32_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh32_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh32_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_base_sh64_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh64_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh64_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_base_sh16_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh16_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh16_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_base_sh32_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh32_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh32_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_base_sh64_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/4096_base_sh64_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/4096_base_sh64_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/4096_control_single.elf kernel exit=58 expected=58 PASS
+fixtures/4096_control_split.elf kernel exit=58 expected=58 PASS
+fixtures/4096_control_sh16_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh16_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh16_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_control_sh32_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh32_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh32_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_control_sh64_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh64_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh64_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_control_sh16_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh16_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh16_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_control_sh32_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh32_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh32_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/4096_control_sh64_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/4096_control_sh64_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/4096_control_sh64_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_base_single.elf kernel exit=57 expected=57 PASS
+fixtures/32768_base_split.elf kernel exit=57 expected=57 PASS
+fixtures/32768_base_sh16_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh16_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh16_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_base_sh32_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh32_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh32_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_base_sh64_physical.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh64_physical.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh64_physical.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_base_sh16_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh16_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh16_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_base_sh32_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh32_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh32_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_base_sh64_nobits.ueec monolithic exit=57 expected=57 PASS
+fixtures/32768_base_sh64_nobits.ueec scattered exit=57 expected=57 PASS
+fixtures/32768_base_sh64_nobits.ueec hybrid exit=57 expected=57 PASS
+fixtures/32768_control_single.elf kernel exit=58 expected=58 PASS
+fixtures/32768_control_split.elf kernel exit=58 expected=58 PASS
+fixtures/32768_control_sh16_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh16_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh16_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_control_sh32_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh32_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh32_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_control_sh64_physical.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh64_physical.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh64_physical.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_control_sh16_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh16_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh16_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_control_sh32_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh32_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh32_nobits.ueec hybrid exit=58 expected=58 PASS
+fixtures/32768_control_sh64_nobits.ueec monolithic exit=58 expected=58 PASS
+fixtures/32768_control_sh64_nobits.ueec scattered exit=58 expected=58 PASS
+fixtures/32768_control_sh64_nobits.ueec hybrid exit=58 expected=58 PASS
+memory_bytes,format,headers,code,constant_data,init_data,relocation,physical_unused_bytes,gap,file_size
+16,single,120,134,16,16,0,0,0,286
+16,split,232,134,16,16,0,0,7810,8208
+16,sh16_physical,86,134,16,16,22,16,0,290
+16,sh32_physical,110,134,16,16,22,16,0,314
+16,sh64_physical,158,134,16,16,22,16,0,362
+16,sh16_nobits,86,134,16,16,22,0,0,274
+16,sh32_nobits,110,134,16,16,22,0,0,298
+16,sh64_nobits,158,134,16,16,22,0,0,346
+256,single,120,134,16,16,0,0,0,286
+256,split,232,134,16,16,0,0,7810,8208
+256,sh16_physical,86,134,16,16,22,256,0,530
+256,sh32_physical,110,134,16,16,22,256,0,554
+256,sh64_physical,158,134,16,16,22,256,0,602
+256,sh16_nobits,86,134,16,16,22,0,0,274
+256,sh32_nobits,110,134,16,16,22,0,0,298
+256,sh64_nobits,158,134,16,16,22,0,0,346
+4096,single,120,134,16,16,0,0,0,286
+4096,split,232,134,16,16,0,0,7810,8208
+4096,sh16_physical,86,134,16,16,22,4096,0,4370
+4096,sh32_physical,110,134,16,16,22,4096,0,4394
+4096,sh64_physical,158,134,16,16,22,4096,0,4442
+4096,sh16_nobits,86,134,16,16,22,0,0,274
+4096,sh32_nobits,110,134,16,16,22,0,0,298
+4096,sh64_nobits,158,134,16,16,22,0,0,346
+32768,single,120,134,16,16,0,0,0,286
+32768,split,232,134,16,16,0,0,7810,8208
+32768,sh16_physical,86,134,16,16,22,32768,0,33042
+32768,sh32_physical,110,134,16,16,22,32768,0,33066
+32768,sh64_physical,158,134,16,16,22,32768,0,33114
+32768,sh16_nobits,86,134,16,16,22,0,0,274
+32768,sh32_nobits,110,134,16,16,22,0,0,298
+32768,sh64_nobits,158,134,16,16,22,0,0,346
+160/160 PASS
+research-host:~/Downloads/UEEC_Paper01_E02_6$ 

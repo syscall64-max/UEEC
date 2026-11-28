@@ -1,0 +1,11 @@
+Image configurations: 126 PASS; timed cycles: 12600
+Node selection configurations: 18 PASS
+Process-launch configurations: 72 PASS; samples: 1440
+Python export/import reference configurations: 18 PASS
+All configurations: 234 PASS; timing observations: 145440
+sections=2 hybrid ready median=5288.0 ns p95=25387 ns
+sections=2 monolithic ready median=4467.0 ns p95=6660 ns
+sections=2 scattered ready median=5087.5 ns p95=7832 ns
+sections=32 scattered ready median=107620.0 ns p95=174519 ns
+sections=32 hybrid ready median=76063.0 ns p95=141069 ns
+sections=32 monolithic ready median=78211.0 ns p95=108170 ns

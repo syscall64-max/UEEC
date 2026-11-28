@@ -1,0 +1,62 @@
+--- reference/ueec_load.original.c	2026-11-28 09:34:18.179621271 +0000
++++ reference/ueec_load.c	2026-11-28 09:37:28.029651997 +0000
+@@ -247,7 +247,7 @@
+             value > UINT64_MAX - section.section_size) {
+             return -1;
+         }
+-        value += section.section_size;
++        value += (getenv("UEEC_EXPERIMENT_NOBITS") && section.type == UEEC_SECTION_UNINIT_DATA && section.data_size == 0) ? 0 : section.section_size;
+     }
+     *offset = value;
+     return 0;
+@@ -380,7 +380,7 @@
+             fprintf(stderr, "error: invalid section %zu\n", i);
+             return -1;
+         }
+-        physical_end += section.section_size;
++        physical_end += (getenv("UEEC_EXPERIMENT_NOBITS") && section.type == UEEC_SECTION_UNINIT_DATA && section.data_size == 0) ? 0 : section.section_size;
+     }
+     if (physical_end > (uint64_t)file->size) {
+         fprintf(stderr, "error: sections exceed file size\n");
+@@ -804,6 +804,41 @@
+                                 (char *)image->section_address[i] +
+                                 (size_t)image->section[i].data_size);
+     }
++    /* E02.6 test-only bridge: three v1 FLAT ABS64 entries. */
++    if (image->local_count != 6 || image->section[1].type != UEEC_SECTION_CODE ||
++        image->section[2].type != UEEC_SECTION_CONSTANT_DATA ||
++        image->section[3].type != UEEC_SECTION_INIT_DATA ||
++        image->section[4].type != UEEC_SECTION_UNINIT_DATA ||
++        image->section[5].type != UEEC_SECTION_RELOCATION ||
++        image->section[5].data_size != 22 || image->section[1].data_size < 30 ||
++        image->section[2].data_size != 16 || image->section[3].data_size != 16 ||
++        image->section[4].data_size != 0 || view->endian != UEEC_ENDIAN_LITTLE) {
++        release_image(image); return -1;
++    }
++    const uint8_t *r = (const uint8_t *)image->section_address[5];
++    if (read_u16(r, view->endian) != 0 || read_u16(r+2, view->endian) != 0) {
++        release_image(image); return -1;
++    }
++    for (size_t j=0; j<3; ++j) {
++        size_t off=2+10*j;
++        if (read_u16(r+4+6*j, view->endian) != 32*(j+1) ||
++            read_u16(r+6+6*j, view->endian) != 1 ||
++            read_u16(r+8+6*j, view->endian) != (0x1000|off)) {
++            release_image(image); return -1;
++        }
++        uint8_t *patch=(uint8_t *)image->section_address[1]+off;
++        if (read_u64(patch, view->endian) != 0) { release_image(image); return -1; }
++        uint64_t value=(uint64_t)image->section_address[j+2];
++        memcpy(patch,&value,sizeof value);
++    }
++    __builtin___clear_cache((char *)image->section_address[1],
++        (char *)image->section_address[1]+image->section[1].data_size);
++    for (size_t j=0; j<image->local_count; ++j) {
++        uintptr_t addr;
++        memcpy(&addr, (const uint8_t *)image->section_address[0]+address_offset+j*sizeof(addr), sizeof addr);
++        if (addr != image->section_address[j]) { release_image(image); return -1; }
++    }
++    printf("MATRIX_RELOC_OK runtime_header_addresses=%zu regions=%zu\n", image->local_count, image->region_count);
+     for (i = 0U; i < image->local_count; ++i) {
+         int protection = PROT_READ;
+         if (i != 0U && image->section[i].type == UEEC_SECTION_CODE) {
